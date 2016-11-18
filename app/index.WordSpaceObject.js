@@ -11,6 +11,7 @@
         var data = {
             name: '',
             cui: '',
+            error:'',
             session_token: '',
             rol:{
                 id:'',
@@ -25,7 +26,9 @@
                 usuario:'',
                 clave:'',
                 fechaCreacion:'',
-                creadoPor:''
+                creadoPor:'',
+                cui:'',
+                roles:[]
             },
             access:{
                 valor:'',

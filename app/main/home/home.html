@@ -44,7 +44,7 @@
                 <md-input-container flex>
                     <label>Sexo</label>
                     <md-select ng-disabled="manualEnable" ng-model="vm.basicForm.sexo">
-                    <md-option ng-value="" ><em>Ninguno</em></md-option>
+                    <md-option ng-value="" ><em>Selecciona</em></md-option>
 <md-option ng-repeat="state in genero" ng-value="state.id" 
 ng-selected="state.id == generoSet">
                         {{state.name}}
@@ -64,7 +64,7 @@ ng-selected="state.id == generoSet">
                 <md-input-container flex>
 		                <label>Departamento</label>
                     <md-select ng-model="vm.basicForm.departamento">
-                      <md-option ng-value="" ><em>Ninguno</em></md-option>
+                      <md-option ng-value="" ><em>Selecciona</em></md-option>
                       <md-option ng-repeat="state in depto3" ng-value="state.id" ng-click="takeDepto3(state.id)">
                         {{state.valor}}
                       </md-option>
@@ -74,7 +74,7 @@ ng-selected="state.id == generoSet">
                 <md-input-container flex>
                     <label>Municipio</label>
                     <md-select ng-model="vm.basicForm.municipio">
-                      <md-option ng-value="" ><em>Ninguno</em></md-option>
+                      <md-option ng-value="" ><em>Selecciona</em></md-option>
                       <md-option ng-repeat="municipio in muni3" ng-value="municipio.id">
                         {{municipio.valor}}
                       </md-option>
@@ -86,7 +86,7 @@ ng-selected="state.id == generoSet">
                 <md-input-container flex>
 		          <label>Pueblo</label>
 		          <md-select ng-model="vm.basicForm.pueblo" >
-		            <md-option ng-value="" ><em>Ninguno</em></md-option>
+		            <md-option ng-value="" ><em>Selecciona</em></md-option>
 		            <md-option ng-repeat="p in pueblo" ng-value="p.id">
 		              {{p.name}}
 		            </md-option>
@@ -104,7 +104,10 @@ ng-selected="state.id == generoSet">
                                ng-disabled="basicForm.$invalid || basicForm.$pristine">
                         Realizar Busqueda
                     </md-button>
-                </form>
+                    <button ng-click="clear()" class=" 
+  md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Limpiar Busqueda</span><div class="md-ripple-container"></div></button>
+
+             </form>
         </div>
         <div ng-show="showDinamico" style=" width: 100%; margin: 0 auto; border: 1px solid; margin-bottom: 25px;">
         <article style="text-align: right;  background: #075993; margin-top: 0px; margin-bottom: 20px;">
@@ -195,6 +198,8 @@ ng-selected="state.id == generoSet">
                                ng-disabled="basicForm2.$invalid || basicForm2.$pristine">
                         Realizar Busqueda
                     </md-button>
+                    <button ng-click="clear()" class=" 
+  md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Limpiar Busqueda</span><div class="md-ripple-container"></div></button>
         </form>
 
 	</div>
@@ -209,6 +214,10 @@ ng-selected="state.id == generoSet">
 
       <button ng-click="edit()" class=" 
   md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Editar</span><div class="md-ripple-container"></div></button>
+
+  <button ng-click="" class=" 
+  md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">EXCEL</span><div class="md-ripple-container"></div></button>
+
 		</div>
 		<div flex="30" style="text-align: right;">
 			

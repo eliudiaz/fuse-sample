@@ -36,7 +36,7 @@
                 .clickOutsideToClose(true)
                 .parent(angular.element(document.body))
                 .title('Guardado')
-                .textContent('Usuario Guardado Con Exito')
+                .textContent('Acceso Guardado Con Exito')
                 .ariaLabel('Alert Dialog Demo')
                 .ok('Aceptar')
                 .targetEvent(ev)
@@ -67,19 +67,46 @@
                     $scope.showAlert(); 
                     $state.go("app.accessos");
                 }, function(error) {
-                    
+                     workSpace.error = error.data.message; 
+                     $scope.Error();
                 });
             }else{
                 $scope.entry = ws.saveAccess();
                 var entry = $scope.entry.save(obj, function() {
                     $scope.showAlert(); 
                     $state.go("app.accessos");
-                }, function(error) { console.error(error); } 
+                }, function(error) { 
+                     workSpace.error = error.data.message; 
+                     $scope.Error(); 
+                } 
                 );    
             }
             
 
             
+        }
+
+
+        $scope.Error = function(id) {
+            $mdDialog.show({
+                controller: function($scope, $mdDialog, workSpace) {
+                    $scope.closeDialog = function() {
+                        $mdDialog.hide();
+                    }
+                },
+                template: '<md-dialog>' +
+                    ' <md-dialog-content>' +
+                    ' Error:  '+ workSpace.error +'' +
+                    '</md-dialog-content>' +
+                    '  <md-dialog-actions>' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Close' +
+                    '    </md-button>' +
+                    '  </md-dialog-actions>' +
+                    '</md-dialog>',
+                parent: angular.element('body'),
+                clickOutsideToClose: true
+            });
         }    
 
   }

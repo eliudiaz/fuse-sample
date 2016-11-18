@@ -3,8 +3,8 @@
     'use strict';
 
     angular
-        .module('app.toolbar')
-        .controller('ToolbarController', ToolbarController);
+            .module('app.toolbar')
+            .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
     function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast)
@@ -20,48 +20,37 @@
         vm.userStatusOptions = [
             {
                 'title': 'Online',
-                'icon' : 'icon-checkbox-marked-circle',
+                'icon': 'icon-checkbox-marked-circle',
                 'color': '#4CAF50'
             },
             {
                 'title': 'Away',
-                'icon' : 'icon-clock',
+                'icon': 'icon-clock',
                 'color': '#FFC107'
             },
             {
                 'title': 'Do not Disturb',
-                'icon' : 'icon-minus-circle',
+                'icon': 'icon-minus-circle',
                 'color': '#F44336'
             },
             {
                 'title': 'Invisible',
-                'icon' : 'icon-checkbox-blank-circle-outline',
+                'icon': 'icon-checkbox-blank-circle-outline',
                 'color': '#BDBDBD'
             },
             {
                 'title': 'Offline',
-                'icon' : 'icon-checkbox-blank-circle-outline',
+                'icon': 'icon-checkbox-blank-circle-outline',
                 'color': '#616161'
             }
         ];
         vm.languages = {
-            en: {
-                'title'      : 'English',
-                'translation': 'TOOLBAR.ENGLISH',
-                'code'       : 'en',
-                'flag'       : 'us'
-            },
+
             es: {
-                'title'      : 'Spanish',
+                'title': 'Spanish',
                 'translation': 'TOOLBAR.SPANISH',
-                'code'       : 'es',
-                'flag'       : 'es'
-            },
-            tr: {
-                'title'      : 'Turkish',
-                'translation': 'TOOLBAR.TURKISH',
-                'code'       : 'tr',
-                'flag'       : 'tr'
+                'code': 'es',
+                'flag': 'es'
             }
         };
 
@@ -81,7 +70,10 @@
          */
         function init()
         {
+
+            vm.user = JSON.parse(localStorage.getItem("currentUser"));
             // Select the first status as a default
+
             vm.userStatus = vm.userStatusOptions[0];
 
             // Get the selected language directly from angular-translate module setting
@@ -113,7 +105,7 @@
          */
         function logout()
         {
-            // Do logout here..
+            window.location = localStorage.getItem("context") + "/logout.jsp";
         }
 
         /**
@@ -135,15 +127,15 @@
              * end of this if block. If you have all the translation files, remove this if
              * block and the translations should work without any problems.
              */
-            if ( lang.code !== 'en' )
+            if (lang.code !== 'en')
             {
                 var message = 'Fuse supports translations through angular-translate module, but currently we do not have any translations other than English language. If you want to help us, send us a message through ThemeForest profile page.';
 
                 $mdToast.show({
-                    template : '<md-toast id="language-message" layout="column" layout-align="center start"><div class="md-toast-content">' + message + '</div></md-toast>',
+                    template: '<md-toast id="language-message" layout="column" layout-align="center start"><div class="md-toast-content">' + message + '</div></md-toast>',
                     hideDelay: 7000,
-                    position : 'top right',
-                    parent   : '#content'
+                    position: 'top right',
+                    parent: '#content'
                 });
 
                 return;

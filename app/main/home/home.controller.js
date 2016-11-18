@@ -43,6 +43,32 @@
         $(id).addClass("openNav");
       }
 
+
+      $scope.clear = function(){
+        vm.basicForm.primerNombre = '';
+        vm.basicForm.segundoNombre = '';
+        vm.basicForm.edad = '';
+        vm.basicForm.primerApellido = '';
+        vm.basicForm.segundoApellido = '';
+        vm.basicForm.sexo = '';
+        vm.basicForm.departamento = '';
+        vm.basicForm.municipio = '';
+        vm.basicForm.pueblo = '';
+        vm.basicForm.direccion = '';
+
+        vm.basicForm2.objSearchDinamico = '';
+        vm.basicForm2.filtroReglon = '';
+        vm.basicForm2.inputFiltroReglon = '';
+        vm.basicForm2.input2FiltroReglon = '';
+        $scope.searchObjDinamico.filtros = [];
+
+        var entryViewsAll = ws.allPersonas().query({}, function() {
+           $scope.gridOptions.api.setRowData(entryViewsAll);
+         }, function(error) {
+            workSpace.error = JSON.stringify(error.data); 
+            $scope.Error();
+        });
+      }
      
 
       $scope.betweenOK = function(id){
@@ -64,7 +90,7 @@
 
      
 
-      $scope.columnDefs.push({ headerName: "Cui", field: "cui", filter: 'text', filterParams: { apply: true } });
+      $scope.columnDefs.push({ headerName: "Cui", checkboxSelection: true, field: "cui", filter: 'text', filterParams: { apply: true } });
       $scope.columnDefs.push({ headerName: "Primer Nombre", field: "primerNombre", filter: 'text', filterParams: { apply: true } });
       $scope.columnDefs.push({ headerName: "Segundo nombre", field: "segundoNombre", filter: 'text', filterParams: { apply: true } });
       $scope.columnDefs.push({ headerName: "Primer apellido", field: "primerApellido", filter: 'text', filterParams: { apply: true } });
@@ -83,7 +109,10 @@
         
         var entryViewsAll = ws.allPersonas().query({}, function() {
            $scope.gridOptions.api.setRowData(entryViewsAll);
-         });
+         }, function(error) {
+            workSpace.error = JSON.stringify(error.data); 
+            $scope.Error();
+        });
 
 
       }, 300);
@@ -170,16 +199,25 @@ $scope.genero = [{id:'HOMBRE',name:'HOMBRE'},
 
 var entryViewsPuestoFuncional = ws.puestoFuncional().query({}, function() {
          $scope.puestoFuncional = entryViewsPuestoFuncional;
-    });
+    }, function(error) {
+            workSpace.error = JSON.stringify(error.data); 
+            $scope.Error();
+        });
 
 var entryViewsReglon = ws.reglon().query({}, function() {
          $scope.reglon = entryViewsReglon;
-    });
+    }, function(error) {
+            workSpace.error = JSON.stringify(error.data); 
+            $scope.Error();
+        });
 
 
 var entryViewsDepto = ws.depto().query({}, function() {
          $scope.depto3 = entryViewsDepto;
-});
+}, function(error) {
+            workSpace.error = JSON.stringify(error.data); 
+            $scope.Error();
+        });
 
 
 $scope.takeDepto3 = function(id){
@@ -229,7 +267,8 @@ $scope.takeDepto3 = function(id){
     var EntryUp = $scope.entryUp.post(obj, function() {
         $scope.gridOptions.api.setRowData(EntryUp);
     }, function(error) {
-        
+        workSpace.error = JSON.stringify(error.data); 
+        $scope.Error();
     });
 
 
@@ -244,7 +283,8 @@ $scope.takeDepto3 = function(id){
     var EntryUp = $scope.entryUp.post(obj, function() {
         $scope.gridOptions.api.setRowData(EntryUp);
     }, function(error) {
-        
+        workSpace.error = JSON.stringify(error.data); 
+        $scope.Error();
     });
 
 
@@ -256,7 +296,8 @@ $scope.takeDepto3 = function(id){
     var EntryUp2 = $scope.entryUp2.post($scope.searchObjDinamico, function() {
         $scope.gridOptions.api.setRowData(EntryUp2);
     }, function(error) {
-        
+        workSpace.error = JSON.stringify(error.data); 
+        $scope.Error();
     });
 
 
@@ -294,13 +335,39 @@ $scope.takeDepto3 = function(id){
           $state.go("app.home_add");
         
           console.info(JSON.stringify(ob));
-      });
+      }, function(error) {
+            workSpace.error = JSON.stringify(error.data); 
+            $scope.Error();
+        });
       
     }else{
       $scope.showAlert(); 
     }
     
   }
+
+  $scope.Error = function(id) {
+            $mdDialog.show({
+                controller: function($scope, $mdDialog, workSpace) {
+                    $scope.closeDialog = function() {
+                        $mdDialog.hide();
+                    }
+                },
+                template: '<md-dialog>' +
+                    ' <md-dialog-content>' +
+                    ' Error:  '+ workSpace.error +'' +
+                    '</md-dialog-content>' +
+                    '  <md-dialog-actions>' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Close' +
+                    '    </md-button>' +
+                    '  </md-dialog-actions>' +
+                    '</md-dialog>',
+                parent: angular.element('body'),
+                clickOutsideToClose: true
+            });
+        }
+
 
 }
 })();

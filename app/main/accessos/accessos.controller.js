@@ -11,6 +11,9 @@
         
         var entryViews = ws.allAccess().query({}, function() {
              $scope.usuarioData = entryViews;
+        }, function(error) {
+            workSpace.error = error.data.message; 
+            $scope.Error();
         });
 
          //*************************
@@ -57,6 +60,28 @@
           	localStorageService.set('workSpace', workSpace);
             $state.go("app.accessos_add");
 
+        }
+
+        $scope.Error = function(id) {
+            $mdDialog.show({
+                controller: function($scope, $mdDialog, workSpace) {
+                    $scope.closeDialog = function() {
+                        $mdDialog.hide();
+                    }
+                },
+                template: '<md-dialog>' +
+                    ' <md-dialog-content>' +
+                    ' Error:  '+ workSpace.error +'' +
+                    '</md-dialog-content>' +
+                    '  <md-dialog-actions>' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Close' +
+                    '    </md-button>' +
+                    '  </md-dialog-actions>' +
+                    '</md-dialog>',
+                parent: angular.element('body'),
+                clickOutsideToClose: true
+            });
         }
 
   }

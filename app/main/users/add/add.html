@@ -15,8 +15,36 @@
 		<form name="basicForm" class="md-inline-form" novalidate>
 	        <div class="form-title"></div>
             <div layout="column" layout-gt-sm="row">
+                <md-input-container flex="50">
+                    <input ng-disabled="bloqueo" type="text" name="cui" ng-model="vm.basicForm.cui"
+                           placeholder="CUI" ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
+                    <div ng-messages="basicForm.cui.$error" ng-show="basicForm.cui.$touched"
+                         role="alert">
+                        <div ng-message="required">
+                            <span>CUI es requerido</span>
+                        </div>
+                        <div ng-message="pattern">
+                                                <span>CUI NO VALIDO.</span>
+                                            </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex ="30">
+                    <button ng-click="schNormalCui()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Buscar</span><div class="md-ripple-container"></div></button>
+                </md-input-container>
+                <md-input-container flex="30" flex-gt-xs="50" style="text-align: right;">
+                    <md-checkbox ng-disabled="manualEnable" ng-change="check()" ng-model="vm.basicForm.super" aria-label="Checkbox 1">
+                        Super Usuario
+                    </md-checkbox>
+                </md-input-container>
+                <md-input-container ng-show="ccY" flex="30" flex-gt-xs="50" style="text-align: right;">
+                    <md-checkbox ng-disabled="manualEnable" ng-model="vm.basicForm.cc" aria-label="Checkbox 1">
+                        Cambiar Contraseña
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="column" layout-gt-sm="row">
                 <md-input-container flex>
-                    <input type="text" name="nombre" ng-model="vm.basicForm.nombre"
+                    <input ng-disabled="pasa" type="text" id="nombre" name="nombre" ng-model="vm.basicForm.nombre"
                            placeholder="Nombres" required>
                     <div ng-messages="basicForm.nombre.$error" ng-show="basicForm.nombre.$touched"
                          role="alert">
@@ -26,7 +54,7 @@
                     </div>
                 </md-input-container>
                 <md-input-container flex>
-                    <input type="text" name="apellido" ng-model="vm.basicForm.apellido"
+                    <input ng-disabled="pasa" type="text" name="apellido" ng-model="vm.basicForm.apellido"
                            placeholder="Apellidos" required>
                     <div ng-messages="basicForm.apellido.$error" ng-show="basicForm.apellido.$touched"
                          role="alert">
@@ -37,18 +65,9 @@
                 </md-input-container>
             </div>
             <div layout="column" layout-gt-sm="row">
+                
                 <md-input-container flex>
-                    <input type="text" name="cui" ng-model="vm.basicForm.cui"
-                           placeholder="CUI" required>
-                    <div ng-messages="basicForm.cui.$error" ng-show="basicForm.cui.$touched"
-                         role="alert">
-                        <div ng-message="required">
-                            <span>CUI es requerido</span>
-                        </div>
-                    </div>
-                </md-input-container>
-                <md-input-container flex>
-                    <input type="text" name="usuario" ng-model="vm.basicForm.usuario"
+                    <input ng-disabled="pasa" type="text" name="usuario" ng-model="vm.basicForm.usuario"
                            placeholder="Usuario" required>
                     <div ng-messages="basicForm.usuario.$error" ng-show="basicForm.usuario.$touched"
                          role="alert">
@@ -63,8 +82,8 @@
 
             <div layout="column" layout-gt-sm="row">
                 <md-input-container flex>
-                    <input type="password" name="password" ng-model="vm.basicForm.password"
-                           placeholder="Password" required>
+                    <input ng-disabled="pasa" type="password" name="password" ng-model="vm.basicForm.password"
+                           placeholder="Password">
                     <div ng-messages="basicForm.password.$error" ng-show="basicForm.password.$touched"
                          role="alert">
                         <div ng-message="required">
@@ -73,8 +92,8 @@
                     </div>
                 </md-input-container>
                 <md-input-container flex>
-                    <input type="password" name="password2" ng-model="vm.basicForm.password2"
-                           placeholder="Confirmar Password" required>
+                    <input ng-disabled="pasa" type="password" name="password2" ng-model="vm.basicForm.password2"
+                           placeholder="Confirmar Password">
                     <div ng-messages="basicForm.password2.$error" ng-show="basicForm.password2.$touched"
                          role="alert">
                         <div ng-message="required">
@@ -85,26 +104,30 @@
             </div>
             <div layout="column" layout-gt-sm="row">
                 <md-input-container flex>
-                    <input type="text" name="correo" ng-model="vm.basicForm.correo"
-                           placeholder="Correo" required>
+                    <input ng-disabled="pasa" type="text" name="correo" ng-model="vm.basicForm.correo"
+                           placeholder="Correo" ng-pattern="/^.+@.+\..+$/" required>
                     <div ng-messages="basicForm.correo.$error" ng-show="basicForm.correo.$touched"
                          role="alert">
                         <div ng-message="required">
                             <span>Correo es requerido</span>
                         </div>
+                        <div ng-message="pattern">
+                                                <span>Correo NO VALIDO.</span>
+                                            </div>
                     </div>
                 </md-input-container>
+                
+            </div>
+            <div layout="column" layout-gt-sm="row">
                 <md-input-container flex>
-                    <label>Rol</label>
-                   <md-select ng-model="vm.formWizard.rol" required>
-                    <md-option><em>Ninguno</em></md-option>
-                    <md-option ng-repeat="state in departamento" ng-value="state.id">
-                      {{state.nombre}}
-                    </md-option>
-                  </md-select>
+                  <label>Roles</label>
+                    <oi-select ng-disabled="pasa" oi-options="item.nombre for item in shopArr track by item.id"
+                    ng-model="vm.basicForm.bundle"
+                    multiple
+                    placeholder="Select" required></oi-select>
                 </md-input-container>
             </div>
-           
+
                     <md-button ng-click="save()" type="button" class="md-raised md-accent" aria-label="Submit"
                                ng-disabled="basicForm.$invalid || basicForm.$pristine">
                         Guardar

@@ -66,19 +66,43 @@
                     $scope.showAlert(); 
                     $state.go("app.roles");
                 }, function(error) {
-                    
+                    $scope.Error();
                 });
             }else{
                 $scope.entry = ws.saveRol();
                 var entry = $scope.entry.save(obj, function() {
                     $scope.showAlert(); 
                     $state.go("app.roles");
-                }, function(error) { tr.toster(errorManager.getDescError(error), 'ik-error'); } 
-                );   
+                }, function(error) {
+                    workSpace.error = error.data.message; 
+                    $scope.Error();
+                });   
             }
 
                        
         }    
+
+        $scope.Error = function(id) {
+            $mdDialog.show({
+                controller: function($scope, $mdDialog, workSpace) {
+                    $scope.closeDialog = function() {
+                        $mdDialog.hide();
+                    }
+                },
+                template: '<md-dialog>' +
+                    ' <md-dialog-content>' +
+                    ' Error:  '+ workSpace.error +'' +
+                    '</md-dialog-content>' +
+                    '  <md-dialog-actions>' +
+                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                    '      Close' +
+                    '    </md-button>' +
+                    '  </md-dialog-actions>' +
+                    '</md-dialog>',
+                parent: angular.element('body'),
+                clickOutsideToClose: true
+            });
+        }
 
   }
 })();

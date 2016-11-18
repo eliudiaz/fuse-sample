@@ -31,6 +31,6 @@ agGrid.initialiseAgGridWithAngular1(angular);
                 'agGrid',
                 'oi.select',
                 'ui-notification',
-                'ngInputDate'
+                '720kb.datepicker'
             ]);
 })();
