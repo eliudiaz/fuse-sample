@@ -214,7 +214,7 @@
             vm.formWizard.folio = $scope.lecturaJson.txtFolio;
             vm.formWizard.partida = $scope.lecturaJson.txtPartida;
             vm.formWizard.ncedula = $scope.lecturaJson.txtCedulaNumero;
-            vm.formWizard.edad = '33';
+            vm.formWizard.edad = $scope.lecturaJson.edad;
             vm.formWizard.fchCreacionDpi = $scope.lecturaJson.txtFecEmision;
             vm.formWizard.fchVenceDpi = $scope.lecturaJson.txtFecVencimiento;
 
