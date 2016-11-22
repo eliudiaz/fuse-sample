@@ -999,7 +999,7 @@
                     "primerApellido": vm.formWizard.primerApellido,
                     "segundoApellido": vm.formWizard.segundoApellido,
                     "otrosApellidos": vm.formWizard.tercerApellido,
-                    "fkNacionalidad": vm.formWizard.nacionalidad,
+                    "fkNacionalidadNombre": vm.formWizard.nacionalidad,
                     "fkProfesion": vm.formWizard.profesion,
                     "limitacionesFisicas": vm.formWizard.limitacionesFisicas,
                     "sabeLeer": vm.formWizard.sabeLeer ? vm.formWizard.sabeLeer : 'false',
