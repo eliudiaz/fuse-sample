@@ -154,8 +154,9 @@
                             </div>
                             <div layout="column" layout-gt-xs="row" flex-gt-xs="75" style="margin-top: -8px;">
                                 <md-input-container flex flex-gt-xs="50">
-                                    <label>Sexo</label>
-                                    <md-select ng-disabled="manualEnable" ng-model="vm.formWizard.sexo" required>
+                                    <label>{{sexoSet}}</label>
+                                    <div ng-if="!sexoSetShow"> {{sexoSet}} </div>
+                                    <md-select ng-if="sexoSetShow" ng-disabled="manualEnable" ng-model="vm.formWizard.sexo" required>
                                         <md-option ng-repeat="state in genero" ng-value="state.id"
                                                    ng-selected="state.id == generoSet">
                                             {{state.name}}
@@ -168,8 +169,9 @@
                                     </div>
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
-                                    <label>Estado Civil</label>
-                                    <md-select ng-disabled="manualEnable" ng-model="vm.formWizard.estadoCivil" required>
+                                    <label>{{scivilSet}}</label>
+                                    <div ng-if="!scivilSetShow"> {{scivilSet}} </div>
+                                    <md-select ng-if="scivilSetShow" ng-disabled="manualEnable" ng-model="vm.formWizard.estadoCivil" required>
                                         <md-option ng-repeat="state in stadoCivil" ng-value="state.id" ng-selected="state.id == stadoCivilSet">
                                             {{state.name}}
                                         </md-option>
@@ -181,8 +183,9 @@
                                     </div>
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
-                                    <label>Nacionalidad</label>
-                                    <md-select ng-disabled="manualEnable" ng-model="vm.formWizard.nacionalidad" required>
+                                    <label>{{nacionSet}}</label>
+                                    <div ng-if="!nacionSetShow"> {{nacionSet}} </div>
+                                    <md-select ng-if="nacionSetShow" ng-disabled="manualEnable" ng-model="vm.formWizard.nacionalidad" required>
                                         <md-option ng-repeat="state in nacionalidad" ng-value="state.id" ng-selected="state.id == nacionalidadSet">
                                             {{state.valor}}
                                         </md-option>
@@ -273,11 +276,11 @@
                                 </md-input-container>
 
                                 <div ng-if="!fchNacShow"> Fecha Nacimieto </div>
-                                <div ng-if="!fchNacShow"> {{fchNacSet}} </div>
+
 
                                 <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                     <div class="input-group">
-                                        <input class="form-control" ng-model="vm.formWizard.fechaNacimiento" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;" ng-change="fechaNacChange(vm.formWizard.fechaNacimiento)" />
+                                        <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fechaNacimiento" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;" ng-change="fechaNacChange(vm.formWizard.fechaNacimiento)" />
                                         <span class="input-group-addon" style="cursor: pointer">
                                             <i style="margin-left: -181px;" class="icon-calendar-today s20"></i>
                                         </span>
@@ -454,17 +457,12 @@
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
                                     <label>Comunidad Lingüística</label>
-                                    <md-select ng-model="vm.formWizard.comunidadLinguistica" required>
+                                    <md-select ng-model="vm.formWizard.comunidadLinguistica">
                                         <md-option ng-repeat="lin in comLing" ng-value="lin.id" ng-selected="lin.id == linSet">
                                             {{lin.valor}}
                                         </md-option>
                                     </md-select>
-                                    <div ng-show="!vm.formWizard.comunidadLinguistica" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
-                                            <span>
-                                                Comunidad Lingüística es Requerido.</span>
-                                        </div>
-                                    </div>
+
                                 </md-input-container>
                             </div>
 
@@ -599,7 +597,7 @@
                                 <md-input-container flex="50">
                                     <label>Grado Aprobado</label>
                                     <md-select ng-model="vm.formWizard.gradoEstudia" required>
-                                        <md-option ng-repeat="state in nivelEducativoPadre" ng-value="state.id" ng-selected="state.id == takeNivelEducaPadre">
+                                        <md-option ng-repeat="state in nivelEducativoPadre" ng-value="state.id" ng-selected="state.id == takeNivelEducaPadre" ng-click="takeNivelCarrera(state.id)">
                                             {{state.valor}}
                                         </md-option>
                                     </md-select>
@@ -609,6 +607,14 @@
                                                 Grado Aprobado es Requerido.</span>
                                         </div>
                                     </div>
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Carrera</label>
+                                    <md-select ng-model="vm.formWizard.gradoCarrera">
+                                        <md-option ng-repeat="state in nivelEducativoPadrePadre" ng-value="state.id" ng-selected="state.id == takeNivelEducaPadre">
+                                            {{state.valor}}
+                                        </md-option>
+                                    </md-select>
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>Estudia Actualmente</label>
@@ -637,7 +643,15 @@
                                 <md-input-container flex="50" ng-show="showEscolaridad">
                                     <label>Grado que estudia?</label>
                                     <md-select ng-model="vm.formWizard.gradoEstudia2" >
-                                        <md-option ng-repeat="state in nivelEducativoPadre2" ng-value="state.id" ng-selected="state.id == takenivelEduPrad2">
+                                        <md-option ng-repeat="state in nivelEducativoPadre2" ng-value="state.id" ng-selected="state.id == takenivelEduPrad2" ng-click="takeNivelCarrera2(state.id)">
+                                            {{state.valor}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Carrera</label>
+                                    <md-select ng-model="vm.formWizard.gradoCarrera2">
+                                        <md-option ng-repeat="state in nivelEducativoPadrePadre2" ng-value="state.id" ng-selected="state.id == takeNivelEducaPadre">
                                             {{state.valor}}
                                         </md-option>
                                     </md-select>
@@ -1014,16 +1028,10 @@
                             </div>
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex flex-gt-xs="50">
-                                    <input type="text" name="observaciones" id="observaciones" ng-model="vm.formWizard.observaciones"
-                                           placeholder="Observaciones"
-                                           >
-                                    <div ng-messages="wizardStep4.observaciones.$error"
-                                         ng-show="wizardStep4.observaciones"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>Observaciones es Requerido.</span>
-                                        </div>
-                                    </div>
+                                    <label>Observaciones</label>
+                                    <textarea id="observaciones" ng-model="vm.formWizard.observaciones" md-maxlength="150" rows="5" md-select-on-focus>
+
+                                    </textarea>
                                 </md-input-container>
                             </div>
 

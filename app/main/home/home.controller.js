@@ -13,8 +13,7 @@
        vm.basicForm = {};
        vm.basicForm2 = {};
 
-
- 
+      $scope.arySearchTake = {obj:'',api:'http://45.79.200.203:8080/MS_RRHH_Servicios/personas/todos'};  
 
       $scope.showReglon2 = false;
       $scope.showanioIngreso2 = false;
@@ -42,6 +41,13 @@
         var id = '#frmD';
         $(id).addClass("openNav");
       }
+
+
+      $scope.excel = function () {
+            //ESTA VARIABLE CONTIENE EL API Y LAS VARIABLES QE NECESITA PARA EJECUTARSE 
+            // SEGUN LA ULTIMA ACTIVIDADA BUSQUEDA NORMAL,AVANZADA O CUI TODO QUEDA REGUISTRADO
+            console.info('Ultima Busqueda Generada',$scope.arySearchTake);
+      };
 
 
       $scope.clear = function(){
@@ -263,6 +269,8 @@ $scope.takeDepto3 = function(id){
          pueblo:vm.basicForm.pueblo
     };
 
+    $scope.arySearchTake = {obj: obj,api:'http://45.79.200.203:8080/MS_RRHH_Servicios/home/busquedaNormal'};  
+
     $scope.entryUp = ws.searchPersona();
     var EntryUp = $scope.entryUp.post(obj, function() {
         $scope.gridOptions.api.setRowData(EntryUp);
@@ -279,6 +287,8 @@ $scope.takeDepto3 = function(id){
          cui:vm.basicForm.search
     };
 
+    $scope.arySearchTake = {obj: obj,api:'http://45.79.200.203:8080/MS_RRHH_Servicios/home/busquedaNormal'};  
+
     $scope.entryUp = ws.searchPersona();
     var EntryUp = $scope.entryUp.post(obj, function() {
         $scope.gridOptions.api.setRowData(EntryUp);
@@ -293,6 +303,9 @@ $scope.takeDepto3 = function(id){
    $scope.schDinamic = function(){
 
     $scope.entryUp2 = ws.searchPersonaAvs();
+    
+    $scope.arySearchTake = {obj: $scope.searchObjDinamico,api:'http://45.79.200.203:8080/MS_RRHH_Servicios/home/busquedaAvanzada'};  
+
     var EntryUp2 = $scope.entryUp2.post($scope.searchObjDinamico, function() {
         $scope.gridOptions.api.setRowData(EntryUp2);
     }, function(error) {
