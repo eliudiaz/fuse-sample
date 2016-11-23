@@ -180,10 +180,7 @@
                 "txtCedulaMunicipio": "CHIQUIMULILLA",
                 "txtCedulaDepto": "SANTA ROSA"
             };
-
             $scope.cargarDatosLector();
-
-
         }
 
         $scope.checkID = function () {
@@ -465,7 +462,7 @@
         }
 
         $scope.takeNivelCarrera = function (id) {
-            var entryViewsnivelEducativoPadre = ws.nivelEducativoPadre(id).query({}, function () {
+            var entryViewsnivelEducativoPadre = ws.nivelEducativoCarrera(id).query({}, function () {
                 $scope.nivelEducativoPadrePadre = entryViewsnivelEducativoPadre;
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -486,7 +483,7 @@
         }
 
         $scope.takeNivelCarrera2 = function (id) {
-            var entryViewsnivelEducativoPadre2 = ws.nivelEducativoPadre(id).query({}, function () {
+            var entryViewsnivelEducativoPadre2 = ws.nivelEducativoCarrera(id).query({}, function () {
                 $scope.nivelEducativoPadrePadre2 = entryViewsnivelEducativoPadre2;
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
