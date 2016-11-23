@@ -50,6 +50,8 @@
         $scope.deptoCedSetShow = true;
         $scope.muniCedSet = 'Munucipio';
         $scope.muniCedSetShow = true;
+        $scope.carreraShow = false;
+        $scope.carreraShow2 = false;
 
         $scope.labelNivel1 = 'Distrito';
         $scope.labelNivel2 = 'Lugar Específico';
@@ -180,6 +182,7 @@
             };
 
             $scope.cargarDatosLector();
+
 
         }
 
@@ -468,6 +471,9 @@
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
             });
+            if ($scope.nivelEducativoPadrePadre) {
+                $scope.carreraShow = true;
+            }
         }
 
         $scope.takeNivelEducativo2 = function (id) {
@@ -486,6 +492,9 @@
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
             });
+            if ($scope.nivelEducativoPadrePadre2) {
+                $scope.carreraShow2 = true;
+            }
         }
 
         $scope.takeReglon = function (id) {
@@ -1046,8 +1055,8 @@
                     "idiomas": ido,
                     "dpi": {
                         "noSerie": 112323123,
-                        "fechaEmision": "12-12-2012",
-                        "fechaVencimiento": "12-12-2012"
+                        "fechaEmision": vm.formWizard.fchCreacionDpi,
+                        "fechaVencimiento": vm.formWizard.fchVenceDpi
                     },
                     "estudiosSalud": salu
                 };
@@ -1101,8 +1110,8 @@
                     "idiomas": ido,
                     "dpi": {
                         "noSerie": 112323123,
-                        "fechaEmision": "12-12-2012",
-                        "fechaVencimiento": "12-12-2012"
+                        "fechaEmision": vm.formWizard.fchCreacionDpi,
+                        "fechaVencimiento": vm.formWizard.fchVenceDpi
                     },
                     "estudiosSalud": salu
                 };
@@ -1158,8 +1167,8 @@
                     "idiomas": ido,
                     "dpi": {
                         "noSerie": 112323123,
-                        "fechaEmision": "12-12-2012",
-                        "fechaVencimiento": "12-12-2012"
+                        "fechaEmision": vm.formWizard.fchCreacionDpi,
+                        "fechaVencimiento": vm.formWizard.fchVenceDpi
                     },
                     "estudiosSalud": salu
                 };

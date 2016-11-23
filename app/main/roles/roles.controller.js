@@ -7,10 +7,14 @@
         .controller('rolesController', rolesController);
 
     /** @ngInject */
-  function rolesController($scope,$timeout,$state,workSpace,localStorageService,ws){
+  function rolesController($scope,$timeout,$state,workSpace,localStorageService,ws,sg,$mdDialog,Notification){
 
         var entryViews = ws.allRol().query({}, function() {
              $scope.RolesData = entryViews;
+            $timeout(function() {
+    	        $scope.gridOptions.api.setColumnDefs($scope.columnDefs);
+    	        $scope.gridOptions.api.setRowData($scope.RolesData);
+    	     }, 300);
         }, function(error) {
             workSpace.error = error.data.message; 
             $scope.Error();
@@ -24,15 +28,46 @@
             columnDefs: $scope.columnDefs,
         }; 
 
+        $scope.sg = sg.callSg();
+        if($scope.sg.roles.activo){
+            $state.go("app.home");
+            Notification.error('No tienes Acceso a Roles');
+        }
+        
+
         $scope.columnDefs = [];
 
         $scope.columnDefs.push({ headerName: "id", checkboxSelection: true,  field: "id", filter: 'text', filterParams: { apply: true } });
         $scope.columnDefs.push({ headerName: "Nombre", field: "nombre", filter: 'text', filterParams: { apply: true } });
 
-        $timeout(function() {
-	        $scope.gridOptions.api.setColumnDefs($scope.columnDefs);
-	        $scope.gridOptions.api.setRowData($scope.RolesData);
-	     }, 300);
+
+        $scope.showConfirm = function(ev) {
+            var ob = $scope.gridOptions.api.getSelectedRows();
+            if(ob.length>0){
+              // Appending dialog to document.body to cover sidenav in docs app
+              var confirm = $mdDialog.confirm()
+                    .title('Seguro que desea Eliminar el Registro?')
+                    .textContent('Se eliminara el registro selecto a continuacion')
+                    .ariaLabel('Lucky day')
+                    .targetEvent(ev)
+                    .ok('Eliminar')
+                    .cancel('Cancelar');
+
+              $mdDialog.show(confirm).then(function() {
+                    var entryViews = ws.allRol().query({}, function() {
+                             $scope.RolesData = entryViews;
+                             $scope.gridOptions.api.setRowData($scope.RolesData);
+                        }, function(error) {
+                            workSpace.error = error.data.message; 
+                            $scope.Error();
+                        });
+              }, function() {
+                
+              });
+            }else{
+              Notification.error('Selecciona un Registro Primero');
+            }
+      };
 
 
         $scope.nuevo = function(){

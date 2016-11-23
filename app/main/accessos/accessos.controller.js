@@ -7,14 +7,24 @@
         .controller('accessosController', accessosController);
 
     /** @ngInject */
-  function accessosController($scope,$timeout,$state,workSpace,localStorageService,ws){
+  function accessosController($scope,$timeout,$state,workSpace,localStorageService,ws,sg,Notification,$mdDialog ){
         
         var entryViews = ws.allAccess().query({}, function() {
              $scope.usuarioData = entryViews;
+                $timeout(function() {
+        	        $scope.gridOptions.api.setColumnDefs($scope.columnDefs);
+        	        $scope.gridOptions.api.setRowData($scope.usuarioData);
+        	     }, 300);
         }, function(error) {
             workSpace.error = error.data.message; 
             $scope.Error();
         });
+
+        $scope.sg = sg.callSg();
+        if($scope.sg.accesos.activo){
+            $state.go("app.home");
+            Notification.error('No tienes Acceso a Accesos');
+        }
 
          //*************************
         // GRID OPTION
@@ -25,6 +35,34 @@
             columnDefs: $scope.columnDefs,
         }; 
 
+        $scope.showConfirm = function(ev) {
+            var ob = $scope.gridOptions.api.getSelectedRows();
+            if(ob.length>0){
+              // Appending dialog to document.body to cover sidenav in docs app
+              var confirm = $mdDialog.confirm()
+                    .title('Seguro que desea Eliminar el Registro?')
+                    .textContent('Se eliminara el registro selecto a continuacion')
+                    .ariaLabel('Lucky day')
+                    .targetEvent(ev)
+                    .ok('Eliminar')
+                    .cancel('Cancelar');
+
+              $mdDialog.show(confirm).then(function() {
+                 var entryViews = ws.allAccess().query({}, function() {
+                         $scope.usuarioData = entryViews;
+                         $scope.gridOptions.api.setRowData($scope.usuarioData);
+                    }, function(error) {
+                        workSpace.error = error.data.message; 
+                        $scope.Error();
+                    });
+              }, function() {
+                
+              });
+            }else{
+              Notification.error('Selecciona un Registro Primero');
+            }
+      };
+
         $scope.columnDefs = [];
 
         $scope.columnDefs.push({ headerName: "Id", checkboxSelection: true,  field: "id", filter: 'text', filterParams: { apply: true } });
@@ -34,10 +72,6 @@
         $scope.columnDefs.push({ headerName: "Creado Por", field: "creadoPor", filter: 'text', filterParams: { apply: true } });
 
 
-        $timeout(function() {
-	        $scope.gridOptions.api.setColumnDefs($scope.columnDefs);
-	        $scope.gridOptions.api.setRowData($scope.usuarioData);
-	     }, 300);
 
 
         $scope.nuevo = function(){
