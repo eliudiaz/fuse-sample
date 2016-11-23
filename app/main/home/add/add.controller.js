@@ -1225,11 +1225,6 @@
                             "direccion": vm.formWizard.detalleResidencia
                         },
                         "idiomas": ido,
-                        "dpi": {
-                            "noSerie": vm.formWizard.nserie,
-                            "fechaEmision": vm.formWizard.fchCreacionDpi,
-                            "fechaVencimiento": vm.formWizard.fchVenceDpi
-                        },
                         "estudiosSalud": salu
                     };
                 }
