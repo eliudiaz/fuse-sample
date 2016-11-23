@@ -17,10 +17,14 @@
 	    	<i class="ion-search" style="font-size: 22px;"></i>
 		</div>
 		<div flex="30" style="text-align: right;">
-			<button ng-click="nuevo()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Nuevo (+)</span><div class="md-ripple-container"></div></button>
+			<button ng-disabled="{{sg.accesos.nuevo}}" ng-click="nuevo()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Nuevo (+)</span><div class="md-ripple-container"></div></button>
 
-			<button ng-click="edit()" class=" 
+			<button ng-disabled="{{sg.accesos.editar}}" ng-click="edit()" class=" 
 	md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Editar</span><div class="md-ripple-container"></div></button>
+
+	<md-button ng-disabled="{{sg.accesos.delete}}" class="md-primary md-raised" ng-click="showConfirm($event)" >
+      Eliminar
+    </md-button>
 
 		</div>	
 	</div>	

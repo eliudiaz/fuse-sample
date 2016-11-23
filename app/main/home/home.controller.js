@@ -7,7 +7,7 @@
         .controller('homeController', homeController);
 
     /** @ngInject */
-    function homeController($scope,$state,$timeout,$mdDialog,workSpace,localStorageService,ws){
+    function homeController($scope,$state,$timeout,$mdDialog,workSpace,localStorageService,ws,sg,Notification){
        var vm = this;
 
        vm.basicForm = {};
@@ -18,6 +18,7 @@
       $scope.showReglon2 = false;
       $scope.showanioIngreso2 = false;
 
+      $scope.sg = sg.callSg();
    
         //*************************
         // GRID OPTION
@@ -47,6 +48,32 @@
             //ESTA VARIABLE CONTIENE EL API Y LAS VARIABLES QE NECESITA PARA EJECUTARSE 
             // SEGUN LA ULTIMA ACTIVIDADA BUSQUEDA NORMAL,AVANZADA O CUI TODO QUEDA REGUISTRADO
             console.info('Ultima Busqueda Generada',$scope.arySearchTake);
+      };
+
+      $scope.showConfirm = function(ev) {
+        var ob = $scope.gridOptions.api.getSelectedRows();
+        if(ob.length>0){
+          // Appending dialog to document.body to cover sidenav in docs app
+          var confirm = $mdDialog.confirm()
+                .title('Seguro que desea Eliminar el Registro?')
+                .textContent('Se eliminara el registro selecto a continuacion')
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Eliminar')
+                .cancel('Cancelar');
+
+          $mdDialog.show(confirm).then(function() {
+            console.info('EEE');
+               var entryViewsAll = ws.allPersonas().query({}, function() {
+                   $scope.gridOptions.api.setRowData(entryViewsAll);
+                 }, function(error) {
+                    workSpace.error = JSON.stringify(error.data); 
+                    $scope.Error();
+                });       
+          }, function() {   });
+        }else{
+          Notification.error('Selecciona un Registro Primero');
+        }
       };
 
 

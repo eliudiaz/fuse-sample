@@ -1,0 +1,63 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('fuse')
+        .factory('sg', sg);
+
+    /** @ngInject */
+    function sg(ws,localStorageService) {
+
+        return {
+            callSg: callSg
+        }
+
+        function callSg(id){
+             var data;
+             
+             if(!localStorageService.get('ActiveSegurity')){
+                data = localStorageService.get('DataActiveSegurity');
+                data = {
+                    persona: {
+                        activo:true,
+                        editar:false,
+                        nuevo:false,
+                        delete:false,
+                        excel:true
+                    },
+                    roles:{
+                        activo:false,
+                        editar:true,
+                        nuevo:false,
+                        delete:false
+                    },
+                    usuarios:{
+                        activo:false,
+                        editar:true,
+                        nuevo:false,
+                        delete:false
+                    },
+                    accesos: {
+                        activo:false,
+                        editar:true,
+                        nuevo:false,
+                        delete:false
+                    }
+                };
+                //localStorageService.set('ActiveSegurity', data);
+             }else{
+                data = localStorageService.get('ActiveSegurity');
+                console.info('Puro Local');
+             }
+
+
+             
+
+        return data;
+
+        }       
+
+
+    }
+
+})();
