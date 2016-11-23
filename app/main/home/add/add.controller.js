@@ -188,7 +188,7 @@
             var sessionId = localStorage.getItem("sessionId");
             $http({
                 method: 'GET',
-                url: (pullPath + "?sesionId=" + sessionId)
+                url: (pullPath + "?sessionId=" + sessionId)
             }).then(function successCallback(response) {
                 $scope.lecturaJson = response.data;
                 $scope.cargarDatosLector();
