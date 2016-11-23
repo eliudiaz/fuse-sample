@@ -1,22 +1,22 @@
 <style type="text/css" media="screen">
-    .md-primary-bg{
-        background-color: #075993 !important;
-    }
+	.md-primary-bg{
+		    background-color: #075993 !important;
+	}
 </style>
 <header class="headerNew">
 </header>
-
-<div >
-</div>
+    
+    <div >
+      </div>
 <div class="contentBase">
     <div ng-show="showNormal" style=" width: 100%; margin: 0 auto; border: 1px solid; margin-bottom: 25px;">
-        <article style="text-align: right;  background: #075993;">
-            <label class="baseFiltro"> Filtro Normal </label>
-            <a class="btn btn-primary " href="#"  ng-click="closeNave('frmN')"><i class="icon2 icon-close-circle"></i></a>
+		    <article style="text-align: right;  background: #075993;">
+               <label class="baseFiltro"> Filtro Normal </label>
+               <a class="btn btn-primary " href="#"  ng-click="closeNave('frmN')"><i class="icon2 icon-close-circle"></i></a>     
         </article>
         <form name="basicForm" id="frmN" class="navNormal md-inline-form" novalidate style="margin: 15px;">
 
-            <div class="form-title">Busqueda</div>
+	        <div class="form-title">Busqueda</div>
             <div layout="column" layout-gt-sm="row">
                 <md-input-container flex>
                     <input type="text" name="primerNombre" ng-model="vm.basicForm.primerNombre"
@@ -44,129 +44,141 @@
                 <md-input-container flex>
                     <label>Sexo</label>
                     <md-select ng-disabled="manualEnable" ng-model="vm.basicForm.sexo">
-                        <md-option ng-value="" ><em>Selecciona</em></md-option>
-                        <md-option ng-repeat="state in genero" ng-value="state.id"
-                                   ng-selected="state.id == generoSet">
-                            {{state.name}}
-                        </md-option>
+                    <md-option ng-value="" ><em>Selecciona</em></md-option>
+<md-option ng-repeat="state in genero" ng-value="state.id" 
+ng-selected="state.id == generoSet">
+                        {{state.name}}
+                      </md-option>
                     </md-select>
                 </md-input-container>
             </div>
-
+         
             <div>
-                Rango de Fecha Nacimiento
+            	Rango de Fechas
             </div>
             <div layout="column" layout-gt-sm="row">
-                <md-datepicker flex ng-model="vm.basicForm.fechaDesde" md-placeholder="Desde"></md-datepicker>
-                <md-datepicker flex ng-model="vm.basicForm.fechaHasta" md-placeholder="Hasta"></md-datepicker>
+                <datepicker   style="max-width: 177px; text-align: left; padding-left: 0px; margin-left: 0px;" date-format="dd-MM-yyyy" selector="form-control">
+                                    <div class="input-group">
+                                        <input ng-disabled="manualEnable" class="form-control" ng-model="vm.basicForm.fechaDesde" placeholder="Fecha Desde" style="height: 34px; padding-left: 30px;"  />
+                                       
+                                    </div>
+                                </datepicker>
+                <datepicker  style="max-width: 177px; text-align: left; padding-left: 0px; margin-left:  0px;" date-format="dd-MM-yyyy" selector="form-control">
+                                    <div class="input-group">
+                                        <input ng-disabled="manualEnable" class="form-control" ng-model="vm.basicForm.fechaHasta" placeholder="Fecha Hasta" style="height: 34px; padding-left: 30px;" />
+                                       
+                                    </div>
+                                </datepicker>
+                          
             </div>
+            <p></p><p></p><p></p><p></p>
             <div layout="column" layout-gt-sm="row">
                 <md-input-container flex>
-                    <label>Departamento</label>
+		                <label>Departamento</label>
                     <md-select ng-model="vm.basicForm.departamento">
-                        <md-option ng-value="" ><em>Selecciona</em></md-option>
-                        <md-option ng-repeat="state in depto3" ng-value="state.id" ng-click="takeDepto3(state.id)">
-                            {{state.valor}}
-                        </md-option>
+                      <md-option ng-value="" ><em>Selecciona</em></md-option>
+                      <md-option ng-repeat="state in depto3" ng-value="state.id" ng-click="takeDepto3(state.id)">
+                        {{state.valor}}
+                      </md-option>
                     </md-select>
-                </md-input-container>
+		            </md-input-container>
 
                 <md-input-container flex>
                     <label>Municipio</label>
                     <md-select ng-model="vm.basicForm.municipio">
-                        <md-option ng-value="" ><em>Selecciona</em></md-option>
-                        <md-option ng-repeat="municipio in muni3" ng-value="municipio.id">
-                            {{municipio.valor}}
-                        </md-option>
+                      <md-option ng-value="" ><em>Selecciona</em></md-option>
+                      <md-option ng-repeat="municipio in muni3" ng-value="municipio.id">
+                        {{municipio.valor}}
+                      </md-option>
                     </md-select>
                 </md-input-container>
             </div>
-
+            <p></p><p></p><p></p><p></p><p></p><p></p>
             <div layout="column" layout-gt-sm="row">
                 <md-input-container flex>
-                    <label>Pueblo</label>
-                    <md-select ng-model="vm.basicForm.pueblo" >
-                        <md-option ng-value="" ><em>Selecciona</em></md-option>
-                        <md-option ng-repeat="p in pueblo" ng-value="p.id">
-                            {{p.name}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-input-container flex>
+		          <label>Pueblo</label>
+		          <md-select ng-model="vm.basicForm.pueblo" >
+		            <md-option ng-value="" ><em>Selecciona</em></md-option>
+		            <md-option ng-repeat="p in pueblo" ng-value="p.id">
+		              {{p.name}}
+		            </md-option>
+		          </md-select>
+		        </md-input-container>
+		        <md-input-container flex>
                     <input type="text" name="direccion" ng-model="vm.basicForm.direccion"
                            placeholder="Direccion" >
                 </md-input-container>
             </div>
 
 
+          
+                    <md-button ng-click="schNormal()" type="button" class="md-raised md-accent" aria-label="Submit"
+                               ng-disabled="basicForm.$invalid || basicForm.$pristine">
+                        Realizar Busqueda
+                    </md-button>
+                    <button ng-click="clear()" class=" 
+  md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Limpiar Busqueda</span><div class="md-ripple-container"></div></button>
 
-            <md-button ng-click="schNormal()" type="button" class="md-raised md-accent" aria-label="Submit"
-                       ng-disabled="basicForm.$invalid || basicForm.$pristine">
-                Realizar Busqueda
-            </md-button>
-            <button ng-click="clear()" class="
-                    md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Limpiar Busqueda</span><div class="md-ripple-container"></div></button>
-
-        </form>
-    </div>
-    <div ng-show="showDinamico" style=" width: 100%; margin: 0 auto; border: 1px solid; margin-bottom: 25px;">
+             </form>
+        </div>
+        <div ng-show="showDinamico" style=" width: 100%; margin: 0 auto; border: 1px solid; margin-bottom: 25px;">
         <article style="text-align: right;  background: #075993; margin-top: 0px; margin-bottom: 20px;">
-            <label class="baseFiltro"> Filtro Dinamico </label>
-            <a class="btn btn-primary " href="#"  ng-click="closeNave('frmD')"><i class="icon2 icon-close-circle"></i></a>
+               <label class="baseFiltro"> Filtro Dinamico </label>
+               <a class="btn btn-primary " href="#"  ng-click="closeNave('frmD')"><i class="icon2 icon-close-circle"></i></a>   
         </article>
         <form name="basicForm2" id="frmD" class="navNormal md-inline-form" novalidate style="margin: 15px;">
 
             <div layout="column" ng-repeat="state in searchObjDinamico.filtros" layout-gt-sm="row">
-                <div  flex>
+              <div  flex>
                     <div class="tblHead"> Campo Busqueda </div>
                     <div class="tblHeadBody"> {{state.campo}} </div>
-                </div>
-                <div  flex>
+              </div>
+              <div  flex>
                     <div class="tblHead"> Operador Logico </div>
                     <div class="tblHeadBody"> {{state.comparador}} </div>
-                </div>
-                <div  flex>
+              </div>
+              <div  flex>
                     <div class="tblHead"> Valor 1 </div>
                     <div class="tblHeadBody"> {{state.valor1}} </div>
-                </div>
-                <div  flex>
+              </div>
+              <div  flex>
                     <div class="tblHead"> Valor 2 </div>
                     <div class="tblHeadBody"> {{ state.valor2 ? state.valor2 : 'No Aplica' }} </div>
-                </div>
-                <div  flex="5" style="text-align: center;">
+              </div>
+              <div  flex="5" style="text-align: center;">
                     <div class="tblHead"> Acciones </div>
                     <div class="tblHeadBody"> <a class="btn btn-primary " href="#"  ng-click="out($index)"><i class="icon3 icon-close-circle"></i></a>  </div>
-                </div>
+              </div>
             </div>
-
+            
             <div layout="column" layout-gt-sm="row">
                 <md-input-container flex>
                     <label> Campo Busqueda </label>
                     <md-select ng-model="vm.basicForm2.objSearchDinamico" >
-                        <md-option ng-repeat="state in objSearchDinamico" ng-click="takeObcD(state.id)" ng-value="state.id">
-                            {{state.name}}
-                        </md-option>
+                      <md-option ng-repeat="state in objSearchDinamico" ng-click="takeObcD(state.id)" ng-value="state.id">
+                        {{state.name}}
+                      </md-option>
                     </md-select>
                     <div ng-show="!vm.basicForm2.objSearchDinamico" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                        <div>
-                            <span>
-                                Campo Busqueda es Requerido.</span>
-                        </div>
+                      <div>
+                          <span>
+                          Campo Busqueda es Requerido.</span>
+                      </div>
                     </div>
-
+                    
                 </md-input-container>
                 <md-input-container flex>
                     <label>Operador Logico</label>
                     <md-select ng-model="vm.basicForm2.filtroReglon" ng-change="betweenOK(1)">
-                        <md-option ng-repeat="state in filtroDData" ng-value="state.id">
-                            {{state.name}}
-                        </md-option>
+                      <md-option ng-repeat="state in filtroDData" ng-value="state.id">
+                        {{state.name}}
+                      </md-option>
                     </md-select>
                     <div ng-show="!vm.basicForm2.filtroReglon" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                        <div>
-                            <span>
-                                Operador Logico es Requerido.</span>
-                        </div>
+                      <div>
+                          <span>
+                          Operador Logico es Requerido.</span>
+                      </div>
                     </div>
                 </md-input-container>
                 <md-input-container flex>
@@ -174,7 +186,7 @@
                            placeholder="Ingresa Valor "
                            >
                     <div ng-show="!vm.basicForm2.inputFiltroReglon"
-                         style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336"                      >
+                       style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336"                      >
                         <div >
                             <span>Valor es Requerido.</span>
                         </div>
@@ -183,54 +195,54 @@
                 <md-input-container flex ng-show="showReglon2">
                     <input type="text" name="input2FiltroReglon" ng-model="vm.basicForm2.input2FiltroReglon" placeholder="Ingresa Valor 2" >
                     <div ng-show="!vm.basicForm2.input2FiltroReglon"
-                         style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336"                      >
+                       style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336"                      >
                         <div >
                             <span>Valor es Requerido.</span>
                         </div>
                     </div>
                 </md-input-container>
-                <button ng-click="addDinamico()" class="
-                        md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Crear</span><div class="md-ripple-container"></div></button>
+                <button ng-click="addDinamico()" class=" 
+  md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Crear</span><div class="md-ripple-container"></div></button>
 
             </div>
-
+           
             <md-button ng-click="schDinamic()" type="button" class="md-raised md-accent" aria-label="Submit"
-                       ng-disabled="basicForm2.$invalid || basicForm2.$pristine">
-                Realizar Busqueda
-            </md-button>
-            <button ng-click="clear()" class="
-                    md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Limpiar Busqueda</span><div class="md-ripple-container"></div></button>
+                               ng-disabled="basicForm2.$invalid || basicForm2.$pristine">
+                        Realizar Busqueda
+                    </md-button>
+                    <button ng-click="clear()" class=" 
+  md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Limpiar Busqueda</span><div class="md-ripple-container"></div></button>
         </form>
 
-    </div>
-    <div layout style="margin-bottom: 15px;">
-        <div flex="70">
-            <input type="text" ng-model="vm.basicForm.search" placeholder="Buscar CUI" style="padding-left:5px;  width: 80%; margin-right: 5px; height: 35px; margin-top: 17px; border: 2px solid #9E9E9E;"/>
-            <i class="ion-search" style="font-size: 22px;"></i>
-            <button ng-click="schNormalCui()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Buscar</span><div class="md-ripple-container"></div></button>
-            <button ng-click="showOpcionesF()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">(+) Opciones</span><div class="md-ripple-container"></div></button>
-            <button ng-click="showDinamicoF()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">(+) Avanzadas</span><div class="md-ripple-container"></div></button>
-            <button ng-disabled="{{sg.persona.nuevo}}" ng-click="add()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Nuevo (+)</span><div class="md-ripple-container"></div></button>
+	</div>
+	<div layout style="margin-bottom: 15px;">
+		<div flex="70">
+			<input type="text" ng-model="vm.basicForm.search" placeholder="Buscar CUI" style="padding-left:5px;  width: 80%; margin-right: 5px; height: 35px; margin-top: 17px; border: 2px solid #9E9E9E;"/>
+	    	<i class="ion-search" style="font-size: 22px;"></i>
+        <button ng-click="schNormalCui()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Buscar</span><div class="md-ripple-container"></div></button>
+        <button ng-click="showOpcionesF()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">(+) Opciones</span><div class="md-ripple-container"></div></button>
+        <button ng-click="showDinamicoF()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">(+) Avanzadas</span><div class="md-ripple-container"></div></button>
+        <button ng-disabled="{{sg.persona.nuevo}}" ng-click="add()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Nuevo (+)</span><div class="md-ripple-container"></div></button>
 
-            <button ng-disabled="{{sg.persona.editar}}" ng-click="edit()" class="
-                    md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Editar</span><div class="md-ripple-container"></div></button>
+      <button ng-disabled="{{sg.persona.editar}}" ng-click="edit()" class=" 
+  md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Editar</span><div class="md-ripple-container"></div></button>
 
-            <button ng-disabled="{{sg.persona.excel}}" ng-click="excel()" class="
-                    md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">EXCEL</span><div class="md-ripple-container"></div></button>
+  <button ng-disabled="{{sg.persona.excel}}" ng-click="excel()" class=" 
+  md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">EXCEL</span><div class="md-ripple-container"></div></button>
 
-            <md-button ng-disabled="{{sg.persona.delete}}" class="md-primary md-raised" ng-click="showConfirm($event)" >
-                Eliminar
-            </md-button>
+    <md-button ng-disabled="{{sg.persona.delete}}" class="md-primary md-raised" ng-click="showConfirm($event)" >
+      Eliminar
+    </md-button>
 
-        </div>
-        <div flex="30" style="text-align: right;">
+		</div>
+		<div flex="30" style="text-align: right;">
+			
 
-
-        </div>
-    </div>
-    <div style="">
-        <div id="myGrid" ag-grid="gridOptions" style="height: 400px; text-align: left; width: 100%; " class="ag-blue"></div>
-    </div>
+		</div>	
+	</div>	
+	<div style="">
+		<div id="myGrid" ag-grid="gridOptions" style="height: 400px; text-align: left; width: 100%; " class="ag-blue"></div>
+	</div>
 
 </div>
 

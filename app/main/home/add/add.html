@@ -32,7 +32,7 @@
                                 <button ng-click="manual()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>
-                                <button ng-click="lector()" class="
+                                <button ng-click="lector2()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
                             </article>
@@ -156,7 +156,7 @@
                                 <md-input-container flex flex-gt-xs="50">
                                     <label>{{sexoSet}}</label>
                                     <div ng-if="!sexoSetShow"> {{sexoSet}} </div>
-                                    <md-select ng-if="sexoSetShow" ng-disabled="manualEnable" ng-model="vm.formWizard.sexo" required>
+                                    <md-select ng-if="sexoSetShow" ng-disabled="manualEnable" ng-model="vm.formWizard.sexo" ng-selected="state.id == generoSet" required>
                                         <md-option ng-repeat="state in genero" ng-value="state.id"
                                                    ng-selected="state.id == generoSet">
                                             {{state.name}}
@@ -210,29 +210,22 @@
                                         </div>
                                     </div>
                                 </md-input-container>
+                                
                                 <md-input-container flex flex-gt-xs="50">
-                                    <input  ng-disabled="true" type="text" name="fchCreacionDpi" id="fchCreacionDpi" ng-model="vm.formWizard.fchCreacionDpi"
-                                            placeholder="Fecha Creacion"
-                                            >
-                                    <div ng-messages="wizardStep2.fchCreacionDpi.$error"
-                                         ng-show="wizardStep2.fchCreacionDpi"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>No. Serie es Requerido.</span>
+                                    <datepicker date-format="dd-MM-yyyy" selector="form-control">
+                                        <div class="input-group">
+                                            <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchCreacionDpi" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;"  />
+                                            
                                         </div>
-                                    </div>
+                                    </datepicker>
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
-                                    <input ng-disabled="true" type="text" name="fchVenceDpi" id="fchVenceDpi" ng-model="vm.formWizard.fchVenceDpi"
-                                           placeholder="Fecha Vencimiento"
-                                           >
-                                    <div ng-messages="wizardStep2.fchVenceDpi.$error"
-                                         ng-show="wizardStep2.fchVenceDpi"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>No. Serie es Requerido.</span>
-                                        </div>
-                                    </div>
+                                    <datepicker date-format="dd-MM-yyyy" selector="form-control">
+                                        <div class="input-group">
+                                            <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchVenceDpi" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;"  />
+                                                                                    </div>
+                                    </datepicker>
+
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
                                     <input ng-disabled="manualEnable" type="text" name="profesion" id="profesion" ng-model="vm.formWizard.profesion"
@@ -276,14 +269,12 @@
                                 </md-input-container>
 
                                 <div ng-if="!fchNacShow"> Fecha Nacimieto </div>
-
+                                
 
                                 <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                     <div class="input-group">
                                         <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fechaNacimiento" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;" ng-change="fechaNacChange(vm.formWizard.fechaNacimiento)" />
-                                        <span class="input-group-addon" style="cursor: pointer">
-                                            <i style="margin-left: -181px;" class="icon-calendar-today s20"></i>
-                                        </span>
+                                       
                                     </div>
                                 </datepicker>
 
@@ -462,7 +453,7 @@
                                             {{lin.valor}}
                                         </md-option>
                                     </md-select>
-
+                                  
                                 </md-input-container>
                             </div>
 
@@ -1029,9 +1020,9 @@
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex flex-gt-xs="50">
                                     <label>Observaciones</label>
-                                    <textarea id="observaciones" ng-model="vm.formWizard.observaciones" md-maxlength="150" rows="5" md-select-on-focus>
-
-                                    </textarea>
+                    <textarea id="observaciones" ng-model="vm.formWizard.observaciones" md-maxlength="150" rows="5" md-select-on-focus>
+                        
+                    </textarea>
                                 </md-input-container>
                             </div>
 

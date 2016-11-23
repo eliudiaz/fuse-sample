@@ -33,12 +33,14 @@
       $scope.columnDefs = [];
 
       $scope.showOpcionesF =  function(){
+        $scope.showDinamico = false;
         $scope.showNormal= true;
         var id = '#frmN';
         $(id).addClass("openNav");
       }
       $scope.showDinamicoF =  function(){
         $scope.showDinamico = true;
+        $scope.showNormal= false;
         var id = '#frmD';
         $(id).addClass("openNav");
       }
@@ -78,21 +80,24 @@
 
 
       $scope.clear = function(){
-        vm.basicForm.primerNombre = '';
-        vm.basicForm.segundoNombre = '';
-        vm.basicForm.edad = '';
-        vm.basicForm.primerApellido = '';
-        vm.basicForm.segundoApellido = '';
-        vm.basicForm.sexo = '';
-        vm.basicForm.departamento = '';
-        vm.basicForm.municipio = '';
-        vm.basicForm.pueblo = '';
-        vm.basicForm.direccion = '';
+        vm.basicForm.primerNombre = null;
+        vm.basicForm.segundoNombre = null;
+        vm.basicForm.edad = null;
+        vm.basicForm.primerApellido = null;
+        vm.basicForm.segundoApellido = null;
+        vm.basicForm.sexo = null;
+        vm.basicForm.departamento = null;
+        vm.basicForm.municipio = null;
+        vm.basicForm.pueblo = null;
+        vm.basicForm.direccion = null;
 
-        vm.basicForm2.objSearchDinamico = '';
-        vm.basicForm2.filtroReglon = '';
-        vm.basicForm2.inputFiltroReglon = '';
-        vm.basicForm2.input2FiltroReglon = '';
+        vm.basicForm2.objSearchDinamico = null;
+        vm.basicForm2.filtroReglon = null;
+        vm.basicForm2.inputFiltroReglon = null;
+        vm.basicForm2.input2FiltroReglon = null;
+        vm.basicForm.fechaDesde = null;
+        vm.basicForm.fechaHasta = null;
+
         $scope.searchObjDinamico.filtros = [];
 
         var entryViewsAll = ws.allPersonas().query({}, function() {
@@ -280,20 +285,21 @@ $scope.takeDepto3 = function(id){
   }
 
   $scope.schNormal = function(){
+    if(vm.basicForm.edad>0){
     var obj = {
-         cui:vm.basicForm.cui,
-         edad: vm.basicForm.edad,
-         primerNombre:vm.basicForm.primerNombre ,
-         segundoNombre:vm.basicForm.segundoNombre,
-         primerApellido:vm.basicForm.primerApellido ,
-         segundoApellido:vm.basicForm.segundoApellido ,
-         sexo:vm.basicForm.sexo,
-         fechaNacInicio:vm.basicForm.n,
-         fechaNacFin:vm.basicForm.n,
-         departamento:vm.basicForm.departamento,
-         municipio:vm.basicForm.municipio,
-         direccion:vm.basicForm.direccion,
-         pueblo:vm.basicForm.pueblo
+         cui: vm.basicForm.cui ? vm.basicForm.cui : null,
+         edad: vm.basicForm.edad ? vm.basicForm.edad : null,
+         primerNombre:vm.basicForm.primerNombre ? vm.basicForm.primerNombre : null ,
+         segundoNombre:vm.basicForm.segundoNombre ? vm.basicForm.segundoNombre : null,
+         primerApellido:vm.basicForm.primerApellido ? vm.basicForm.primerApellido : null ,
+         segundoApellido:vm.basicForm.segundoApellido ? vm.basicForm.segundoApellido : null ,
+         sexo:vm.basicForm.sexo ? vm.basicForm.sexo : null,
+         fechaNacInicio:vm.basicForm.fechaDesde ? vm.basicForm.fechaDesde : null,
+         fechaNacFin:vm.basicForm.fechaHasta ? vm.basicForm.fechaHasta : null,
+         departamento:vm.basicForm.departamento ? vm.basicForm.departamento : null,
+         municipio:vm.basicForm.municipio ? vm.basicForm.municipio : null,
+         direccion:vm.basicForm.direccion ? vm.basicForm.direccion : null,
+         pueblo:vm.basicForm.pueblo ? vm.basicForm.pueblo : null
     };
 
     $scope.arySearchTake = {obj: obj,api:'http://45.79.200.203:8080/MS_RRHH_Servicios/home/busquedaNormal'};  
@@ -305,7 +311,7 @@ $scope.takeDepto3 = function(id){
         workSpace.error = JSON.stringify(error.data); 
         $scope.Error();
     });
-
+  }
 
   }
 
