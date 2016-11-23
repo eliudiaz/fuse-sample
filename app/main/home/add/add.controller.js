@@ -184,9 +184,11 @@
         }
 
         $scope.checkID = function () {
+            var pullPath = localStorage.getItem("pullPath");
+            var sessionId = localStorage.getItem("sessionId");
             $http({
                 method: 'GET',
-                url: 'http://localhost:41825/sd-lector-events/events2?sessionid=123'
+                url: (pullPath + "?sesionId=" + sessionId)
             }).then(function successCallback(response) {
                 $scope.lecturaJson = response.data;
                 $scope.cargarDatosLector();
