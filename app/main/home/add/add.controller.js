@@ -187,9 +187,10 @@
         }
 
         $scope.checkID = function () {
+            var pullPath = localStorage.getItem("pullPath") + "?sessionId=" + localStorage.getItem("sessionId");
             $http({
                 method: 'GET',
-                url: 'http://localhost:41825/sd-lector-events/events2?sessionid=123'
+                url: pullPath
             }).then(function successCallback(response) {
                 $scope.lecturaJson = response.data;
                 $scope.cargarDatosLector();
@@ -466,16 +467,16 @@
             $scope.nivelEducativoPadrePadre = [];
             var entryViewsnivelEducativoPadre = ws.nivelEducativoCarrera(id).query({}, function () {
                 $scope.nivelEducativoPadrePadre = entryViewsnivelEducativoPadre;
-                if ($scope.nivelEducativoPadrePadre.length>0) {
+                if ($scope.nivelEducativoPadrePadre.length > 0) {
                     $scope.carreraShow = true;
-                }else{
+                } else {
                     $scope.carreraShow = false;
                 }
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
             });
-            
+
         }
 
         $scope.takeNivelEducativo2 = function (id) {
@@ -491,9 +492,9 @@
             $scope.nivelEducativoPadrePadre2 = [];
             var entryViewsnivelEducativoPadre2 = ws.nivelEducativoCarrera(id).query({}, function () {
                 $scope.nivelEducativoPadrePadre2 = entryViewsnivelEducativoPadre2;
-                if ($scope.nivelEducativoPadrePadre2.length>0) {
+                if ($scope.nivelEducativoPadrePadre2.length > 0) {
                     $scope.carreraShow2 = true;
-                }else{
+                } else {
                     $scope.carreraShow2 = false;
                 }
             }, function (error) {
@@ -710,7 +711,7 @@
             vm.formWizard.ncedula = valor.noCedula;
             vm.formWizard.edad = valor.edad;
             valor.fechaNacimiento ? vm.formWizard.fechaNacimiento = valor.fechaNacimiento : '';
-            valor.lugarResidencia.direccion? vm.formWizard.detalleResidencia = valor.lugarResidencia.direccion : '';
+            valor.lugarResidencia.direccion ? vm.formWizard.detalleResidencia = valor.lugarResidencia.direccion : '';
             valor.dpi.fechaEmision ? vm.formWizard.fchCreacionDpi = valor.dpi.fechaEmision : '';
             valor.dpi.noSerie ? vm.formWizard.nserie = valor.dpi.noSerie : '';
             valor.dpi.fechaVencimiento ? vm.formWizard.fchVenceDpi = valor.dpi.fechaVencimiento : '';
@@ -838,7 +839,7 @@
                 contaP++;
             });
 
-            if (contaP>1) {
+            if (contaP > 1) {
                 $scope.takeOtrop = "SI";
             } else {
                 $scope.takeOtrop = "NO";
@@ -1065,9 +1066,9 @@
                     },
                     "idiomas": ido,
                     "dpi": {
-                        "noSerie": 112323123,
-                        "fechaEmision": vm.formWizard.fchCreacionDpi,
-                        "fechaVencimiento": vm.formWizard.fchVenceDpi
+                        "noSerie": vm.formWizard.nserie,
+                        "fechaEmisionTexto": vm.formWizard.fchCreacionDpi,
+                        "fechaVencimientoTexto": vm.formWizard.fchVenceDpi
                     },
                     "estudiosSalud": salu
                 };

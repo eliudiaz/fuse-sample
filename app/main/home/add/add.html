@@ -32,7 +32,7 @@
                                 <button ng-click="manual()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>
-                                <button ng-click="lector2()" class="
+                                <button ng-click="lector()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
                             </article>
@@ -210,12 +210,12 @@
                                         </div>
                                     </div>
                                 </md-input-container>
-                                
+
                                 <md-input-container flex flex-gt-xs="50">
                                     <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                         <div class="input-group">
                                             <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchCreacionDpi" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;"  />
-                                            
+
                                         </div>
                                     </datepicker>
                                 </md-input-container>
@@ -223,7 +223,7 @@
                                     <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                         <div class="input-group">
                                             <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchVenceDpi" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;"  />
-                                                                                    </div>
+                                        </div>
                                     </datepicker>
 
                                 </md-input-container>
@@ -269,12 +269,12 @@
                                 </md-input-container>
 
                                 <div ng-if="!fchNacShow"> Fecha Nacimieto </div>
-                                
+
 
                                 <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                     <div class="input-group">
                                         <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fechaNacimiento" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;" ng-change="fechaNacChange(vm.formWizard.fechaNacimiento)" />
-                                       
+
                                     </div>
                                 </datepicker>
 
@@ -453,7 +453,7 @@
                                             {{lin.valor}}
                                         </md-option>
                                     </md-select>
-                                  
+
                                 </md-input-container>
                             </div>
 
@@ -1020,9 +1020,9 @@
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex flex-gt-xs="50">
                                     <label>Observaciones</label>
-                    <textarea id="observaciones" ng-model="vm.formWizard.observaciones" md-maxlength="150" rows="5" md-select-on-focus>
-                        
-                    </textarea>
+                                    <textarea id="observaciones" ng-model="vm.formWizard.observaciones" md-maxlength="150" rows="5" md-select-on-focus>
+
+                                    </textarea>
                                 </md-input-container>
                             </div>
 
