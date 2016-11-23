@@ -116,7 +116,11 @@
                 return r;
             },
             nivelEducativoPadre: function (id) {
-                var r = $resource(path + 'catalogos/get/all?tipo=NIVEL_EDUCATIVO&padre=' + id);
+                var r = $resource(path + 'catalogos/get/all?tipo=NIVEL_EDUCATIVO_GRADO&padre=' + id);
+                return r;
+            },
+            nivelEducativoCarrera: function (id) {
+                var r = $resource(path + 'catalogos/get/all?tipo=NIVEL_EDUCATIVO_CARRERA&padre=' + id);
                 return r;
             },
             nacionalidad: function () {
