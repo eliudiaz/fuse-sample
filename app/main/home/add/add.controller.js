@@ -199,6 +199,14 @@
                 $timeout($scope.checkID, 2000);
             });
         };
+        $scope.getSexo = function (dpiSexo) {
+            switch (dpiSexo) {
+                case "MASCULINO":
+                    return "HOMBRE";
+                case "FEMENINO":
+                    return "MUJER";
+            }
+        }
         $scope.cargarDatosLector = function () {
             $scope.img = $scope.lecturaJson.lblPicture;
             $scope.manualEnable = true;
@@ -221,6 +229,7 @@
             vm.formWizard.partida = $scope.lecturaJson.txtPartida;
             vm.formWizard.ncedula = $scope.lecturaJson.txtCedulaNumero;
             vm.formWizard.edad = $scope.lecturaJson.edad;
+            vm.formWizard.nserie = $scope.lecturaJson.txtNumSerie;
             vm.formWizard.fchCreacionDpi = $scope.lecturaJson.txtFecEmision;
             vm.formWizard.fchVenceDpi = $scope.lecturaJson.txtFecVencimiento;
 
@@ -240,7 +249,7 @@
 
             $scope.sexoSet = $scope.lecturaJson.txtGenero;
             $scope.sexoSetShow = false;
-            vm.formWizard.sexo = $scope.lecturaJson.txtGenero;
+            vm.formWizard.sexo = $scope.getSexo($scope.lecturaJson.txtGenero);
 
             $scope.nacionSet = $scope.lecturaJson.txtNacionalidad;
             $scope.nacionSetShow = false;
@@ -1004,6 +1013,7 @@
 
             if ($scope.txtMRZ2_1) {
                 var sendJSON = {
+                    "foto": $scope.img,
                     "cui": vm.formWizard.cui,
                     "primerNombre": vm.formWizard.primerNombre,
                     "segundoNombre": vm.formWizard.segundoNombre,
@@ -1051,14 +1061,15 @@
                     },
                     "idiomas": ido,
                     "dpi": {
-                        "noSerie": 112323123,
-                        "fechaEmision": vm.formWizard.fchCreacionDpi,
-                        "fechaVencimiento": vm.formWizard.fchVenceDpi
+                        "noSerie": vm.formWizard.nserie,
+                        "fechaEmisionTexto": vm.formWizard.fchCreacionDpi,
+                        "fechaVencimientoTexto": vm.formWizard.fchVenceDpi
                     },
                     "estudiosSalud": salu
                 };
             } else {
                 var sendJSON = {
+                    "foto": $scope.img,
                     "cui": vm.formWizard.cui,
                     "primerNombre": vm.formWizard.primerNombre,
                     "segundoNombre": vm.formWizard.segundoNombre,
@@ -1105,73 +1116,124 @@
                         "direccion": vm.formWizard.detalleResidencia
                     },
                     "idiomas": ido,
-                    "dpi": {
-                        "noSerie": 112323123,
-                        "fechaEmision": vm.formWizard.fchCreacionDpi,
-                        "fechaVencimiento": vm.formWizard.fchVenceDpi
-                    },
                     "estudiosSalud": salu
                 };
             }
 
             if (update) {
-                var sendJSON = {
-                    "primerNombre": vm.formWizard.primerNombre,
-                    "segundoNombre": vm.formWizard.segundoNombre,
-                    "otrosNombres": vm.formWizard.tercerNombre,
-                    "primerApellido": vm.formWizard.primerApellido,
-                    "segundoApellido": vm.formWizard.segundoApellido,
-                    "otrosApellidos": vm.formWizard.tercerApellido,
-                    "fkNacionalidad": vm.formWizard.nacionalidad,
-                    "fkProfesion": vm.formWizard.profesion,
-                    "limitacionesFisicas": vm.formWizard.limitacionesFisicas,
-                    "sabeLeer": vm.formWizard.sabeLeer ? vm.formWizard.sabeLeer : 'false',
-                    "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
-                    "fechaNacimiento": vm.formWizard.fechaNacimiento,
-                    "fkMunicipioNacimiento": vm.formWizard.municipio,
-                    "nacNoLibro": vm.formWizard.libro,
-                    "nacNoFolio": vm.formWizard.folio,
-                    "nacNoPartida": vm.formWizard.partida,
-                    "fkPueblo": vm.formWizard.pueblo,
-                    "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica,
-                    "mrz": $scope.txtMRZ2_1,
-                    "noCedula": vm.formWizard.ncedula,
-                    "fkMunicipioCedula": vm.formWizard.municipioCedula,
-                    "fkMunicipioVecindad": vm.formWizard.municipioVecindad,
-                    "huellaManoDer": $scope.huellaManoDer,
-                    "huellaManoIzq": $scope.huellaManoIzq,
-                    "huellaDedoDer": $scope.huellaDedoDer,
-                    "huellaDedoIzq": $scope.huellaDedoIzq,
-                    "estadoCivil": vm.formWizard.estadoCivil,
-                    "sexo": vm.formWizard.sexo,
-                    "registroLaboral": {
-                        "anioIngreso": vm.formWizard.anioIngresoInstitucion,
-                        "comisionado": comosionadoAc,
-                        "fkComunidadComisionado": '1',
-                        "fkExpectativa": vm.formWizard.expectativas,
-                        "puestos": puestosD,
-                        "observaciones": vm.formWizard.observaciones
-                    },
-                    "registroAcademico": {
-                        "ultimoGrado": studioUltimoGrado,
-                        "gradoActual": studioGradoActual,
-                        "estudiaActualmente": studiaAc
-                    },
-                    "lugarResidencia": {
-                        "fkMunicipio": vm.formWizard.municipioResidencia,
-                        "direccion": vm.formWizard.detalleResidencia
-                    },
-                    "idiomas": ido,
-                    "dpi": {
-                        "noSerie": 112323123,
-                        "fechaEmision": vm.formWizard.fchCreacionDpi,
-                        "fechaVencimiento": vm.formWizard.fchVenceDpi
-                    },
-                    "estudiosSalud": salu
-                };
+                if ($scope.txtMRZ2_1) {
+                    var sendJSON = {
+                        "foto": $scope.img,
+                        "cui": vm.formWizard.cui,
+                        "primerNombre": vm.formWizard.primerNombre,
+                        "segundoNombre": vm.formWizard.segundoNombre,
+                        "otrosNombres": vm.formWizard.tercerNombre,
+                        "primerApellido": vm.formWizard.primerApellido,
+                        "segundoApellido": vm.formWizard.segundoApellido,
+                        "otrosApellidos": vm.formWizard.tercerApellido,
+                        "fkNacionalidadNombre": vm.formWizard.nacionalidad,
+                        "fkProfesion": vm.formWizard.profesion,
+                        "limitacionesFisicas": vm.formWizard.limitacionesFisicas,
+                        "sabeLeer": vm.formWizard.sabeLeer ? vm.formWizard.sabeLeer : 'false',
+                        "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
+                        "fechaNacimientoTexto": vm.formWizard.fechaNacimiento,
+                        "fkMunicipioNacimientoNombre": vm.formWizard.municipio,
+                        "nacNoLibro": vm.formWizard.libro,
+                        "nacNoFolio": vm.formWizard.folio,
+                        "nacNoPartida": vm.formWizard.partida,
+                        "fkPueblo": vm.formWizard.pueblo,
+                        "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica,
+                        "mrz": "<<<sdfsdf<<<sdfsdfd<<<",
+                        "noCedula": vm.formWizard.ncedula,
+                        "fkMunicipioCedulaNombre": vm.formWizard.municipioCedula,
+                        "fkMunicipioVecindadNombre": vm.formWizard.municipioVecindad,
+                        "huellaManoDer": $scope.chkRightThumb,
+                        "huellaManoIzq": $scope.chkLeftThumb,
+                        "huellaDedoDer": "indice",
+                        "huellaDedoIzq": "medio",
+                        "estadoCivil": vm.formWizard.estadoCivil,
+                        "sexo": vm.formWizard.sexo,
+                        "registroLaboral": {
+                            "anioIngreso": vm.formWizard.anioIngresoInstitucion,
+                            "comisionado": comosionadoAc,
+                            "fkExpectativa": vm.formWizard.expectativas,
+                            "puestos": puestosD,
+                            "observaciones": vm.formWizard.observaciones
+                        },
+                        "registroAcademico": {
+                            "ultimoGrado": studioUltimoGrado,
+                            "gradoActual": studioGradoActual,
+                            "estudiaActualmente": studiaAc
+                        },
+                        "lugarResidencia": {
+                            "fkMunicipio": vm.formWizard.municipioResidencia,
+                            "direccion": vm.formWizard.detalleResidencia
+                        },
+                        "idiomas": ido,
+                        "dpi": {
+                            "noSerie": vm.formWizard.nserie,
+                            "fechaEmisionTexto": vm.formWizard.fchCreacionDpi,
+                            "fechaVencimientoTexto": vm.formWizard.fchVenceDpi
+                        },
+                        "estudiosSalud": salu
+                    };
+                } else {
+                    var sendJSON = {
+                        "primerNombre": vm.formWizard.primerNombre,
+                        "segundoNombre": vm.formWizard.segundoNombre,
+                        "otrosNombres": vm.formWizard.tercerNombre,
+                        "primerApellido": vm.formWizard.primerApellido,
+                        "segundoApellido": vm.formWizard.segundoApellido,
+                        "otrosApellidos": vm.formWizard.tercerApellido,
+                        "fkNacionalidad": vm.formWizard.nacionalidad,
+                        "fkProfesion": vm.formWizard.profesion,
+                        "limitacionesFisicas": vm.formWizard.limitacionesFisicas,
+                        "sabeLeer": vm.formWizard.sabeLeer ? vm.formWizard.sabeLeer : 'false',
+                        "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
+                        "fechaNacimiento": vm.formWizard.fechaNacimiento,
+                        "fkMunicipioNacimiento": vm.formWizard.municipio,
+                        "nacNoLibro": vm.formWizard.libro,
+                        "nacNoFolio": vm.formWizard.folio,
+                        "nacNoPartida": vm.formWizard.partida,
+                        "fkPueblo": vm.formWizard.pueblo,
+                        "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica,
+                        "mrz": $scope.txtMRZ2_1,
+                        "noCedula": vm.formWizard.ncedula,
+                        "fkMunicipioCedula": vm.formWizard.municipioCedula,
+                        "fkMunicipioVecindad": vm.formWizard.municipioVecindad,
+                        "huellaManoDer": $scope.huellaManoDer,
+                        "huellaManoIzq": $scope.huellaManoIzq,
+                        "huellaDedoDer": $scope.huellaDedoDer,
+                        "huellaDedoIzq": $scope.huellaDedoIzq,
+                        "estadoCivil": vm.formWizard.estadoCivil,
+                        "sexo": vm.formWizard.sexo,
+                        "registroLaboral": {
+                            "anioIngreso": vm.formWizard.anioIngresoInstitucion,
+                            "comisionado": comosionadoAc,
+                            "fkComunidadComisionado": '1',
+                            "fkExpectativa": vm.formWizard.expectativas,
+                            "puestos": puestosD,
+                            "observaciones": vm.formWizard.observaciones
+                        },
+                        "registroAcademico": {
+                            "ultimoGrado": studioUltimoGrado,
+                            "gradoActual": studioGradoActual,
+                            "estudiaActualmente": studiaAc
+                        },
+                        "lugarResidencia": {
+                            "fkMunicipio": vm.formWizard.municipioResidencia,
+                            "direccion": vm.formWizard.detalleResidencia
+                        },
+                        "idiomas": ido,
+                        "dpi": {
+                            "noSerie": vm.formWizard.nserie,
+                            "fechaEmision": vm.formWizard.fchCreacionDpi,
+                            "fechaVencimiento": vm.formWizard.fchVenceDpi
+                        },
+                        "estudiosSalud": salu
+                    };
+                }
             }
-
-
 
             if (update) {
                 $scope.entryUp = ws.UpdatePersonas(vm.formWizard.cui);
