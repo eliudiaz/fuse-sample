@@ -17,8 +17,8 @@
         $scope.paisCheckV2 = true;
 
         $scope.img = '';
-        $scope.txtMRZ2_1 = '';
-        $scope.txtMRZ2_2 = '';
+        $scope.txtMRZ2_1 = null;
+        $scope.txtMRZ2_2 = null;
         $scope.huellaManoIzq = false;
         $scope.huellaManoDer = false;
         $scope.huellaDedoDer = '';
