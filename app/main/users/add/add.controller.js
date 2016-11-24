@@ -31,7 +31,10 @@
             vm.basicForm.usuario = localStorageService.get('workSpace').user.usuario;
             vm.basicForm.correo = localStorageService.get('workSpace').user.correo;
             vm.basicForm.bundle = localStorageService.get('workSpace').user.roles;
-
+            if(vm.basicForm.bundle.length<=0){
+                vm.basicForm.super = true;
+                $scope.bloqueo = true;
+            }
             update = true;
             $scope.pasa = false;
             $scope.ccY = true;
@@ -113,10 +116,11 @@
         $scope.check = function(){
             if(vm.basicForm.super){
                 $scope.pasa = false;
+                $scope.bloqueo = true;
                 f('nombre');
             }else{
                 $scope.pasa = true;
-
+                $scope.bloqueo = false;
             }
         }
 

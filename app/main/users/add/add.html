@@ -119,7 +119,7 @@
                 
             </div>
             <div layout="column" layout-gt-sm="row">
-                <md-input-container flex>
+                <md-input-container ng-if="!vm.basicForm.super" flex>
                   <label>Roles</label>
                     <oi-select ng-disabled="pasa" oi-options="item.nombre for item in shopArr track by item.id"
                     ng-model="vm.basicForm.bundle"

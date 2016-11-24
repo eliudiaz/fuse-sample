@@ -35,6 +35,7 @@
             columnDefs: $scope.columnDefs,
         }; 
 
+
         $scope.showConfirm = function(ev) {
             var ob = $scope.gridOptions.api.getSelectedRows();
             if(ob.length>0){

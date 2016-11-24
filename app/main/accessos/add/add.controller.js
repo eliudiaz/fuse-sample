@@ -25,9 +25,13 @@
 
         if(valor){
             vm.basicForm.valor = localStorageService.get('workSpace').access.valor;
-            vm.basicForm.tipo = localStorageService.get('workSpace').access.tipo;
+            $scope.getType = localStorageService.get('workSpace').access.tipo;
             update = true;
         }
+
+
+        $scope.getAllType = [{id:'MENU',name:'MENU'},{id:'ACCESS',name:'ACCESS'}];
+
 
         $scope.showAlert = function(ev) {
             $mdDialog.show(
@@ -63,7 +67,7 @@
 
             if(update){
                 $scope.entryUp = ws.UpdateAccess(valor);
-                EntryUp = $scope.entryUp.update(obj, function() {
+                var EntryUp = $scope.entryUp.update(obj, function() {
                     $scope.showAlert(); 
                     $state.go("app.accessos");
                 }, function(error) {

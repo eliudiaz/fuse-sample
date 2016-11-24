@@ -19,27 +19,27 @@
                 data = localStorageService.get('DataActiveSegurity');
                 data = {
                     persona: {
-                        activo:true,
+                        activo:false,
                         editar:false,
                         nuevo:false,
                         delete:false,
-                        excel:true
+                        excel:false
                     },
                     roles:{
                         activo:false,
-                        editar:true,
+                        editar:false,
                         nuevo:false,
                         delete:false
                     },
                     usuarios:{
                         activo:false,
-                        editar:true,
+                        editar:false,
                         nuevo:false,
                         delete:false
                     },
                     accesos: {
                         activo:false,
-                        editar:true,
+                        editar:false,
                         nuevo:false,
                         delete:false
                     }

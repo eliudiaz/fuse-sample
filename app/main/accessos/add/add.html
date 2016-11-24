@@ -18,20 +18,24 @@
                 <md-input-container flex>
                     <input type="text" name="valor" ng-model="vm.basicForm.valor"
                            placeholder="Valor" required>
-                    <div ng-messages="basicForm.valor.$error" ng-show="basicForm.valor.$touched"
+                    <div ng-messages="basicForm.valor.$error" ng-show="basicForm.valor"
                          role="alert">
                         <div ng-message="required">
                             <span>valor es requerido</span>
                         </div>
                     </div>
                 </md-input-container>
-                <md-input-container flex>
-                    <input type="text" name="tipo" ng-model="vm.basicForm.tipo"
-                           placeholder="Tipo" required>
-                    <div ng-messages="basicForm.tipo.$error" ng-show="basicForm.tipo.$touched"
-                         role="alert">
-                        <div ng-message="required">
-                            <span>tipo es requerido</span>
+                <md-input-container flex flex-gt-xs="50">
+                    <label>Tipo</label>
+                    <md-select ng-model="vm.basicForm.tipo"  required>
+                        <md-option ng-repeat="state in getAllType" ng-value="state.id"
+                                   ng-selected="state.id == getType">
+                            {{state.name}}
+                        </md-option>
+                    </md-select>
+                    <div ng-show="!vm.basicForm.tipo" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                        <div >
+                            <span>Tipo es Requerido.</span>
                         </div>
                     </div>
                 </md-input-container>
