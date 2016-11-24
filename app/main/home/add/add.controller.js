@@ -924,6 +924,15 @@
                     );
         };
 
+        $scope.getSexo = function (sexo) {
+            switch (sexo) {
+                case "MASCULINO":
+                    return "HOMBRE";
+                case "FEMENINO":
+                    return "MUJER";
+            }
+        }
+
         $scope.sendForm = function () {
             var studiaAc;
             var comosionadoAc;
@@ -1047,7 +1056,7 @@
                     "huellaDedoDer": "indice",
                     "huellaDedoIzq": "medio",
                     "estadoCivil": vm.formWizard.estadoCivil,
-                    "sexo": vm.formWizard.sexo,
+                    "sexo": $scope.getSexo(vm.formWizard.sexo),
                     "registroLaboral": {
                         "anioIngreso": vm.formWizard.anioIngresoInstitucion,
                         "comisionado": comosionadoAc,
