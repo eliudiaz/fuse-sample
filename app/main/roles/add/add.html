@@ -10,8 +10,7 @@
 	<article>
 		<h1 style=" padding: 0;    margin: 0;"> Nuevo Rol: </h1> 
 	</article>
-	 <button class="btn btn-primary show-custom" ng-click="customTemplateScope()">Custom template and scope</button>
-     <script type="text/ng-template" id="custom_template.html">
+	 <script type="text/ng-template" id="custom_template.html">
         <div class="ui-notification custom-template">
             <h3>{{nTitle}}</h3>
             <div class="message" ng-bind-html="message"></div>
@@ -46,7 +45,7 @@
                     <oi-select oi-options="item.valor for item in shopArr track by item.id"
                     ng-model="bundle"
                     multiple
-                    placeholder="Select" required></oi-select>
+                    placeholder="Selecciona" required></oi-select>
                 </md-input-container>
                 
             </div>

@@ -214,16 +214,15 @@
                                 <md-input-container flex flex-gt-xs="50">
                                     <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                         <div class="input-group">
-                                            <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchCreacionDpi" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;"  />
-
+                                            <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchCreacionDpi" placeholder="Fecha Emisión" style="height: 34px; padding-left: 30px;"  />
                                         </div>
                                     </datepicker>
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
                                     <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                         <div class="input-group">
-                                            <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchVenceDpi" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;"  />
-                                        </div>
+                                            <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchVenceDpi" placeholder="Fecha Vencimiento" style="height: 34px; padding-left: 30px;"  />
+                                                                                    </div>
                                     </datepicker>
 
                                 </md-input-container>
@@ -273,8 +272,7 @@
 
                                 <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                     <div class="input-group">
-                                        <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fechaNacimiento" placeholder="Selecciona Fecha" style="height: 34px; padding-left: 30px;" ng-change="fechaNacChange(vm.formWizard.fechaNacimiento)" />
-
+                                        <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fechaNacimiento" placeholder="Fecha Nacimiento" style="height: 34px; padding-left: 30px;" ng-change="fechaNacChange(vm.formWizard.fechaNacimiento)" />
                                     </div>
                                 </datepicker>
 
@@ -292,17 +290,23 @@
                                     </div>
                                 </md-input-container>
                             </div>
-
+                            <div ng-click="puta()">
+                                MIERDA
+                            </div>
                             <h3>Lugar Nacimiento</h3>
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex flex-gt-xs="50">
                                     <label>{{paisSet}}</label>
                                     <div ng-if="!paisSetShow"> {{paisSet}} </div>
-                                    <md-select ng-if="paisSetShow" ng-model="vm.formWizard.pais" ng-change="paisCheck()" required>
-                                        <md-option ng-repeat="pa in pais" ng-value="pa.id" ng-selected="pa.id == paisSet2">
-                                            {{pa.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                    ng-if="paisSetShow"
+                                    oi-options="item.valor for (key, item) in pais"
+                                    ng-model="vm.formWizard.pais"
+                                    oi-select-options="{newItem: 'autocomplete'}"
+                                    placeholder="Selecciona" 
+                                    ng-change="paisCheck()"
+                                    required>
+                                    </oi-select>
                                     <div ng-show="!vm.formWizard.pais" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>Pais es Requerido.</span>
@@ -330,49 +334,19 @@
 
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
-                                    <input ng-disabled="manualEnable" ng-pattern="/^[0-9]*$/" type="text" name="libro" id="libro" ng-model="vm.formWizard.libro"
+                                    <input ng-disabled="manualEnable" type="text" name="libro" id="libro" ng-model="vm.formWizard.libro"
                                            placeholder="Libro"
-                                           required >
-                                    <div ng-messages="wizardStep2.libro.$error"
-                                         ng-show="wizardStep2.libro"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>Libro es Requerido.</span>
-                                        </div>
-                                        <div ng-message="pattern" class="my-message">
-                                            Ingresa solamente Numeros
-                                        </div>
-                                    </div>
+                                           >
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
-                                    <input ng-disabled="manualEnable" ng-pattern="/^[0-9]*$/" type="text" name="folio" id="folio" ng-model="vm.formWizard.folio"
+                                    <input ng-disabled="manualEnable" type="text" name="folio" id="folio" ng-model="vm.formWizard.folio"
                                            placeholder="Folio"
-                                           required >
-                                    <div ng-messages="wizardStep2.folio.$error"
-                                         ng-show="wizardStep2.folio"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>Folio es Requerido.</span>
-                                        </div>
-                                        <div ng-message="pattern" class="my-message">
-                                            Ingresa solamente Numeros
-                                        </div>
-                                    </div>
+                                           >
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
-                                    <input ng-disabled="manualEnable" ng-pattern="/^[0-9]*$/" type="text" name="partida" id="partida" ng-model="vm.formWizard.partida"
+                                    <input ng-disabled="manualEnable" type="text" name="partida" id="partida" ng-model="vm.formWizard.partida"
                                            placeholder="Partida"
-                                           required >
-                                    <div ng-messages="wizardStep2.partida.$error"
-                                         ng-show="wizardStep2.partida"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>Partida es Requerido.</span>
-                                        </div>
-                                        <div ng-message="pattern" class="my-message">
-                                            Ingresa solamente Numeros
-                                        </div>
-                                    </div>
+                                           >
                                 </md-input-container>
 
 
@@ -382,11 +356,15 @@
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex flex-gt-xs="50">
                                     <label>Pais</label>
-                                    <md-select ng-model="vm.formWizard.paisResidencia" ng-change="paisCheck2()" required>
-                                        <md-option ng-repeat="pa in pais2" ng-value="pa.id" ng-selected="pa.id == pais2Set">
-                                            {{pa.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                    oi-options="item.valor for (key, item) in pais2"
+                                    ng-model="vm.formWizard.paisResidencia"
+                                    oi-select-options="{newItem: 'autocomplete'}"
+                                    placeholder="Selecciona" 
+                                    ng-change="paisCheck2()"
+                                    required>
+                                    </oi-select>
+                                   
                                     <div ng-show="!vm.formWizard.paisResidencia" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
@@ -397,20 +375,27 @@
 
                                 <md-input-container flex="50">
                                     <label>Departamento</label>
-                                    <md-select ng-model="vm.formWizard.departamentoResidencia" ng-disabled="paisCheckV2">
-                                        <md-option ng-repeat="de2 in depto2" ng-value="de2.id" ng-click="takeDepto2(de2.id)" ng-selected="de2.id == takedeptoRec">
-                                            {{de2.valor}}
-                                        </md-option>
-                                    </md-select>
-
+                                    <oi-select
+                                    oi-options="item.valor for (key, item) in depto2"
+                                    ng-model="vm.formWizard.departamentoResidencia"
+                                    oi-select-options="{newItem: 'autocomplete'}"
+                                    placeholder="Selecciona" 
+                                    ng-disabled="paisCheckV2"
+                                    ng-change="takeDepto2()"
+                                    >
+                                    </oi-select>
+                         
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>Municipio</label>
-                                    <md-select ng-model="vm.formWizard.municipioResidencia" ng-disabled="paisCheckV2">
-                                        <md-option ng-repeat="municipio in muni2" ng-value="municipio.id" ng-selected="municipio.id == takemuniRec">
-                                            {{municipio.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                    oi-options="item.valor for (key, item) in muni2"
+                                    ng-model="vm.formWizard.municipioResidencia"
+                                    oi-select-options="{newItem: 'autocomplete'}"
+                                    placeholder="Selecciona" 
+                                    ng-disabled="paisCheckV2"
+                                    >
+                                    </oi-select>
 
                                 </md-input-container>
 
@@ -434,26 +419,37 @@
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex="50">
                                     <label>Pueblo</label>
-                                    <md-select ng-model="vm.formWizard.pueblo" required>
-                                        <md-option ng-repeat="p in pueblo" ng-value="p.id" ng-selected="p.id == puebloSet">
-                                            {{p.name}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                    oi-options="item.name for (key, item) in pueblo"
+                                    ng-model="vm.formWizard.pueblo"
+                                    oi-select-options="{newItem: 'autocomplete'}"
+                                    placeholder="Selecciona" 
+                                    ng-change="takePueblo()"
+                                    required>
+                                    </oi-select>
                                     <div ng-show="!vm.formWizard.pueblo" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
+                                        <div>
                                             <span>
                                                 Pueblo es Requerido.</span>
                                         </div>
                                     </div>
                                 </md-input-container>
-                                <md-input-container flex flex-gt-xs="50">
+                                <md-input-container ng-if="showCL" flex flex-gt-xs="50">
                                     <label>Comunidad Lingüística</label>
-                                    <md-select ng-model="vm.formWizard.comunidadLinguistica">
-                                        <md-option ng-repeat="lin in comLing" ng-value="lin.id" ng-selected="lin.id == linSet">
-                                            {{lin.valor}}
-                                        </md-option>
-                                    </md-select>
-
+                                    <oi-select
+                                    oi-options="item.valor for (key, item) in comLing"
+                                    ng-model="vm.formWizard.comunidadLinguistica"
+                                    oi-select-options="{newItem: 'autocomplete'}"
+                                    placeholder="Selecciona" 
+                                    required>
+                                    </oi-select>
+                                    <div ng-show="!vm.formWizard.comunidadLinguistica" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                        <div >
+                                            <span>
+                                                Comunidad Lingüística es Requerido.</span>
+                                        </div>
+                                    </div>
+                                  
                                 </md-input-container>
                             </div>
 
@@ -654,7 +650,7 @@
                                     <oi-select oi-options="item.valor for item in shopArr track by item.id"
                                                ng-model="vm.formWizard.bundle"
                                                multiple
-                                               placeholder="Select"></oi-select>
+                                               placeholder="Select" ng-change="changeSalud()"></oi-select>
                                 </md-input-container>
                             </div>
 
@@ -680,7 +676,7 @@
                                 <md-input-container flex="50" >
                                     <md-button ng-click="pp()" type="button" class="md-raised md-accent" aria-label="Submit"
                                                ng-disabled="basicForm.$invalid || basicForm.$pristine">
-                                        Agregar
+                                        Agregar un año a cada estudio en salud
                                     </md-button>
                                 </md-input-container>
 
@@ -821,17 +817,11 @@
                                 </md-input-container>
                                 <md-input-container flex="50" >
                                     <div>{{labelNivel3}}</div>
-                                    <md-select ng-model="vm.formWizard.comunidadDistrito" required>
+                                    <md-select ng-model="vm.formWizard.comunidadDistrito">
                                         <md-option ng-repeat="state in comunidad" ng-value="state.id" ng-selected="state.id == takeComunidad1" ng-click="takeCumnidadaDis1(state.id)">
                                             {{state.valor}}
                                         </md-option>
                                     </md-select>
-                                    <div ng-show="!vm.formWizard.comunidadDistrito" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
-                                            <span>
-                                                {{labelNivel3}} es Requerido.</span>
-                                        </div>
-                                    </div>
                                 </md-input-container>
                                 <md-input-container flex="50" ng-show="lavel4Si">
                                     <div>{{labelNivel4}}</div>

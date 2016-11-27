@@ -25,7 +25,7 @@
 
         if(valor){
             vm.basicForm.valor = localStorageService.get('workSpace').access.valor;
-            $scope.getType = localStorageService.get('workSpace').access.tipo;
+            vm.basicForm.tipo = {id:localStorageService.get('workSpace').access.tipo,name:localStorageService.get('workSpace').access.tipo};
             update = true;
         }
 
@@ -60,7 +60,7 @@
         $scope.save = function(){
             var obj = {
               "valor":vm.basicForm.valor,
-              "tipo":vm.basicForm.tipo,
+              "tipo":vm.basicForm.tipo.id,
               "creadoPor":"admin",
               "fechaCreacion":"01-01-2012"
             };

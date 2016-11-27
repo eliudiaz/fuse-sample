@@ -9,7 +9,7 @@
     /** @ngInject */
     function addHomeRolController($scope, $timeout, $mdDialog, $state, workSpace,
             localStorageService,
-            f, ws, ioStuSalud, ioIdioma, $http) {
+            f, ws, ioStuSalud, ioIdioma, $http,Notification) {
         var vm = this;
         $scope.manualEnable = true;
         $scope.focus = false;
@@ -52,20 +52,21 @@
         $scope.muniCedSetShow = true;
         $scope.carreraShow = false;
         $scope.carreraShow2 = false;
+        $scope.showCL = false;
 
         $scope.labelNivel1 = 'Distrito';
         $scope.labelNivel2 = 'Lugar Específico';
-        $scope.labelNivel3 = 'Comunidad Lingüística';
+        $scope.labelNivel3 = 'Comunidad';
         $scope.labelNivel4 = 'Nivel 4';
 
         $scope.labelNivel11 = 'Distrito';
         $scope.labelNivel22 = 'Lugar Específico';
-        $scope.labelNivel33 = 'Comunidad Lingüística';
+        $scope.labelNivel33 = 'Comunidad';
         $scope.labelNivel44 = 'Nivel 4';
 
         $scope.labelNivel13 = 'Distrito';
         $scope.labelNivel23 = 'Lugar Específico';
-        $scope.labelNivel33 = 'Comunidad Lingüística';
+        $scope.labelNivel33 = 'Comunidad';
         $scope.labelNivel43 = 'Nivel 4';
 
 
@@ -329,7 +330,11 @@
         ];
 
         var entryViews = ws.pais().query({}, function () {
-            $scope.pais = entryViews;
+            $scope.pais = [];
+            entryViews.forEach(function (value, key) {
+                $scope.pais.push({id:entryViews.id,valor:entryViews.valor});
+            });
+            
             $scope.pais2 = $scope.pais;
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
@@ -411,10 +416,19 @@
         }
 
         $scope.paisCheck2 = function () {
-            if (vm.formWizard.paisResidencia == 74) {
+            if (vm.formWizard.paisResidencia.id == 74) {
                 $scope.paisCheckV2 = false;
             } else {
                 $scope.paisCheckV2 = true;
+            }
+        }
+
+        $scope.takePueblo = function(){
+            var id = vm.formWizard.pueblo.id;
+            if(id=='MAYA'){
+                $scope.showCL = true;
+            }else{
+                $scope.showCL = false;
             }
         }
 
@@ -427,7 +441,8 @@
             });
         }
 
-        $scope.takeDepto2 = function (id) {
+        $scope.takeDepto2 = function () {
+            var id = vm.formWizard.departamentoResidencia.id;
             var entryViewsMuni2 = ws.muni(id).query({}, function () {
                 $scope.muni2 = entryViewsMuni2;
             }, function (error) {
@@ -549,7 +564,7 @@
             } else {
                 $scope.labelNivel1 = 'Distrito';
                 $scope.labelNivel2 = 'Lugar Específico';
-                $scope.labelNivel3 = 'Comunidad Lingüística';
+                $scope.labelNivel3 = 'Comunidad';
                 $scope.labelNivel4 = 'Nivel 4';
                 $scope.lavel4Si = false;
             }
@@ -567,7 +582,7 @@
                 $scope.labelNivel12 = 'Nivel 2';
             } else {
                 $scope.labelNivel11 = 'Distrito';
-                $scope.labelNivel22 = 'Lugar Específico';
+                $scope.labelNivel12 = 'Lugar Específico';
             }
             var entryViewsDistrito2 = ws.distrito(id).query({}, function () {
                 $scope.distrito2 = entryViewsDistrito2;
@@ -586,7 +601,7 @@
             } else {
                 $scope.labelNivel13 = 'Distrito';
                 $scope.labelNivel23 = 'Lugar Específico';
-                $scope.labelNivel33 = 'Comunidad Lingüística';
+                $scope.labelNivel33 = 'Comunidad';
                 $scope.labelNivel43 = 'Nivel 4';
                 $scope.lavel4Si2 = false;
             }
@@ -652,6 +667,10 @@
             });
         }
 
+        $scope.changeSalud = function(){
+            Notification.warning('Agregar un año a cada estudio agregado');
+        }
+
         //MULTI
         $scope.shopArr = ioStuSalud.query();
         $scope.bundle = [];
@@ -687,6 +706,9 @@
             });
         }
 
+        $scope.puta = function(){
+            console.info(vm.formWizard.pais);
+        }
 
 
         try {
@@ -717,6 +739,19 @@
             valor.dpi.fechaVencimiento ? vm.formWizard.fchVenceDpi = valor.dpi.fechaVencimiento : '';
             valor.registroLaboral.observaciones ? vm.formWizard.observaciones = valor.registroLaboral.observaciones : '';
 
+           /* vm.formWizard.paisResidencia = {
+                id:valor.lugarResidencia.refLugarResidencia.fkPais,
+                valor:valor.lugarResidencia.refLugarResidencia.fkPaisNombre,
+                tipo: "",
+                estado: "",
+                fechaCreacion: ""
+            }; */
+
+            vm.formWizard.pais = {
+                id:valor.refNacimiento.fkPais,
+                valor:valor.refNacimiento.fkPaisNombre
+            };
+
             $scope.img = valor.foto;
 
             if (!$scope.img) {
@@ -746,7 +781,7 @@
             $scope.pais2Set = valor.lugarResidencia.refLugarResidencia.fkPais;
             $scope.takedeptoRec = valor.lugarResidencia.refLugarResidencia.fkDepartamento;
 
-            $scope.takedeptoRec ? $scope.takeDepto2($scope.takedeptoRec) : '';
+          //  $scope.takedeptoRec ? $scope.takeDepto2($scope.takedeptoRec) : '';
             $scope.takemuniRec = valor.lugarResidencia.refLugarResidencia.fkMunicio;
 
             $scope.paisSet2 = valor.refNacimiento.fkPais;

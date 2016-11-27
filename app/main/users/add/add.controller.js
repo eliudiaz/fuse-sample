@@ -127,9 +127,11 @@
         $scope.save = function() {
             var ro = [];
 
-            vm.basicForm.bundle.forEach(function(value, key) {
-                ro.push({ id: vm.basicForm.bundle[key].id });
-            });
+            if (vm.basicForm.bundle) {
+                vm.basicForm.bundle.forEach(function(value, key) {
+                    ro.push({ id: vm.basicForm.bundle[key].id });
+                });
+            }
 
             if(vm.basicForm.super){
                  var obj = {

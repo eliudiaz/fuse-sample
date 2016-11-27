@@ -7,7 +7,7 @@
             .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
-    function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast)
+    function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast,localStorageService,$state)
     {
         var vm = this;
 
@@ -64,6 +64,15 @@
         //////////
 
         init();
+
+
+        var idSession = localStorageService.get('sessionId');
+        if(idSession){
+            console.info('ENTRA');
+        }else{
+            console.info('OUT');
+            //window.location.href = "http://www.google.com";
+        }
 
         /**
          * Initialize
