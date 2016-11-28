@@ -35,6 +35,12 @@
                 });
                 return r;
             },
+            deleteUser: function (id) {
+                var r = $resource(path + 'usuarios/disable/' + id, null, {
+                    'delete': {method: 'DELETE', isArray: true}
+                });
+                return r;
+            },
             allRol: function () {
                 var r = $resource(path + 'roles/get/all');
                 return r;
@@ -46,6 +52,12 @@
             UpdateRol: function (id) {
                 var r = $resource(path + 'roles/mod/' + id, null, {
                     'update': {method: 'PUT'}
+                });
+                return r;
+            },
+            deleteRol: function (id) {
+                var r = $resource(path + 'roles/disable/' + id, null, {
+                    'delete': {method: 'DELETE', isArray: true}
                 });
                 return r;
             },
@@ -73,6 +85,12 @@
                 });
                 return r;
             },
+            deletePersona: function (id) {
+                var r = $resource(path + '/personas/disable/' + id, null, {
+                    'delete': {method: 'DELETE', isArray: true}
+                });
+                return r;
+            },
             searchPersonaAvs: function () {
                 var r = $resource(path + 'home/busquedaAvanzada', null, {
                     'post': {method: 'POST', isArray: true}
@@ -86,6 +104,12 @@
             UpdateAccess: function (id) {
                 var r = $resource(path + 'accesos/mod/' + id, null, {
                     'update': {method: 'PUT'}
+                });
+                return r;
+            },
+            deleteAcess: function (id) {
+                var r = $resource(path + 'accesos/disable/' + id, null, {
+                    'delete': {method: 'DELETE', isArray: true}
                 });
                 return r;
             },
@@ -124,7 +148,7 @@
                 return r;
             },
             nacionalidad: function () {
-                var r = $resource(path + 'areas-geograficas/get/all?tipo=NACIONALIDAD');
+                var r = $resource(path + 'catalogos/get/all?tipo=NACIONALIDAD');
                 return r;
             },
             expectativas: function () {

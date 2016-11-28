@@ -66,12 +66,20 @@
 
           $mdDialog.show(confirm).then(function() {
             console.info('EEE');
-               var entryViewsAll = ws.allPersonas().query({}, function() {
-                   $scope.gridOptions.api.setRowData(entryViewsAll);
-                 }, function(error) {
-                    workSpace.error = JSON.stringify(error.data); 
-                    $scope.Error();
-                });       
+                $scope.entryUp = ws.deletePersona(ob[0].cui);
+                  var EntryUp = $scope.entryUp.delete( function () {
+                      var entryViewsAll = ws.allPersonas().query({}, function() {
+                         $scope.gridOptions.api.setRowData(entryViewsAll);
+                       }, function(error) {
+                          workSpace.error = JSON.stringify(error.data); 
+                          $scope.Error();
+                      }); 
+                  }, function (error) {
+                      workSpace.error = JSON.stringify(error.data);
+                      $scope.Error();
+                  });
+
+                     
           }, function() {   });
         }else{
           Notification.error('Selecciona un Registro Primero');

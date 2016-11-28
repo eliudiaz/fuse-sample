@@ -54,16 +54,25 @@
                     .cancel('Cancelar');
 
               $mdDialog.show(confirm).then(function() {
-                    var entryViews = ws.allRol().query({}, function() {
+                    $scope.entryUp = ws.deleteRol(ob[0].id);
+                    var EntryUp = $scope.entryUp.delete( function () {
+                        var entryViews = ws.allRol().query({}, function() {
                              $scope.RolesData = entryViews;
-                             $scope.gridOptions.api.setRowData($scope.RolesData);
-                        }, function(error) {
-                            workSpace.error = error.data.message; 
-                            $scope.Error();
-                        });
-              }, function() {
-                
-              });
+                                         $scope.gridOptions.api.setRowData($scope.RolesData);
+                                    }, function(error) {
+                                        workSpace.error = error.data.message; 
+                                        $scope.Error();
+                                    });
+                          }, function() {
+                            
+                          });
+
+                    }, function (error) {
+                      workSpace.error = JSON.stringify(error.data);
+                      $scope.Error();
+                    });
+
+                    
             }else{
               Notification.error('Selecciona un Registro Primero');
             }

@@ -49,13 +49,22 @@
                     .cancel('Cancelar');
 
               $mdDialog.show(confirm).then(function() {
-                 var entryViews = ws.allAccess().query({}, function() {
+
+                $scope.entryUp = ws.deleteAcess(ob[0].id);
+                  var EntryUp = $scope.entryUp.delete( function () {
+
+                        var entryViews = ws.allAccess().query({}, function() {
                          $scope.usuarioData = entryViews;
                          $scope.gridOptions.api.setRowData($scope.usuarioData);
                     }, function(error) {
                         workSpace.error = error.data.message; 
                         $scope.Error();
                     });
+                }, function (error) {
+                      workSpace.error = JSON.stringify(error.data);
+                      $scope.Error();
+                  });
+                 
               }, function() {
                 
               });
