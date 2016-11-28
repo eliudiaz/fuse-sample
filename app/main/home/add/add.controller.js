@@ -527,8 +527,8 @@
                     $scope.nivelEducativoPadre.push({id:value.id,valor:value.valor});    
                 });
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+                //workSpace.error = JSON.stringify(error.data);
+               // $scope.Error();
             });
         }
 
@@ -546,8 +546,8 @@
                     $scope.carreraShow = false;
                 }
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+                //workSpace.error = JSON.stringify(error.data);
+                //$scope.Error();
             });
             
         }
@@ -852,19 +852,22 @@
             valor.dpi ? vm.formWizard.fchVenceDpi = valor.dpi.fechaVencimiento : '';
             valor.registroLaboral.observaciones ? vm.formWizard.observaciones = valor.registroLaboral.observaciones : '';
 
-            vm.formWizard.pais = {
-                id:valor.refNacimiento.fkPais,
-                valor:valor.refNacimiento.fkPaisNombre
-            };
-            vm.formWizard.departamento = {
-                id:valor.refNacimiento.fkDepartamento,
-                valor:valor.refNacimiento.fkDepartamentoNombre  
-            };
-            vm.formWizard.municipio = {
-                id:valor.refNacimiento.fkMunicio,
-                valor:valor.refNacimiento.fkMunicioNombre  
-            };
-            vm.formWizard.departamento ? $scope.takeDepto() : '';
+            if(valor.refNacimiento){
+                vm.formWizard.pais = {
+                    id:valor.refNacimiento.fkPais,
+                    valor:valor.refNacimiento.fkPaisNombre
+                };
+                vm.formWizard.departamento = {
+                    id:valor.refNacimiento.fkDepartamento,
+                    valor:valor.refNacimiento.fkDepartamentoNombre  
+                };
+                vm.formWizard.municipio = {
+                    id:valor.refNacimiento.fkMunicio,
+                    valor:valor.refNacimiento.fkMunicioNombre  
+                };
+                vm.formWizard.departamento ? $scope.takeDepto() : '';
+            }
+            
             
 
             vm.formWizard.paisResidencia = {
@@ -886,7 +889,7 @@
                 name:valor.fkPueblo  
             };
            
-
+            if(valor.refCedula){
             vm.formWizard.departamentoCedula = {
                 id:valor.refCedula.fkDepartamento,
                 valor:valor.refCedula.fkDepartamentoNombre  
@@ -896,8 +899,9 @@
                 valor:valor.refCedula.fkMunicioNombre  
             };
             vm.formWizard.departamentoCedula ? $scope.takeDepto3() : '';
+            }
 
-
+            if(valor.refCedula){
             vm.formWizard.departamentoVecindad = {
                 id:valor.refVecindad.fkDepartamento,
                 valor:valor.refVecindad.fkDepartamentoNombre  
@@ -907,7 +911,7 @@
                 valor:valor.refVecindad.fkMunicioNombre  
             };
             vm.formWizard.departamentoVecindad ? $scope.takeDepto4() : '';
-
+            }
 
             vm.formWizard.gradoAprobado = {
                 id:valor.registroAcademico.nivelUltimoGrado,
@@ -959,13 +963,16 @@
 
             $scope.txtMRZ2_1 = valor.mrz;
 
+             if(valor.refCedula){
             $scope.pais2Set = valor.refCedula.fkPais;
             $scope.municipioCedulaSet = valor.refCedula.fkMunicio;
             $scope.depto3Set = valor.refCedula.fkDepartamento;
+            }
 
+            if(valor.refCedula){
             $scope.depto4Set2 = valor.refVecindad.fkDepartamento;
             $scope.muni4Set = valor.refVecindad.fkMunicio;
-
+            } 
             $scope.pais2Set = valor.lugarResidencia.refLugarResidencia.fkPais;
             $scope.takedeptoRec = valor.lugarResidencia.refLugarResidencia.fkDepartamento;
 
@@ -1203,9 +1210,9 @@
             var fkComunida;
             if (vm.formWizard.nivel4) {
                 fkComunida = vm.formWizard.nivel4;
-            } else if (vm.formWizard.comunidadDistrito) {
+            } else if (vm.formWizard.comunidadDistrito.id) {
                 fkComunida = vm.formWizard.comunidadDistrito.id;
-            } else if (vm.formWizard.lugarEspesificoDistrito) {
+            } else if (vm.formWizard.lugarEspesificoDistrito.id) {
                 fkComunida = vm.formWizard.lugarEspesificoDistrito.id;
             } else {
                 fkComunida = vm.formWizard.distrito.id;
@@ -1245,7 +1252,7 @@
                         fkPuestoFuncional: vm.formWizard.puestoFuncional.id,
                         tipo: 'PRINCIPAL',
                         fkPuestoNominal: vm.formWizard.puestoNominal.id,
-                        fkComunidad: vm.formWizard.comunidadDistrito.id,
+                        fkComunidad: fkComunida,
                         fkClasificacionServicio: vm.formWizard.AreaclasificaServicio
                     }
                 ];

@@ -444,7 +444,7 @@
                                     ng-change="takePueblo()"
                                     required>
                                     </oi-select>
-                                    <div ng-show="!vm.formWizard.pueblo" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.pueblo.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div>
                                             <span>
                                                 Pueblo es Requerido.</span>
@@ -460,7 +460,7 @@
                                     placeholder="Selecciona" 
                                     required>
                                     </oi-select>
-                                    <div ng-show="!vm.formWizard.comunidadLinguistica" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.comunidadLinguistica.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Comunidad Lingüística es Requerido.</span>
@@ -770,7 +770,8 @@
                                     placeholder="Selecciona" 
                                     required
                                     >
-                                    <div ng-show="!vm.formWizard.expectativas" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    </oi-select>
+                                    <div ng-show="!vm.formWizard.expectativas.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Expectativas es Requerido.</span>
@@ -786,7 +787,8 @@
                                     placeholder="Selecciona" 
                                     required
                                     >
-                                    <div ng-show="!vm.formWizard.puestoFuncional" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    </oi-select>
+                                    <div ng-show="!vm.formWizard.puestoFuncional.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Puesto de acuerdo a funciones es Requerido.</span>
@@ -805,7 +807,8 @@
                                     ng-change="takeReglon()"
                                     required
                                     >
-                                    <div ng-show="!vm.formWizard.reglonPresupuestario" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    </oi-select>
+                                    <div ng-show="!vm.formWizard.reglonPresupuestario.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Reglón Presupuestario es Requerido.</span>
@@ -820,8 +823,8 @@
                                     oi-select-options="{newItem: 'autocomplete'}"
                                     placeholder="Selecciona" 
                                     required
-                                    >
-                                    <div ng-show="!vm.formWizard.puestoNominal" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    ></oi-select>
+                                    <div ng-show="!vm.formWizard.puestoNominal.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Puesto Nominal es Requerido.</span>
@@ -837,8 +840,8 @@
                                     placeholder="Selecciona" 
                                     ng-change="takeUnidadEje()"
                                     required
-                                    >
-                                    <div ng-show="!vm.formWizard.unidadEjecutoraActual" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    ></oi-select>
+                                    <div ng-show="!vm.formWizard.unidadEjecutoraActual.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Unidad Ejecutora Actual es Requerido.</span>
@@ -857,8 +860,8 @@
                                     placeholder="" 
                                     ng-change="takeDistrito()"
                                     required
-                                    >
-                                    <div ng-show="!vm.formWizard.distrito" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    ></oi-select>
+                                    <div ng-show="!vm.formWizard.distrito.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 {{labelNivel1}} es Requerido.</span>
@@ -874,8 +877,8 @@
                                     placeholder="" 
                                     ng-change="takeLugarE()"
                                     required
-                                    >
-                                    <div ng-show="!vm.formWizard.lugarEspesificoDistrito" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    ></oi-select>
+                                    <div ng-show="!vm.formWizard.lugarEspesificoDistrito.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 {{labelNivel2}} es Requerido.</span>
@@ -890,7 +893,7 @@
                                     oi-select-options="{newItem: 'autocomplete'}"
                                     placeholder="" 
                                     ng-change="takeCumnidadaDis1()"
-                                    >
+                                    ></oi-select>
                                 </md-input-container>
                                 <md-input-container flex="50" ng-show="lavel4Si">
                                     <div>{{labelNivel4}}</div>
