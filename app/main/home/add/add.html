@@ -389,9 +389,14 @@
                                     placeholder="Selecciona" 
                                     ng-disabled="paisCheckV2"
                                     ng-change="takeDepto2()"
+                                    required
                                     >
                                     </oi-select>
-                         
+                                    <div ng-show="!vm.formWizard.departamentoResidencia" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                        <div >
+                                            <span>Departamento es Requerido.</span>
+                                        </div>
+                                    </div>
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>Municipio</label>
@@ -401,9 +406,14 @@
                                     oi-select-options="{newItem: 'autocomplete'}"
                                     placeholder="Selecciona" 
                                     ng-disabled="paisCheckV2"
+                                    required
                                     >
                                     </oi-select>
-
+                                    <div ng-show="!vm.formWizard.municipioResidencia.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                        <div >
+                                            <span>Municipio es Requerido.</span>
+                                        </div>
+                                    </div>
                                 </md-input-container>
 
                             </div>
