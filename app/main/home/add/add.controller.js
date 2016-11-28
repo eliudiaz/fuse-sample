@@ -910,34 +910,34 @@
 
 
             vm.formWizard.gradoAprobado = {
-                id:valor.registroAcademico.nivelGradoActual,
-                valor:valor.registroAcademico.nivelGradoActualNombre  
+                id:valor.registroAcademico.nivelUltimoGrado,
+                valor:valor.registroAcademico.nivelUltimoGradoNombre  
             };
             vm.formWizard.gradoAprobado ? $scope.takeNivelEducativo() : '';
             vm.formWizard.gradoEstudia = {
-                id:valor.registroAcademico.gradoActual,
-                valor:valor.registroAcademico.nombreGradoActual  
+                id:valor.registroAcademico.ultimoGrado,
+                valor:valor.registroAcademico.nombreUltimoGrado  
             };
             vm.formWizard.gradoEstudia ? $scope.takeNivelCarrera() : '';
             vm.formWizard.gradoCarrera = {
-                id:valor.registroAcademico.carreraGradoActual,
-                valor:valor.registroAcademico.carreraGradoActualNombre  
+                id:valor.registroAcademico.carreraUltimoGrado,
+                valor:valor.registroAcademico.carreraUltimoGradoNombre  
             };
 
 
             vm.formWizard.gradoAprobado2 = {
-                id:valor.registroAcademico.nivelUltimoGrado,
-                valor:valor.registroAcademico.nivelUltimoGradoNombre  
+                id:valor.registroAcademico.nivelGradoActual,
+                valor:valor.registroAcademico.nivelGradoActualNombre  
             };
             vm.formWizard.gradoAprobado2 ? $scope.takeNivelEducativo2() : '';
             vm.formWizard.gradoEstudia2 = {
-                id:valor.registroAcademico.ultimoGrado,
-                valor:valor.registroAcademico.nombreUltimoGrado  
+                id:valor.registroAcademico.gradoActual,
+                valor:valor.registroAcademico.nombreGradoActual  
             };
             vm.formWizard.gradoEstudia2 ? $scope.takeNivelCarrera2() : '';
             vm.formWizard.gradoCarrera2 = {
-                id:valor.registroAcademico.carreraUltimoGrado,
-                valor:valor.registroAcademico.carreraUltimoGradoNombre  
+                id:valor.registroAcademico.carreraGradoActual,
+                valor:valor.registroAcademico.carreraGradoActualNombre  
             };
 
 
@@ -1186,16 +1186,16 @@
 
 
             var studioGradoActual;
-            if (vm.formWizard.gradoCarrera2.length>0) {
+            if (vm.formWizard.gradoCarrera2.id) {
                 studioGradoActual = vm.formWizard.gradoCarrera2.id;
-            } else if (vm.formWizard.gradoEstudia2.length>0) {
+            } else if (vm.formWizard.gradoEstudia2.id) {
                 studioGradoActual = vm.formWizard.gradoEstudia2.id;
             }
 
             var studioUltimoGrado;
-            if (vm.formWizard.gradoCarrera.length>0) {
+            if (vm.formWizard.gradoCarrera.id) {
                 studioUltimoGrado = vm.formWizard.gradoCarrera.id;
-            } else if (vm.formWizard.gradoEstudia.length>0) {
+            } else if (vm.formWizard.gradoEstudia.id) {
                 studioUltimoGrado = vm.formWizard.gradoEstudia.id;
             }
 
@@ -1266,19 +1266,19 @@
                     "otrosApellidos": vm.formWizard.tercerApellido,
                     "fkNacionalidadNombre": vm.formWizard.nacionalidad,
                     "fkProfesion": vm.formWizard.profesion,
-                    "limitacionesFisicas": vm.formWizard.limitacionesFisicas,
+                    "limitacionesFisicas": vm.formWizard.limitacionesFisicas ? vm.formWizard.limitacionesFisicas : null,
                     "sabeLeer": vm.formWizard.sabeLeer ? vm.formWizard.sabeLeer : 'false',
                     "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
                     "fechaNacimientoTexto": vm.formWizard.fechaNacimiento,
                     "fkMunicipioNacimientoNombre": vm.formWizard.municipio,
                     "fkMunicipioNacimiento":null,
-                    "nacNoLibro": vm.formWizard.libro,
-                    "nacNoFolio": vm.formWizard.folio,
-                    "nacNoPartida": vm.formWizard.partida,
-                    "fkPueblo": vm.formWizard.pueblo.id,
+                    "nacNoLibro": vm.formWizard.libro ? vm.formWizard.libro : "",
+                    "nacNoFolio": vm.formWizard.folio ? vm.formWizard.folio : "",
+                    "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
+                    "fkPueblo": vm.formWizard.pueblo.id ? vm.formWizard.pueblo.id : null,
                     "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica ? vm.formWizard.comunidadLinguistica.id : null,
                     "mrz": "<<<sdfsdf<<<sdfsdfd<<<",
-                    "noCedula": vm.formWizard.ncedula,
+                    "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
                     "fkMunicipioCedula": null,
                     "fkMunicipioCedulaNombre": vm.formWizard.municipioCedula,
                     "fkMunicipioVecindadNombre": vm.formWizard.municipioVecindad,
@@ -1291,9 +1291,9 @@
                         "anioIngreso": vm.formWizard.anioIngresoInstitucion,
                         "comisionado": comosionadoAc,
                         "fkComunidadComisionado":null,
-                        "fkExpectativa": vm.formWizard.expectativas.id,
+                        "fkExpectativa": vm.formWizard.expectativas.id ? vm.formWizard.expectativas.id : null,
                         "puestos": puestosD,
-                        "observaciones": vm.formWizard.observaciones
+                        "observaciones": vm.formWizard.observaciones ? vm.formWizard.observaciones : null
                     },
                     "registroAcademico": {
                         "ultimoGrado": studioUltimoGrado,
@@ -1301,7 +1301,7 @@
                         "estudiaActualmente": studiaAc
                     },
                     "lugarResidencia": {
-                        "fkMunicipio": vm.formWizard.municipioResidencia.id,
+                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : "",
                         "direccion": vm.formWizard.detalleResidencia
                     },
                     "idiomas": ido,
@@ -1332,9 +1332,9 @@
                     "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
                     "fechaNacimiento": vm.formWizard.fechaNacimiento ? vm.formWizard.fechaNacimiento : null,
                     "fkMunicipioNacimiento": vm.formWizard.municipio ? vm.formWizard.municipio.id : null,
-                    "nacNoLibro": vm.formWizard.libro ? vm.formWizard.libro : null,
-                    "nacNoFolio": vm.formWizard.folio ? vm.formWizard.folio : null,
-                    "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : null,
+                    "nacNoLibro": vm.formWizard.libro ? vm.formWizard.libro : "",
+                    "nacNoFolio": vm.formWizard.folio ? vm.formWizard.folio : "",
+                    "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
                     "fkPueblo": vm.formWizard.pueblo.id ? vm.formWizard.pueblo.id : null,
                     "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica ? vm.formWizard.comunidadLinguistica.id : null,
                     "mrz": "<<<sdfsdf<<<sdfsdfd<<<",
@@ -1358,7 +1358,7 @@
                         "estudiaActualmente": studiaAc ? studiaAc : null
                     },
                     "lugarResidencia": {
-                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : null,
+                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : "",
                         "direccion": vm.formWizard.detalleResidencia ? vm.formWizard.detalleResidencia : null 
                     },
                     "idiomas": ido,
@@ -1383,28 +1383,28 @@
                     "otrosApellidos": vm.formWizard.tercerApellido,
                     "fkNacionalidad": vm.formWizard.nacionalidad,
                     "fkProfesion": vm.formWizard.profesion,
-                    "limitacionesFisicas": vm.formWizard.limitacionesFisicas,
+                    "limitacionesFisicas": vm.formWizard.limitacionesFisicas ? vm.formWizard.limitacionesFisicas : null,
                     "sabeLeer": vm.formWizard.sabeLeer ? vm.formWizard.sabeLeer : 'false',
                     "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
                     "fechaNacimiento": vm.formWizard.fechaNacimiento,
-                    "fkMunicipioNacimiento": vm.formWizard.municipio.id,
-                    "nacNoLibro": vm.formWizard.libro,
-                    "nacNoFolio": vm.formWizard.folio,
-                    "nacNoPartida": vm.formWizard.partida,
-                    "fkPueblo": vm.formWizard.pueblo.id,
-                    "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica.id,
+                    "fkMunicipioNacimiento": vm.formWizard.municipio.id ? vm.formWizard.municipio.id : null,
+                    "nacNoLibro": vm.formWizard.libro ? vm.formWizard.libro : "",
+                    "nacNoFolio": vm.formWizard.folio ? vm.formWizard.folio : "",
+                    "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
+                    "fkPueblo": vm.formWizard.pueblo.id ? vm.formWizard.pueblo.id : null,
+                    "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica.id ? vm.formWizard.comunidadLinguistica.id : null,
                     "mrz": $scope.txtMRZ2_1,
-                    "noCedula": vm.formWizard.ncedula,
-                    "fkMunicipioCedula": vm.formWizard.municipioCedula.id,
-                    "fkMunicipioVecindad": vm.formWizard.municipioVecindad.id,
+                    "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
+                    "fkMunicipioCedula": vm.formWizard.municipioCedula.id ? vm.formWizard.municipioCedula.id : null,
+                    "fkMunicipioVecindad": vm.formWizard.municipioVecindad.id ? vm.formWizard.municipioVecindad.id : null,
                     "huellaManoDer": $scope.huellaManoDer,
                     "huellaManoIzq": $scope.huellaManoIzq,
-                    "estadoCivil": vm.formWizard.estadoCivil,
+                    "estadoCivil": vm.formWizard.estadoCivil ? vm.formWizard.estadoCivil : null,
                     "sexo": vm.formWizard.sexo,
                     "registroLaboral": {
                         "anioIngreso": vm.formWizard.anioIngresoInstitucion,
                         "comisionado": comosionadoAc,
-                        "fkExpectativa": vm.formWizard.expectativas.id,
+                        "fkExpectativa": vm.formWizard.expectativas.id ? vm.formWizard.expectativas.id : null,
                         "puestos": puestosD,
                         "observaciones": vm.formWizard.observaciones
                     },
@@ -1414,14 +1414,14 @@
                         "estudiaActualmente": studiaAc
                     },
                     "lugarResidencia": {
-                        "fkMunicipio": vm.formWizard.municipioResidencia.id,
+                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : "",
                         "direccion": vm.formWizard.detalleResidencia
                     },
                     "idiomas": ido,
                     "dpi": {
                         "noSerie": 112323123,
-                        "fechaEmision": vm.formWizard.fchCreacionDpi,
-                        "fechaVencimiento": vm.formWizard.fchVenceDpi
+                        "fechaEmision": vm.formWizard.fchCreacionDpi ? vm.formWizard.fchCreacionDpi : null,
+                        "fechaVencimiento": vm.formWizard.fchVenceDpi ? vm.formWizard.fchVenceDpi : null
                     },
                     "estudiosSalud": salu
                 };
