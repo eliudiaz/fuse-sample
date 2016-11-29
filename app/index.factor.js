@@ -7,15 +7,15 @@
             .factory('ws', hechoService);
 
     /** @ngInject */
-    function hechoService($resource)
+    function hechoService($resource, $http)
     {
 
 
         var path = localStorage.getItem("servicesPath") == null ?
-                "http://45.79.200.203:8080/MS_RRHH_Servicios/" :
+                "http://localhost:41825/MS_RRHH_Servicios/" :
                 localStorage.getItem("servicesPath");
 
-
+        var sessionId = localStorage.getItem("sessionId");
         var data = {
             saveHome: function () {
                 var r = $resource(path + 'personas/crea');
@@ -80,10 +80,23 @@
                 return r;
             },
             searchPersona: function () {
-                var r = $resource(path + 'home/busquedaNormal', null, {
+                var r = $resource(path + 'home/busquedaNormal?sessionId=' + sessionId, null, {
                     'post': {method: 'POST', isArray: true}
                 });
                 return r;
+            },
+            download: function () {
+                $http({
+                    url: path + 'files?sessionId=' + sessionId,
+                    method: "GET",
+                    responseType: 'arraybuffer'
+                }).success(function (data, status, headers, config) {
+                    var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                    var objectUrl = URL.createObjectURL(blob);
+                    window.open(objectUrl);
+                }).error(function (data, status, headers, config) {
+                    console.error(data);
+                });
             },
             deletePersona: function (id) {
                 var r = $resource(path + '/personas/disable/' + id, null, {
