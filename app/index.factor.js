@@ -128,7 +128,11 @@
                 return r;
             },
             muni: function (id) {
-                var r = $resource(path + 'areas-geograficas/get/all?tipo=MUNICIPIO&padre=' + id);
+                try {
+                    var r = $resource(path + 'areas-geograficas/get/all?tipo=MUNICIPIO&padre=' + id);
+                } catch (e) {
+                    console.error(e);
+                }
                 return r;
             },
             comLing: function () {
@@ -140,11 +144,19 @@
                 return r;
             },
             nivelEducativoPadre: function (id) {
-                var r = $resource(path + 'catalogos/get/all?tipo=NIVEL_EDUCATIVO_GRADO&padre=' + id);
+                try {
+                    var r = $resource(path + 'catalogos/get/all?tipo=NIVEL_EDUCATIVO_GRADO&padre=' + id);
+                } catch (e) {
+                    console.error(e);
+                }
                 return r;
             },
             nivelEducativoCarrera: function (id) {
-                var r = $resource(path + 'catalogos/get/all?tipo=NIVEL_EDUCATIVO_CARRERA&padre=' + id);
+                try {
+                    var r = $resource(path + 'catalogos/get/all?tipo=NIVEL_EDUCATIVO_CARRERA&padre=' + id);
+                } catch (e) {
+                    console.error(e);
+                }
                 return r;
             },
             nacionalidad: function () {
