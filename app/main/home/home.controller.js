@@ -13,7 +13,7 @@
         vm.basicForm = {};
         vm.basicForm2 = {};
 
-        $scope.lastSearchRef = {obj: '', api: 'http://localhost:41825/MS_RRHH_Servicios/personas/todos'};
+        $scope.lastSearchRef = {obj: null, api: ws.searchTodosDownload};
 
         $scope.showReglon2 = false;
         $scope.showanioIngreso2 = false;
