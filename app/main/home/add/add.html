@@ -32,7 +32,7 @@
                                 <button ng-click="manual()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>
-                                <button ng-click="lector2()" class="
+                                <button ng-click="lector()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
                             </article>
@@ -222,7 +222,7 @@
                                     <datepicker date-format="dd-MM-yyyy" selector="form-control">
                                         <div class="input-group">
                                             <input ng-disabled="manualEnable" class="form-control" ng-model="vm.formWizard.fchVenceDpi" placeholder="Fecha Vencimiento" style="height: 34px; padding-left: 30px;"  />
-                                                                                    </div>
+                                        </div>
                                     </datepicker>
 
                                 </md-input-container>
@@ -299,13 +299,13 @@
                                     <label>{{paisSet}}</label>
                                     <div ng-if="!paisSetShow"> {{paisSet}} </div>
                                     <oi-select
-                                    ng-if="paisSetShow"
-                                    oi-options="item.valor for (key, item) in pais"
-                                    ng-model="vm.formWizard.pais"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="paisCheck()"
-                                    required>
+                                        ng-if="paisSetShow"
+                                        oi-options="item.valor for (key, item) in pais"
+                                        ng-model="vm.formWizard.pais"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="paisCheck()"
+                                        required>
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.pais" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -317,27 +317,27 @@
                                     <label>{{deptoSet}}</label>
                                     <div ng-if="!deptoSetShow"> {{deptoSet}} </div>
                                     <oi-select
-                                    ng-if="deptoSetShow"
-                                    oi-options="item.valor for (key, item) in depto"
-                                    ng-model="vm.formWizard.departamento"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-disabled="paisCheckV"
-                                    ng-change="takeDepto()"
-                                    >
+                                        ng-if="deptoSetShow"
+                                        oi-options="item.valor for (key, item) in depto"
+                                        ng-model="vm.formWizard.departamento"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-disabled="paisCheckV"
+                                        ng-change="takeDepto()"
+                                        >
                                     </oi-select>
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>{{muniSet}}</label>
                                     <div ng-if="!muniSetShow"> {{muniSet}} </div>
                                     <oi-select
-                                    ng-if="muniSetShow"
-                                    oi-options="item.valor for (key, item) in muni"
-                                    ng-model="vm.formWizard.municipio"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-disabled="paisCheckV"
-                                    >
+                                        ng-if="muniSetShow"
+                                        oi-options="item.valor for (key, item) in muni"
+                                        ng-model="vm.formWizard.municipio"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-disabled="paisCheckV"
+                                        >
                                     </oi-select>
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
@@ -364,14 +364,14 @@
                                 <md-input-container flex flex-gt-xs="50">
                                     <label>Pais</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in pais2"
-                                    ng-model="vm.formWizard.paisResidencia"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="paisCheck2()"
-                                    required>
+                                        oi-options="item.valor for (key, item) in pais2"
+                                        ng-model="vm.formWizard.paisResidencia"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="paisCheck2()"
+                                        required>
                                     </oi-select>
-                                   
+
                                     <div ng-show="!vm.formWizard.paisResidencia" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
@@ -383,14 +383,14 @@
                                 <md-input-container flex="50">
                                     <label>Departamento</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in depto2"
-                                    ng-model="vm.formWizard.departamentoResidencia"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-disabled="paisCheckV2"
-                                    ng-change="takeDepto2()"
-                                    required
-                                    >
+                                        oi-options="item.valor for (key, item) in depto2"
+                                        ng-model="vm.formWizard.departamentoResidencia"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-disabled="paisCheckV2"
+                                        ng-change="takeDepto2()"
+                                        required
+                                        >
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.departamentoResidencia" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -401,13 +401,13 @@
                                 <md-input-container flex="50">
                                     <label>Municipio</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in muni2"
-                                    ng-model="vm.formWizard.municipioResidencia"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-disabled="paisCheckV2"
-                                    required
-                                    >
+                                        oi-options="item.valor for (key, item) in muni2"
+                                        ng-model="vm.formWizard.municipioResidencia"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-disabled="paisCheckV2"
+                                        required
+                                        >
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.municipioResidencia.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -437,12 +437,12 @@
                                 <md-input-container flex="50">
                                     <label>Pueblo</label>
                                     <oi-select
-                                    oi-options="item.name for (key, item) in pueblo"
-                                    ng-model="vm.formWizard.pueblo"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takePueblo()"
-                                    required>
+                                        oi-options="item.name for (key, item) in pueblo"
+                                        ng-model="vm.formWizard.pueblo"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takePueblo()"
+                                        required>
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.pueblo.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div>
@@ -454,11 +454,11 @@
                                 <md-input-container ng-if="showCL" flex flex-gt-xs="50">
                                     <label>Comunidad Lingüística</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in comLing"
-                                    ng-model="vm.formWizard.comunidadLinguistica"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    required>
+                                        oi-options="item.valor for (key, item) in comLing"
+                                        ng-model="vm.formWizard.comunidadLinguistica"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        required>
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.comunidadLinguistica.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -466,7 +466,7 @@
                                                 Comunidad Lingüística es Requerido.</span>
                                         </div>
                                     </div>
-                                  
+
                                 </md-input-container>
                             </div>
 
@@ -508,26 +508,26 @@
                                 <md-input-container flex="50">
                                     <label>{{deptoCedSet}}</label>
                                     <div ng-if="!deptoCedSetShow"> {{deptoCedSet}} </div>
-                                     <oi-select
-                                    ng-if="deptoCedSetShow"
-                                    oi-options="item.valor for (key, item) in depto3"
-                                    ng-model="vm.formWizard.departamentoCedula"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takeDepto3()"
-                                    >
+                                    <oi-select
+                                        ng-if="deptoCedSetShow"
+                                        oi-options="item.valor for (key, item) in depto3"
+                                        ng-model="vm.formWizard.departamentoCedula"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takeDepto3()"
+                                        >
                                     </oi-select>
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>{{muniCedSet}}</label>
                                     <div ng-if="!muniCedSetShow"> {{muniCedSet}} </div>
                                     <oi-select
-                                    ng-if="muniCedSetShow"
-                                    oi-options="item.valor for (key, item) in muni3"
-                                    ng-model="vm.formWizard.municipioCedula"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    >
+                                        ng-if="muniCedSetShow"
+                                        oi-options="item.valor for (key, item) in muni3"
+                                        ng-model="vm.formWizard.municipioCedula"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        >
                                     </oi-select>
                                 </md-input-container>
 
@@ -539,14 +539,14 @@
                                     <label>{{deptoVecSet}}</label>
                                     <div ng-if="!deptoVecSetShow"> {{deptoVecSet}} </div>
                                     <oi-select
-                                    ng-if="deptoVecSetShow"
-                                    oi-options="item.valor for (key, item) in depto4"
-                                    ng-model="vm.formWizard.departamentoVecindad"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takeDepto4()"
-                                    required
-                                    >
+                                        ng-if="deptoVecSetShow"
+                                        oi-options="item.valor for (key, item) in depto4"
+                                        ng-model="vm.formWizard.departamentoVecindad"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takeDepto4()"
+                                        required
+                                        >
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.departamentoVecindad" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -560,13 +560,13 @@
                                     <label>{{muniVecSet}}</label>
                                     <div ng-if="!muniVecSetShow"> {{muniVecSet}} </div>
                                     <oi-select
-                                    ng-if="muniVecSetShow"
-                                    oi-options="item.valor for (key, item) in muni4"
-                                    ng-model="vm.formWizard.municipioVecindad"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    required
-                                    >
+                                        ng-if="muniVecSetShow"
+                                        oi-options="item.valor for (key, item) in muni4"
+                                        ng-model="vm.formWizard.municipioVecindad"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        required
+                                        >
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.municipioVecindad" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -578,8 +578,8 @@
                                 </md-input-container>
                             </div>
                             <p style="
-    margin-top: 50px;
-"></p>
+                               margin-top: 50px;
+                               "></p>
                             <p></p><p></p><p></p><br />
 
                         </form>
@@ -605,45 +605,45 @@
                                 <md-input-container flex="50">
                                     <label>Ultimo Grado Aprobado</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in nivelEducativo"
-                                    ng-model="vm.formWizard.gradoAprobado"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takeNivelEducativo()"
-                                    required
-                                    >
-                                    <div ng-show="!vm.formWizard.gradoAprobado" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
-                                            <span>
-                                                Ultimo Grado Aprobado es Requerido.</span>
+                                        oi-options="item.valor for (key, item) in nivelEducativo"
+                                        ng-model="vm.formWizard.gradoAprobado"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takeNivelEducativo()"
+                                        required
+                                        >
+                                        <div ng-show="!vm.formWizard.gradoAprobado" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                            <div >
+                                                <span>
+                                                    Ultimo Grado Aprobado es Requerido.</span>
+                                            </div>
                                         </div>
-                                    </div>
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>Grado Aprobado</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in nivelEducativoPadre"
-                                    ng-model="vm.formWizard.gradoEstudia"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takeNivelCarrera()"
-                                    required
-                                    >
-                                    <div ng-show="!vm.formWizard.gradoEstudia" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
-                                            <span>
-                                                Grado Aprobado es Requerido.</span>
+                                        oi-options="item.valor for (key, item) in nivelEducativoPadre"
+                                        ng-model="vm.formWizard.gradoEstudia"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takeNivelCarrera()"
+                                        required
+                                        >
+                                        <div ng-show="!vm.formWizard.gradoEstudia" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                            <div >
+                                                <span>
+                                                    Grado Aprobado es Requerido.</span>
+                                            </div>
                                         </div>
-                                    </div>
                                 </md-input-container>
                                 <md-input-container ng-show="carreraShow" flex="50">
                                     <label>Carrera</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in nivelEducativoPadrePadre"
-                                    ng-model="vm.formWizard.gradoCarrera"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    >
+                                        oi-options="item.valor for (key, item) in nivelEducativoPadrePadre"
+                                        ng-model="vm.formWizard.gradoCarrera"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        >
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>Estudia Actualmente</label>
@@ -663,32 +663,32 @@
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex="50" ng-show="showEscolaridad">
                                     <label>Grado estudia Actualmente</label>
-                                     <oi-select
-                                    oi-options="item.valor for (key, item) in nivelEducativo"
-                                    ng-model="vm.formWizard.gradoAprobado2"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takeNivelEducativo2()"
-                                    >
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in nivelEducativo"
+                                        ng-model="vm.formWizard.gradoAprobado2"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takeNivelEducativo2()"
+                                        >
                                 </md-input-container>
                                 <md-input-container flex="50" ng-show="showEscolaridad">
                                     <label>Grado que estudia?</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in nivelEducativoPadre2"
-                                    ng-model="vm.formWizard.gradoEstudia2"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takeNivelCarrera2()"
-                                    >
+                                        oi-options="item.valor for (key, item) in nivelEducativoPadre2"
+                                        ng-model="vm.formWizard.gradoEstudia2"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takeNivelCarrera2()"
+                                        >
                                 </md-input-container>
                                 <md-input-container ng-show="carreraShow2" flex="50">
                                     <label>Carrera</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in nivelEducativoPadrePadre2"
-                                    ng-model="vm.formWizard.gradoCarrera2"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    >
+                                        oi-options="item.valor for (key, item) in nivelEducativoPadrePadre2"
+                                        ng-model="vm.formWizard.gradoCarrera2"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        >
                                 </md-input-container>
                             </div>
                             <div layout="column" layout-gt-xs="row">
@@ -764,12 +764,12 @@
                                 <md-input-container flex="50">
                                     <label>Expectativas</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in expectativas"
-                                    ng-model="vm.formWizard.expectativas"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    required
-                                    >
+                                        oi-options="item.valor for (key, item) in expectativas"
+                                        ng-model="vm.formWizard.expectativas"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        required
+                                        >
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.expectativas.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -781,12 +781,12 @@
                                 <md-input-container flex="50" >
                                     <label>Puesto de acuerdo a funciones</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in puestoFuncional"
-                                    ng-model="vm.formWizard.puestoFuncional"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    required
-                                    >
+                                        oi-options="item.valor for (key, item) in puestoFuncional"
+                                        ng-model="vm.formWizard.puestoFuncional"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        required
+                                        >
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.puestoFuncional.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -800,13 +800,13 @@
                                 <md-input-container flex="50">
                                     <label>Reglón Presupuestario</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in reglon"
-                                    ng-model="vm.formWizard.reglonPresupuestario"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takeReglon()"
-                                    required
-                                    >
+                                        oi-options="item.valor for (key, item) in reglon"
+                                        ng-model="vm.formWizard.reglonPresupuestario"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takeReglon()"
+                                        required
+                                        >
                                     </oi-select>
                                     <div ng-show="!vm.formWizard.reglonPresupuestario.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
@@ -818,12 +818,12 @@
                                 <md-input-container flex="50" >
                                     <label>Puesto Nominal</label>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in puestoNominal"
-                                    ng-model="vm.formWizard.puestoNominal"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    required
-                                    ></oi-select>
+                                        oi-options="item.valor for (key, item) in puestoNominal"
+                                        ng-model="vm.formWizard.puestoNominal"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        required
+                                        ></oi-select>
                                     <div ng-show="!vm.formWizard.puestoNominal.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
@@ -834,13 +834,13 @@
                                 <md-input-container flex flex-gt-xs="50">
                                     <label>Unidad Ejecutora Actual</label>
                                     <oi-select
-                                    oi-options="item.nombre for (key, item) in unidadEjecutora"
-                                    ng-model="vm.formWizard.unidadEjecutoraActual"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="Selecciona" 
-                                    ng-change="takeUnidadEje()"
-                                    required
-                                    ></oi-select>
+                                        oi-options="item.nombre for (key, item) in unidadEjecutora"
+                                        ng-model="vm.formWizard.unidadEjecutoraActual"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        ng-change="takeUnidadEje()"
+                                        required
+                                        ></oi-select>
                                     <div ng-show="!vm.formWizard.unidadEjecutoraActual.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
@@ -854,13 +854,13 @@
                                 <md-input-container flex="50">
                                     <div>{{labelNivel1}}</div>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in distrito"
-                                    ng-model="vm.formWizard.distrito"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="" 
-                                    ng-change="takeDistrito()"
-                                    required
-                                    ></oi-select>
+                                        oi-options="item.valor for (key, item) in distrito"
+                                        ng-model="vm.formWizard.distrito"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        ng-change="takeDistrito()"
+                                        required
+                                        ></oi-select>
                                     <div ng-show="!vm.formWizard.distrito.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
@@ -871,13 +871,13 @@
                                 <md-input-container flex="50" >
                                     <div>{{labelNivel2}}</div>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in lugarEspesifico"
-                                    ng-model="vm.formWizard.lugarEspesificoDistrito"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="" 
-                                    ng-change="takeLugarE()"
-                                    required
-                                    ></oi-select>
+                                        oi-options="item.valor for (key, item) in lugarEspesifico"
+                                        ng-model="vm.formWizard.lugarEspesificoDistrito"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        ng-change="takeLugarE()"
+                                        required
+                                        ></oi-select>
                                     <div ng-show="!vm.formWizard.lugarEspesificoDistrito.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
@@ -888,12 +888,12 @@
                                 <md-input-container flex="50" >
                                     <div>{{labelNivel3}}</div>
                                     <oi-select
-                                    oi-options="item.valor for (key, item) in comunidad"
-                                    ng-model="vm.formWizard.comunidadDistrito"
-                                    oi-select-options="{newItem: 'autocomplete'}"
-                                    placeholder="" 
-                                    ng-change="takeCumnidadaDis1()"
-                                    ></oi-select>
+                                        oi-options="item.valor for (key, item) in comunidad"
+                                        ng-model="vm.formWizard.comunidadDistrito"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        ng-change="takeCumnidadaDis1()"
+                                        ></oi-select>
                                 </md-input-container>
                                 <md-input-container flex="50" ng-show="lavel4Si">
                                     <div>{{labelNivel4}}</div>

@@ -9,13 +9,13 @@
     /** @ngInject */
     function addHomeRolController($scope, $timeout, $mdDialog, $state, workSpace,
             localStorageService,
-            f, ws, ioStuSalud, ioIdioma, $http,Notification) {
+            f, ws, ioStuSalud, ioIdioma, $http, Notification) {
         var vm = this;
         $scope.manualEnable = true;
         $scope.focus = false;
         $scope.paisCheckV = true;
         $scope.paisCheckV2 = true;
-        $scope.lectorVar =  false;
+        $scope.lectorVar = false;
 
         $scope.img = '';
         $scope.txtMRZ2_1 = null;
@@ -204,9 +204,10 @@
         }
 
         $scope.checkID = function () {
+            var pullPath = localStorage.getItem("pullPath") + "?sessionId=" + localStorage.getItem("sessionId");
             $http({
                 method: 'GET',
-                url: 'http://localhost:41825/sd-lector-events/events2?sessionid=123'
+                url: pullPath
             }).then(function successCallback(response) {
                 $scope.lecturaJson = response.data;
                 $scope.cargarDatosLector();
@@ -347,7 +348,7 @@
         var entryViews = ws.pais().query({}, function () {
             $scope.pais = [];
             entryViews.forEach(function (value, key) {
-                $scope.pais.push({id:value.id,valor:value.valor});    
+                $scope.pais.push({id: value.id, valor: value.valor});
             });
             $scope.pais2 = $scope.pais;
         }, function (error) {
@@ -358,7 +359,7 @@
         var entryViewscomLing = ws.comLing().query({}, function () {
             $scope.comLing = [];
             entryViewscomLing.forEach(function (value, key) {
-                $scope.comLing.push({id:value.id,valor:value.valor});    
+                $scope.comLing.push({id: value.id, valor: value.valor});
             });
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
@@ -375,7 +376,7 @@
         var entryViewsnivelEducativo = ws.nivelEducativo().query({}, function () {
             $scope.nivelEducativo = [];
             entryViewsnivelEducativo.forEach(function (value, key) {
-                $scope.nivelEducativo.push({id:value.id,valor:value.valor});    
+                $scope.nivelEducativo.push({id: value.id, valor: value.valor});
             });
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
@@ -385,7 +386,7 @@
         var entryViewsExpectativas = ws.expectativas().query({}, function () {
             $scope.expectativas = [];
             entryViewsExpectativas.forEach(function (value, key) {
-                $scope.expectativas.push({id:value.id,valor:value.valor});    
+                $scope.expectativas.push({id: value.id, valor: value.valor});
             });
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
@@ -395,7 +396,7 @@
         var entryViewsPuestoFuncional = ws.puestoFuncional().query({}, function () {
             $scope.puestoFuncional = [];
             entryViewsPuestoFuncional.forEach(function (value, key) {
-                $scope.puestoFuncional.push({id:value.id,valor:value.valor});    
+                $scope.puestoFuncional.push({id: value.id, valor: value.valor});
             });
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
@@ -405,7 +406,7 @@
         var entryViewsReglon = ws.reglon().query({}, function () {
             $scope.reglon = [];
             entryViewsReglon.forEach(function (value, key) {
-                $scope.reglon.push({id:value.id,valor:value.valor});    
+                $scope.reglon.push({id: value.id, valor: value.valor});
             });
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
@@ -415,7 +416,7 @@
         var entryViewsUnidadEjecutora = ws.unidadEjecutora().query({}, function () {
             $scope.unidadEjecutora = [];
             entryViewsUnidadEjecutora.forEach(function (value, key) {
-                $scope.unidadEjecutora.push({id:value.id,nombre:value.nombre});    
+                $scope.unidadEjecutora.push({id: value.id, nombre: value.nombre});
             });
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
@@ -432,7 +433,7 @@
         var entryViewsDepto = ws.depto().query({}, function () {
             $scope.depto = [];
             entryViewsDepto.forEach(function (value, key) {
-                $scope.depto.push({id:value.id,valor:value.valor});    
+                $scope.depto.push({id: value.id, valor: value.valor});
             });
             $scope.depto2 = $scope.depto;
             $scope.depto3 = $scope.depto;
@@ -458,11 +459,11 @@
             }
         }
 
-        $scope.takePueblo = function(){
+        $scope.takePueblo = function () {
             var id = vm.formWizard.pueblo.id;
-            if(id=='MAYA'){
+            if (id == 'MAYA') {
                 $scope.showCL = true;
-            }else{
+            } else {
                 $scope.showCL = false;
             }
         }
@@ -471,8 +472,8 @@
             var id = vm.formWizard.departamento.id;
             var entryViewsMuni = ws.muni(id).query({}, function () {
                 $scope.muni = [];
-                 entryViewsMuni.forEach(function (value, key) {
-                    $scope.muni.push({id:value.id,valor:value.valor});    
+                entryViewsMuni.forEach(function (value, key) {
+                    $scope.muni.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -485,7 +486,7 @@
             var entryViewsMuni2 = ws.muni(id).query({}, function () {
                 $scope.muni2 = [];
                 entryViewsMuni2.forEach(function (value, key) {
-                    $scope.muni2.push({id:value.id,valor:value.valor});    
+                    $scope.muni2.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -498,7 +499,7 @@
             var entryViewsMuni3 = ws.muni(id).query({}, function () {
                 $scope.muni3 = [];
                 entryViewsMuni3.forEach(function (value, key) {
-                    $scope.muni3.push({id:value.id,valor:value.valor});    
+                    $scope.muni3.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -511,7 +512,7 @@
             var entryViewsMuni4 = ws.muni(id).query({}, function () {
                 $scope.muni4 = [];
                 entryViewsMuni4.forEach(function (value, key) {
-                    $scope.muni4.push({id:value.id,valor:value.valor});    
+                    $scope.muni4.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -524,11 +525,11 @@
             var entryViewsnivelEducativoPadre = ws.nivelEducativoPadre(id).query({}, function () {
                 $scope.nivelEducativoPadre = [];
                 entryViewsnivelEducativoPadre.forEach(function (value, key) {
-                    $scope.nivelEducativoPadre.push({id:value.id,valor:value.valor});    
+                    $scope.nivelEducativoPadre.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 //workSpace.error = JSON.stringify(error.data);
-               // $scope.Error();
+                // $scope.Error();
             });
         }
 
@@ -538,18 +539,18 @@
             var entryViewsnivelEducativoPadre = ws.nivelEducativoCarrera(id).query({}, function () {
                 $scope.nivelEducativoPadrePadre = [];
                 entryViewsnivelEducativoPadre.forEach(function (value, key) {
-                    $scope.nivelEducativoPadrePadre.push({id:value.id,valor:value.valor});    
+                    $scope.nivelEducativoPadrePadre.push({id: value.id, valor: value.valor});
                 });
-                if ($scope.nivelEducativoPadrePadre.length>0) {
+                if ($scope.nivelEducativoPadrePadre.length > 0) {
                     $scope.carreraShow = true;
-                }else{
+                } else {
                     $scope.carreraShow = false;
                 }
             }, function (error) {
                 //workSpace.error = JSON.stringify(error.data);
                 //$scope.Error();
             });
-            
+
         }
 
         $scope.takeNivelEducativo2 = function (id) {
@@ -557,7 +558,7 @@
             var entryViewsnivelEducativoPadre2 = ws.nivelEducativoPadre(id).query({}, function () {
                 $scope.nivelEducativoPadre2 = [];
                 entryViewsnivelEducativoPadre2.forEach(function (value, key) {
-                    $scope.nivelEducativoPadre2.push({id:value.id,valor:value.valor});    
+                    $scope.nivelEducativoPadre2.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -571,11 +572,11 @@
             var entryViewsnivelEducativoPadre2 = ws.nivelEducativoCarrera(id).query({}, function () {
                 $scope.nivelEducativoPadrePadre2 = [];
                 entryViewsnivelEducativoPadre2.forEach(function (value, key) {
-                    $scope.nivelEducativoPadrePadre2.push({id:value.id,valor:value.valor});    
+                    $scope.nivelEducativoPadrePadre2.push({id: value.id, valor: value.valor});
                 });
-                if ($scope.nivelEducativoPadrePadre2.length>0) {
+                if ($scope.nivelEducativoPadrePadre2.length > 0) {
                     $scope.carreraShow2 = true;
-                }else{
+                } else {
                     $scope.carreraShow2 = false;
                 }
             }, function (error) {
@@ -589,7 +590,7 @@
             var entryViewsPuestoNominal = ws.puestoNominal(id).query({}, function () {
                 $scope.puestoNominal = [];
                 entryViewsPuestoNominal.forEach(function (value, key) {
-                    $scope.puestoNominal.push({id:value.id,valor:value.valor});    
+                    $scope.puestoNominal.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -612,7 +613,7 @@
             var entryViewsComunidad = ws.comunidad2(id).query({}, function () {
                 $scope.nivel4R = [];
                 entryViewsComunidad.forEach(function (value, key) {
-                    $scope.nivel4R.push({id:value.id,valor:value.valor});    
+                    $scope.nivel4R.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -630,7 +631,7 @@
         }
 
         $scope.takeUnidadEje = function (id) {
-                var id = vm.formWizard.unidadEjecutoraActual.id;
+            var id = vm.formWizard.unidadEjecutoraActual.id;
             if (id == 445) {
                 $scope.labelNivel1 = 'Nivel 1';
                 $scope.labelNivel2 = 'Nivel 2';
@@ -646,7 +647,7 @@
             var entryViewsDistrito = ws.distrito(id).query({}, function () {
                 $scope.distrito = [];
                 entryViewsDistrito.forEach(function (value, key) {
-                    $scope.distrito.push({id:value.id,valor:value.valor});    
+                    $scope.distrito.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -696,7 +697,7 @@
             var entryViewsLugarEspesifico = ws.lugarEspesifico(id).query({}, function () {
                 $scope.lugarEspesifico = entryViewsLugarEspesifico;
                 entryViewsLugarEspesifico.forEach(function (value, key) {
-                    $scope.lugarEspesifico.push({id:value.id,valor:value.valor});    
+                    $scope.lugarEspesifico.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -727,7 +728,7 @@
             var entryViewsComunidad = ws.comunidad(id).query({}, function () {
                 $scope.comunidad = [];
                 entryViewsComunidad.forEach(function (value, key) {
-                    $scope.comunidad.push({id:value.id,valor:value.valor});    
+                    $scope.comunidad.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
@@ -753,7 +754,7 @@
             });
         }
 
-        $scope.changeSalud = function(){
+        $scope.changeSalud = function () {
             Notification.warning('Agregar un año a cada estudio agregado');
         }
 
@@ -792,7 +793,7 @@
             });
         }
 
-        $scope.puta = function(){
+        $scope.puta = function () {
             console.info(vm.formWizard.pais);
         }
 
@@ -846,102 +847,102 @@
             vm.formWizard.ncedula = valor.noCedula;
             vm.formWizard.edad = valor.edad;
             valor.fechaNacimiento ? vm.formWizard.fechaNacimiento = valor.fechaNacimiento : '';
-            valor.lugarResidencia.direccion? vm.formWizard.detalleResidencia = valor.lugarResidencia.direccion : '';
+            valor.lugarResidencia.direccion ? vm.formWizard.detalleResidencia = valor.lugarResidencia.direccion : '';
             valor.dpi ? vm.formWizard.fchCreacionDpi = valor.dpi.fechaEmision : '';
             valor.dpi ? vm.formWizard.nserie = valor.dpi.noSerie : '';
             valor.dpi ? vm.formWizard.fchVenceDpi = valor.dpi.fechaVencimiento : '';
             valor.registroLaboral.observaciones ? vm.formWizard.observaciones = valor.registroLaboral.observaciones : '';
 
-            if(valor.refNacimiento){
+            if (valor.refNacimiento) {
                 vm.formWizard.pais = {
-                    id:valor.refNacimiento.fkPais,
-                    valor:valor.refNacimiento.fkPaisNombre
+                    id: valor.refNacimiento.fkPais,
+                    valor: valor.refNacimiento.fkPaisNombre
                 };
                 vm.formWizard.departamento = {
-                    id:valor.refNacimiento.fkDepartamento,
-                    valor:valor.refNacimiento.fkDepartamentoNombre  
+                    id: valor.refNacimiento.fkDepartamento,
+                    valor: valor.refNacimiento.fkDepartamentoNombre
                 };
                 vm.formWizard.municipio = {
-                    id:valor.refNacimiento.fkMunicio,
-                    valor:valor.refNacimiento.fkMunicioNombre  
+                    id: valor.refNacimiento.fkMunicio,
+                    valor: valor.refNacimiento.fkMunicioNombre
                 };
                 vm.formWizard.departamento ? $scope.takeDepto() : '';
             }
-            
-            
+
+
 
             vm.formWizard.paisResidencia = {
-                id:valor.lugarResidencia.refLugarResidencia.fkPais,
-                valor:valor.lugarResidencia.refLugarResidencia.fkPaisNombre
+                id: valor.lugarResidencia.refLugarResidencia.fkPais,
+                valor: valor.lugarResidencia.refLugarResidencia.fkPaisNombre
             };
             vm.formWizard.departamentoResidencia = {
-                id:valor.lugarResidencia.refLugarResidencia.fkDepartamento,
-                valor:valor.lugarResidencia.refLugarResidencia.fkDepartamentoNombre  
+                id: valor.lugarResidencia.refLugarResidencia.fkDepartamento,
+                valor: valor.lugarResidencia.refLugarResidencia.fkDepartamentoNombre
             };
             vm.formWizard.municipioResidencia = {
-                id:valor.lugarResidencia.refLugarResidencia.fkMunicio,
-                valor:valor.lugarResidencia.refLugarResidencia.fkMunicioNombre  
+                id: valor.lugarResidencia.refLugarResidencia.fkMunicio,
+                valor: valor.lugarResidencia.refLugarResidencia.fkMunicioNombre
             };
             vm.formWizard.departamentoResidencia ? $scope.takeDepto2() : '';
-            
+
             vm.formWizard.pueblo = {
-                id:valor.fkPueblo,
-                name:valor.fkPueblo  
+                id: valor.fkPueblo,
+                name: valor.fkPueblo
             };
-           
-            if(valor.refCedula){
-            vm.formWizard.departamentoCedula = {
-                id:valor.refCedula.fkDepartamento,
-                valor:valor.refCedula.fkDepartamentoNombre  
-            };
-            vm.formWizard.municipioCedula = {
-                id:valor.refCedula.fkMunicio,
-                valor:valor.refCedula.fkMunicioNombre  
-            };
-            vm.formWizard.departamentoCedula ? $scope.takeDepto3() : '';
+
+            if (valor.refCedula) {
+                vm.formWizard.departamentoCedula = {
+                    id: valor.refCedula.fkDepartamento,
+                    valor: valor.refCedula.fkDepartamentoNombre
+                };
+                vm.formWizard.municipioCedula = {
+                    id: valor.refCedula.fkMunicio,
+                    valor: valor.refCedula.fkMunicioNombre
+                };
+                vm.formWizard.departamentoCedula ? $scope.takeDepto3() : '';
             }
 
-            if(valor.refCedula){
-            vm.formWizard.departamentoVecindad = {
-                id:valor.refVecindad.fkDepartamento,
-                valor:valor.refVecindad.fkDepartamentoNombre  
-            };
-            vm.formWizard.municipioVecindad = {
-                id:valor.refVecindad.fkMunicio,
-                valor:valor.refVecindad.fkMunicioNombre  
-            };
-            vm.formWizard.departamentoVecindad ? $scope.takeDepto4() : '';
+            if (valor.refCedula) {
+                vm.formWizard.departamentoVecindad = {
+                    id: valor.refVecindad.fkDepartamento,
+                    valor: valor.refVecindad.fkDepartamentoNombre
+                };
+                vm.formWizard.municipioVecindad = {
+                    id: valor.refVecindad.fkMunicio,
+                    valor: valor.refVecindad.fkMunicioNombre
+                };
+                vm.formWizard.departamentoVecindad ? $scope.takeDepto4() : '';
             }
 
             vm.formWizard.gradoAprobado = {
-                id:valor.registroAcademico.nivelUltimoGrado,
-                valor:valor.registroAcademico.nivelUltimoGradoNombre  
+                id: valor.registroAcademico.nivelUltimoGrado,
+                valor: valor.registroAcademico.nivelUltimoGradoNombre
             };
             vm.formWizard.gradoAprobado ? $scope.takeNivelEducativo() : '';
             vm.formWizard.gradoEstudia = {
-                id:valor.registroAcademico.ultimoGrado,
-                valor:valor.registroAcademico.nombreUltimoGrado  
+                id: valor.registroAcademico.ultimoGrado,
+                valor: valor.registroAcademico.nombreUltimoGrado
             };
             vm.formWizard.gradoEstudia ? $scope.takeNivelCarrera() : '';
             vm.formWizard.gradoCarrera = {
-                id:valor.registroAcademico.carreraUltimoGrado,
-                valor:valor.registroAcademico.carreraUltimoGradoNombre  
+                id: valor.registroAcademico.carreraUltimoGrado,
+                valor: valor.registroAcademico.carreraUltimoGradoNombre
             };
 
 
             vm.formWizard.gradoAprobado2 = {
-                id:valor.registroAcademico.nivelGradoActual,
-                valor:valor.registroAcademico.nivelGradoActualNombre  
+                id: valor.registroAcademico.nivelGradoActual,
+                valor: valor.registroAcademico.nivelGradoActualNombre
             };
             vm.formWizard.gradoAprobado2 ? $scope.takeNivelEducativo2() : '';
             vm.formWizard.gradoEstudia2 = {
-                id:valor.registroAcademico.gradoActual,
-                valor:valor.registroAcademico.nombreGradoActual  
+                id: valor.registroAcademico.gradoActual,
+                valor: valor.registroAcademico.nombreGradoActual
             };
             vm.formWizard.gradoEstudia2 ? $scope.takeNivelCarrera2() : '';
             vm.formWizard.gradoCarrera2 = {
-                id:valor.registroAcademico.carreraGradoActual,
-                valor:valor.registroAcademico.carreraGradoActualNombre  
+                id: valor.registroAcademico.carreraGradoActual,
+                valor: valor.registroAcademico.carreraGradoActualNombre
             };
 
 
@@ -963,22 +964,22 @@
 
             $scope.txtMRZ2_1 = valor.mrz;
 
-             if(valor.refCedula){
-            $scope.pais2Set = valor.refCedula.fkPais;
-            $scope.municipioCedulaSet = valor.refCedula.fkMunicio;
-            $scope.depto3Set = valor.refCedula.fkDepartamento;
+            if (valor.refCedula) {
+                $scope.pais2Set = valor.refCedula.fkPais;
+                $scope.municipioCedulaSet = valor.refCedula.fkMunicio;
+                $scope.depto3Set = valor.refCedula.fkDepartamento;
             }
 
-            if(valor.refCedula){
-            $scope.depto4Set2 = valor.refVecindad.fkDepartamento;
-            $scope.muni4Set = valor.refVecindad.fkMunicio;
-            } 
+            if (valor.refCedula) {
+                $scope.depto4Set2 = valor.refVecindad.fkDepartamento;
+                $scope.muni4Set = valor.refVecindad.fkMunicio;
+            }
             $scope.pais2Set = valor.lugarResidencia.refLugarResidencia.fkPais;
             $scope.takedeptoRec = valor.lugarResidencia.refLugarResidencia.fkDepartamento;
 
             $scope.takemuniRec = valor.lugarResidencia.refLugarResidencia.fkMunicio;
 
-            
+
 
             $scope.depto3Set ? $scope.takeDepto3($scope.depto3Set) : '';
             $scope.depto4Set2 ? $scope.takeDepto4($scope.depto4Set2) : '';
@@ -1026,45 +1027,45 @@
                 $scope.takeCmis = "NO";
             }
 
-             vm.formWizard.expectativas = {
-                id:valor.registroLaboral.fkExpectativa,
-                valor:valor.registroLaboral.fkExpectativaNombre  
+            vm.formWizard.expectativas = {
+                id: valor.registroLaboral.fkExpectativa,
+                valor: valor.registroLaboral.fkExpectativaNombre
             };
-            
+
 
             var contaP = 0;
             valor.registroLaboral.puestos.forEach(function (value, key) {
                 if (contaP == 0) {
                     vm.formWizard.puestoFuncional = {
-                        id:valor.registroLaboral.puestos[key].fkPuestoFuncional,
-                        valor:valor.registroLaboral.puestos[key].nombrePuestoFuncional  
+                        id: valor.registroLaboral.puestos[key].fkPuestoFuncional,
+                        valor: valor.registroLaboral.puestos[key].nombrePuestoFuncional
                     };
                     vm.formWizard.reglonPresupuestario = {
-                        id:valor.registroLaboral.puestos[key].fkPuestoNominalRenglon,
-                        valor:valor.registroLaboral.puestos[key].nombrePuestoNominalRenglon  
+                        id: valor.registroLaboral.puestos[key].fkPuestoNominalRenglon,
+                        valor: valor.registroLaboral.puestos[key].nombrePuestoNominalRenglon
                     };
                     vm.formWizard.puestoFuncional ? $scope.takeReglon() : '';
                     vm.formWizard.puestoNominal = {
-                        id:valor.registroLaboral.puestos[key].fkPuestoNominal,
-                        valor:valor.registroLaboral.puestos[key].nombrePuestoNominal  
+                        id: valor.registroLaboral.puestos[key].fkPuestoNominal,
+                        valor: valor.registroLaboral.puestos[key].nombrePuestoNominal
                     };
                     vm.formWizard.unidadEjecutoraActual = {
-                        id:valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutora,
-                        nombre:valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutoraNombre  
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutora,
+                        nombre: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutoraNombre
                     };
                     vm.formWizard.distrito = {
-                        id:valor.registroLaboral.puestos[key].refUnidadNotificadora.fkDistrito,
-                        valor:valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreDistrito  
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkDistrito,
+                        valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreDistrito
                     };
                     vm.formWizard.distrito ? $scope.takeDistrito() : '';
                     vm.formWizard.lugarEspesificoDistrito = {
-                        id:valor.registroLaboral.puestos[key].refUnidadNotificadora.fkLugarEspecifico,
-                        valor:valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreLugarEspecifico  
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkLugarEspecifico,
+                        valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreLugarEspecifico
                     };
                     vm.formWizard.lugarEspesificoDistrito ? $scope.takeLugarE() : '';
                     vm.formWizard.comunidadDistrito = {
-                        id:valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad,
-                        valor:valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreComunidad  
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad,
+                        valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreComunidad
                     };
                     vm.formWizard.comunidadDistrito ? $scope.takeCumnidadaDis1() : '';
 
@@ -1105,7 +1106,7 @@
                 contaP++;
             });
 
-            if (contaP>1) {
+            if (contaP > 1) {
                 $scope.takeOtrop = "SI";
             } else {
                 $scope.takeOtrop = "NO";
@@ -1120,7 +1121,7 @@
 
 
 
-        
+
 
 
         $scope.showEscolaridad = false;
@@ -1262,6 +1263,7 @@
 
             if ($scope.txtMRZ2_1) {
                 var sendJSON = {
+                    "foto": $scope.img,
                     "cui": vm.formWizard.cui ? vm.formWizard.cui : null,
                     "edad": vm.formWizard.edad ? vm.formWizard.edad : null,
                     "lector": true,
@@ -1278,7 +1280,7 @@
                     "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
                     "fechaNacimientoTexto": vm.formWizard.fechaNacimiento,
                     "fkMunicipioNacimientoNombre": vm.formWizard.municipio,
-                    "fkMunicipioNacimiento":null,
+                    "fkMunicipioNacimiento": null,
                     "nacNoLibro": vm.formWizard.libro ? vm.formWizard.libro : "",
                     "nacNoFolio": vm.formWizard.folio ? vm.formWizard.folio : "",
                     "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
@@ -1289,7 +1291,7 @@
                     "fkMunicipioCedula": null,
                     "fkMunicipioCedulaNombre": vm.formWizard.municipioCedula,
                     "fkMunicipioVecindadNombre": vm.formWizard.municipioVecindad,
-                    "fkMunicipioVecindad":null,
+                    "fkMunicipioVecindad": null,
                     "huellaManoDer": $scope.chkRightThumb,
                     "huellaManoIzq": $scope.chkLeftThumb,
                     "estadoCivil": vm.formWizard.estadoCivil,
@@ -1297,7 +1299,7 @@
                     "registroLaboral": {
                         "anioIngreso": vm.formWizard.anioIngresoInstitucion,
                         "comisionado": comosionadoAc,
-                        "fkComunidadComisionado":null,
+                        "fkComunidadComisionado": null,
                         "fkExpectativa": vm.formWizard.expectativas.id ? vm.formWizard.expectativas.id : null,
                         "puestos": puestosD,
                         "observaciones": vm.formWizard.observaciones ? vm.formWizard.observaciones : null
@@ -1316,13 +1318,14 @@
                         "noSerie": vm.formWizard.nserie ? vm.formWizard.nserie : null,
                         "fechaEmision": null,
                         "fechaEmisionTexto": vm.formWizard.fchCreacionDpi,
-                        "fechaVencimiento":null, 
+                        "fechaVencimiento": null,
                         "fechaVencimientoTexto": vm.formWizard.fchVenceDpi
                     },
                     "estudiosSalud": salu
                 };
             } else {
                 var sendJSON = {
+                    "foto": $scope.img,
                     "cui": vm.formWizard.cui ? vm.formWizard.cui : null,
                     "edad": vm.formWizard.edad ? vm.formWizard.edad : null,
                     "lector": $scope.lectorVar,
@@ -1330,8 +1333,8 @@
                     "segundoNombre": vm.formWizard.segundoNombre ? vm.formWizard.segundoNombre : null,
                     "otrosNombres": vm.formWizard.tercerNombre ? vm.formWizard.tercerNombre : null,
                     "primerApellido": vm.formWizard.primerApellido ? vm.formWizard.primerApellido : null,
-                    "segundoApellido": vm.formWizard.segundoApellido ? vm.formWizard.segundoApellido :null,
-                    "otrosApellidos": vm.formWizard.tercerApellido ? vm.formWizard.tercerApellido: null,
+                    "segundoApellido": vm.formWizard.segundoApellido ? vm.formWizard.segundoApellido : null,
+                    "otrosApellidos": vm.formWizard.tercerApellido ? vm.formWizard.tercerApellido : null,
                     "fkNacionalidad": vm.formWizard.nacionalidad ? vm.formWizard.nacionalidad : null,
                     "fkProfesion": vm.formWizard.profesion ? vm.formWizard.profesion : null,
                     "limitacionesFisicas": vm.formWizard.limitacionesFisicas ? vm.formWizard.limitacionesFisicas : null,
@@ -1354,7 +1357,7 @@
                     "sexo": vm.formWizard.sexo ? vm.formWizard.sexo : null,
                     "registroLaboral": {
                         "anioIngreso": vm.formWizard.anioIngresoInstitucion ? vm.formWizard.anioIngresoInstitucion : null,
-                        "comisionado": comosionadoAc ,
+                        "comisionado": comosionadoAc,
                         "fkExpectativa": vm.formWizard.expectativas.id ? vm.formWizard.expectativas.id : null,
                         "puestos": puestosD ? puestosD : null,
                         "observaciones": vm.formWizard.observaciones ? vm.formWizard.observaciones : null
@@ -1366,7 +1369,7 @@
                     },
                     "lugarResidencia": {
                         "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : "",
-                        "direccion": vm.formWizard.detalleResidencia ? vm.formWizard.detalleResidencia : null 
+                        "direccion": vm.formWizard.detalleResidencia ? vm.formWizard.detalleResidencia : null
                     },
                     "idiomas": ido,
                     "dpi": {
@@ -1380,6 +1383,7 @@
 
             if (update) {
                 var sendJSON = {
+                    "foto": $scope.img,
                     "primerNombre": vm.formWizard.primerNombre,
                     "edad": vm.formWizard.edad ? vm.formWizard.edad : null,
                     "lector": $scope.lectorVar,
@@ -1455,7 +1459,7 @@
                     $scope.Error();
                 });
             }
-            console.info('SEND',JSON.stringify(sendJSON));
+            console.info('SEND', JSON.stringify(sendJSON));
         }
 
         $scope.Error = function (id) {
