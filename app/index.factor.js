@@ -85,17 +85,21 @@
                 });
                 return r;
             },
-            download: function () {
-                $http({
-                    url: path + 'files?sessionId=' + sessionId,
-                    method: "GET",
-                    responseType: 'arraybuffer'
-                }).success(function (data, status, headers, config) {
+            fileDownload: function ($headers) {
+                $headers.responseType = "arraybuffer";
+                $http($headers).success(function (data, status, headers, config) {
                     var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                     var objectUrl = URL.createObjectURL(blob);
                     window.open(objectUrl);
                 }).error(function (data, status, headers, config) {
                     console.error(data);
+                });
+            },
+            searchNormalDownload: function (payload) {
+                data.fileDownload({
+                    url: path + 'home/busquedaNormal?download=true',
+                    method: "POST",
+                    data: payload
                 });
             },
             deletePersona: function (id) {
