@@ -51,7 +51,7 @@
             // SEGUN LA ULTIMA ACTIVIDADA BUSQUEDA NORMAL,AVANZADA O CUI TODO QUEDA REGUISTRADO
 
             console.info('Ultima Busqueda Generada', $scope.lastSearchRef);
-            ws.download();
+            $scope.lastSearchRef.api($scope.lastSearchRef.obj);
         };
 
         $scope.showConfirm = function (ev) {
@@ -312,7 +312,7 @@
                 pueblo: vm.basicForm.pueblo ? vm.basicForm.pueblo : null
             };
 
-            $scope.lastSearchRef = {obj: obj, api: ws.busquedaNormal2File};
+            $scope.lastSearchRef = {obj: obj, api: ws.searchNormalDownload};
 
             $scope.entryUp = ws.searchPersona();
             var EntryUp = $scope.entryUp.post(obj, function () {
@@ -328,7 +328,7 @@
                 cui: vm.basicForm.search
             };
 
-            $scope.lastSearchRef = {obj: obj, api: ws.busquedaNormal2File};
+            $scope.lastSearchRef = {obj: obj, api: ws.searchNormalDownload};
 
             $scope.entryUp = ws.searchPersona();
             var EntryUp = $scope.entryUp.post(obj, function () {
