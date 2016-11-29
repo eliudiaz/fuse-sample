@@ -259,7 +259,7 @@
 
             $scope.sexoSet = $scope.lecturaJson.txtGenero;
             $scope.sexoSetShow = false;
-            vm.formWizard.sexo = $scope.lecturaJson.txtGenero;
+            vm.formWizard.sexo = $scope.getSexo($scope.lecturaJson.txtGenero);
 
             $scope.nacionSet = $scope.lecturaJson.txtNacionalidad;
             $scope.nacionSetShow = false;
@@ -319,7 +319,14 @@
         }
 
 
-
+        $scope.getSexo = function (sexo) {
+            switch (sexo) {
+                case "MASCULINO":
+                    return "HOMBRE";
+                case "FEMENINO":
+                    return "MUJER";
+            }
+        }
 
 
         $scope.fechaNacChange = function (id) {
