@@ -86,7 +86,7 @@
                 return r;
             },
             searchPersona: function () {
-                var r = $resource(path + 'home/busquedaNormal?sessionId=' + sessionId, null, {
+                var r = $resource(path + 'home/busquedaNormal', null, {
                     'post': {method: 'POST', isArray: true}
                 });
                 return r;
@@ -99,6 +99,12 @@
                     window.open(objectUrl);
                 }).error(function (data, status, headers, config) {
                     console.error(data);
+                });
+            },
+            searchTodosDownload: function () {
+                data.fileDownload({
+                    url: path + 'personas/todos?download=true',
+                    method: "GET"
                 });
             },
             searchNormalDownload: function (payload) {

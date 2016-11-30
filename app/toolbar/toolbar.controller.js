@@ -7,7 +7,7 @@
             .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
-    function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast,localStorageService,$state)
+    function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast, localStorageService, $state, sesion)
     {
         var vm = this;
 
@@ -66,12 +66,9 @@
         init();
 
 
-        var idSession = localStorageService.get('sessionId');
-        if(idSession){
-            console.info('ENTRA');
-        }else{
-            console.info('OUT');
-            //window.location.href = "http://www.google.com";
+
+        if (sesion.id() == null) {
+//            sesion.exit();
         }
 
         /**
@@ -80,7 +77,7 @@
         function init()
         {
 
-            vm.user = JSON.parse(localStorage.getItem("currentUser"));
+            vm.user = sesion.user();
             // Select the first status as a default
 
             vm.userStatus = vm.userStatusOptions[0];
@@ -114,7 +111,7 @@
          */
         function logout()
         {
-            window.location = localStorage.getItem("context") + "/logout.jsp";
+            sesion.exit();
         }
 
         /**
