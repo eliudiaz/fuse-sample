@@ -32,7 +32,7 @@
                                 <button ng-click="manual()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>
-                                <button ng-click="lector()" class="
+                                <button ng-click="lector2()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
                             </article>
@@ -290,9 +290,6 @@
                                     </div>
                                 </md-input-container>
                             </div>
-                            <div ng-click="puta()">
-                                MIERDA
-                            </div>
                             <h3>Lugar Nacimiento</h3>
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex flex-gt-xs="50">
@@ -372,7 +369,7 @@
                                         required>
                                     </oi-select>
 
-                                    <div ng-show="!vm.formWizard.paisResidencia" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.paisResidencia.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Pais es Requerido.</span>
@@ -392,7 +389,7 @@
                                         required
                                         >
                                     </oi-select>
-                                    <div ng-show="!vm.formWizard.departamentoResidencia" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.departamentoResidencia.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>Departamento es Requerido.</span>
                                         </div>
@@ -535,10 +532,11 @@
 
                             <h3>Vecindad</h3>
                             <div layout="column" layout-gt-xs="row">
-                                <md-input-container flex="50">
+                                <md-input-container  flex="50">
                                     <label>{{deptoVecSet}}</label>
                                     <div ng-if="!deptoVecSetShow"> {{deptoVecSet}} </div>
                                     <oi-select
+                                    ng-disabled="manualEnable"
                                         ng-if="deptoVecSetShow"
                                         oi-options="item.valor for (key, item) in depto4"
                                         ng-model="vm.formWizard.departamentoVecindad"
@@ -548,7 +546,7 @@
                                         required
                                         >
                                     </oi-select>
-                                    <div ng-show="!vm.formWizard.departamentoVecindad" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.departamentoVecindad.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
 
@@ -556,10 +554,11 @@
                                         </div>
                                     </div>
                                 </md-input-container>
-                                <md-input-container flex="50">
+                                <md-input-container  flex="50">
                                     <label>{{muniVecSet}}</label>
                                     <div ng-if="!muniVecSetShow"> {{muniVecSet}} </div>
                                     <oi-select
+                                    ng-disabled="manualEnable"
                                         ng-if="muniVecSetShow"
                                         oi-options="item.valor for (key, item) in muni4"
                                         ng-model="vm.formWizard.municipioVecindad"
@@ -568,7 +567,7 @@
                                         required
                                         >
                                     </oi-select>
-                                    <div ng-show="!vm.formWizard.municipioVecindad" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.municipioVecindad.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
 
@@ -915,12 +914,15 @@
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex="50" >
                                     <label>Clasificación del Servicio</label>
-                                    <md-select ng-model="vm.formWizard.clasificaServicio" required>
-                                        <md-option ng-repeat="state in clasificaServicio" ng-value="state.id" ng-click="takeClasificaSer(state.id)" ng-selected="state.id == takeClasServ1">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
-                                    <div ng-show="!vm.formWizard.clasificaServicio" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in clasificaServicio"
+                                        ng-model="vm.formWizard.clasificaServicio"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        ng-change="takeClasificaSer()"
+                                        required
+                                        ></oi-select>
+                                    <div ng-show="!vm.formWizard.clasificaServicio.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Clasificación del Servicio es Requerido.</span>
@@ -929,12 +931,14 @@
                                 </md-input-container>
                                 <md-input-container flex="50" >
                                     <label>Áreas del Servicio</label>
-                                    <md-select ng-model="vm.formWizard.AreaclasificaServicio" required>
-                                        <md-option ng-repeat="state in clasificacionSerArea" ng-value="state.id" ng-selected="state.id == takeAreaServ1">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
-                                    <div ng-show="!vm.formWizard.AreaclasificaServicio" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in clasificacionSerArea"
+                                        ng-model="vm.formWizard.AreaclasificaServicio"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        required
+                                        ></oi-select>
+                                    <div ng-show="!vm.formWizard.AreaclasificaServicio.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Áreas del Servicio es Requerido.</span>
@@ -962,28 +966,33 @@
                                 </md-input-container>
                                 <md-input-container ng-show="comisionadoSI" flex flex-gt-xs="50">
                                     <label>Unidad Ejecutora Actual</label>
-                                    <md-select ng-model="vm.formWizard.unidadEjecutoraActualComisionado" >
-                                        <md-option ng-repeat="state in unidadEjecutora" ng-click="takeUnidadEje2(state.id)" ng-value="state.id">
-                                            {{state.nombre}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.nombre for (key, item) in unidadEjecutora"
+                                        ng-model="vm.formWizard.unidadEjecutoraActualComisionado"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        ng-change="takeUnidadEje2()"
+                                        ></oi-select>
                                 </md-input-container>
 
                                 <md-input-container ng-show="comisionadoSI" flex="50">
                                     <div>{{labelNivel11}}</div>
-                                    <md-select ng-model="vm.formWizard.distritoComisionado" >
-                                        <md-option ng-repeat="state in distrito2" ng-value="state.id" ng-click="takeDistrito2(state.id)">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in distrito2"
+                                        ng-model="vm.formWizard.distritoComisionado"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        ng-change="takeDistrito2()"
+                                        ></oi-select>
                                 </md-input-container>
                                 <md-input-container ng-show="comisionadoSI" flex="50" >
                                     <div>{{labelNivel12}}</div>
-                                    <md-select ng-model="vm.formWizard.lugarEspesificoDistritoComisionado" >
-                                        <md-option ng-repeat="state in lugarEspesifico2" ng-value="state.id">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in lugarEspesifico2"
+                                        ng-model="vm.formWizard.lugarEspesificoDistritoComisionado"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        ></oi-select>
                                 </md-input-container>
 
                             </div>
@@ -1006,71 +1015,83 @@
                                 </md-input-container>
                                 <md-input-container  ng-show="otroPuestoSI" flex="50" >
                                     <label>Puesto de acuerdo a funciones</label>
-                                    <md-select ng-model="vm.formWizard.puestoFuncionalotroPuesto" >
-                                        <md-option ng-repeat="state in puestoFuncional" ng-value="state.id" ng-selected="state.id == takePuestoFunciona2">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in puestoFuncional"
+                                        ng-model="vm.formWizard.puestoFuncionalotroPuesto"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                    ></oi-select>
                                 </md-input-container>
                                 <md-input-container ng-show="otroPuestoSI" flex="50">
                                     <label>Reglón Presupuestario</label>
-                                    <md-select ng-model="vm.formWizard.reglonPresupuestariootroPuesto" >
-                                        <md-option ng-repeat="state in reglon" ng-value="state.id" ng-click="takeReglon2(state.id)" ng-selected="state.id == takeRelon22">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in reglon"
+                                        ng-model="vm.formWizard.reglonPresupuestariootroPuesto"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        ng-change="takeReglon2()"
+                                        placeholder=""
+                                    ></oi-select>
+                               </md-input-container>
                                 <md-input-container  ng-show="otroPuestoSI" flex="50" >
                                     <label>Puesto Nominal</label>
-                                    <md-select ng-model="vm.formWizard.puestoNominalotroPuesto" >
-                                        <md-option ng-repeat="state in puestoNominal2" ng-value="state.id" ng-selected="state.id == takePuestoNominal2">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in puestoNominal2"
+                                        ng-model="vm.formWizard.puestoNominalotroPuesto"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                    ></oi-select>
                                 </md-input-container>
                             </div>
                             <div layout="column" layout-gt-xs="row" ng-show="otroPuestoSI">
                                 <md-input-container  flex flex-gt-xs="50">
                                     <label>Unidad Ejecutora Actual</label>
-                                    <md-select ng-model="vm.formWizard.unidadEjecutoraActualotroPuesto" >
-                                        <md-option ng-repeat="state in unidadEjecutora" ng-click="takeUnidadEje3(state.id)" ng-value="state.id" ng-selected="state.id == takeunidadEjecutora2">
-                                            {{state.nombre}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.nombre for (key, item) in unidadEjecutora"
+                                        ng-model="vm.formWizard.unidadEjecutoraActualotroPuesto"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        ng-change="takeUnidadEje3()"
+                                        placeholder=""
+                                    ></oi-select>
                                 </md-input-container>
 
                                 <md-input-container flex="50">
                                     <div> {{labelNivel13}} </div>
-                                    <md-select ng-model="vm.formWizard.distritootroPuesto" >
-                                        <md-option ng-repeat="state in distrito3" ng-value="state.id" ng-click="takeDistrito3(state.id)" ng-selected="state.id == takeDistrito22">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in distrito3"
+                                        ng-model="vm.formWizard.distritootroPuesto"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        ng-change="takeDistrito3()"
+                                        placeholder=""
+                                    ></oi-select>
                                 </md-input-container>
                                 <md-input-container flex="50" >
                                     <div> {{labelNivel23}} </div>
-                                    <md-select ng-model="vm.formWizard.lugarEspesificoDistritootroPuesto" >
-
-                                        <md-option ng-repeat="state in lugarEspesifico3" ng-value="state.id" ng-click="takeLugarE2(state.id)" ng-selected="state.id == takeLugarEspesific22">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in lugarEspesifico3"
+                                        ng-model="vm.formWizard.lugarEspesificoDistritootroPuesto"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        ng-change="takeLugarE2()"
+                                        placeholder=""
+                                    ></oi-select>
                                 </md-input-container>
                                 <md-input-container flex="50" >
                                     <div> {{labelNivel33}} </div>
-                                    <md-select ng-model="vm.formWizard.comunidadDistritootroPuesto" >
-                                        <md-option ng-repeat="state in comunidad2" ng-value="state.id" ng-selected="state.id == takeComunida22" ng-click="takeCumnidadaDis2(state.id)">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in comunidad2"
+                                        ng-model="vm.formWizard.comunidadDistritootroPuesto"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        ng-change="takeCumnidadaDis2()"
+                                        placeholder=""
+                                    ></oi-select>
                                 </md-input-container>
                                 <md-input-container flex="50" ng-show="lavel4Si2">
                                     <div>{{labelNivel43}}</div>
-                                    <md-select ng-model="vm.formWizard.nivel4otroPuesto">
-                                        <md-option ng-repeat="state in nivel4RotroPuesto" ng-value="state.id" ng-selected="state.id == takeNivel4">
-                                            {{state.valor}}
-                                        </md-option>
-                                    </md-select>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in nivel4RotroPuesto"
+                                        ng-model="vm.formWizard.nivel4otroPuesto"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                    ></oi-select>
                                     <div ng-show="!vm.formWizard.comunidadDistrito" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
