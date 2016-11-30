@@ -7,7 +7,7 @@
             .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
-    function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast,localStorageService,$state)
+    function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast, localStorageService, $state)
     {
         var vm = this;
 
@@ -67,9 +67,9 @@
 
 
         var idSession = localStorageService.get('sessionId');
-        if(idSession){
+        if (idSession) {
             console.info('ENTRA');
-        }else{
+        } else {
             console.info('OUT');
             //window.location.href = "http://www.google.com";
         }
@@ -114,6 +114,7 @@
          */
         function logout()
         {
+            localStorage.clear();
             window.location = localStorage.getItem("context") + "/logout.jsp";
         }
 
