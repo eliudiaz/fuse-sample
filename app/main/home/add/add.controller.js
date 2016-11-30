@@ -581,8 +581,8 @@
                     $scope.nivelEducativoPadre2.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+                //workSpace.error = JSON.stringify(error.data);
+                //$scope.Error();
             });
         }
 
@@ -600,8 +600,8 @@
                     $scope.carreraShow2 = false;
                 }
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+               // workSpace.error = JSON.stringify(error.data);
+               // $scope.Error();
             });
         }
 
@@ -640,8 +640,8 @@
                     $scope.nivel4R.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+               // workSpace.error = JSON.stringify(error.data);
+              //  $scope.Error();
             });
         }
 
@@ -653,8 +653,8 @@
                     $scope.nivel4RotroPuesto.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+                //workSpace.error = JSON.stringify(error.data);
+                //$scope.Error();
             });
         }
 
@@ -881,6 +881,7 @@
             valor = localStorageService.get('workSpace').person;
             if(valor){
                 $scope.manualEnable = true;
+                $scope.actualizaa = true;
             }
             valor.cui ? update = true : update = false;
             vm.formWizard.cui = valor.cui;
@@ -982,7 +983,7 @@
                 vm.formWizard.departamentoCedula ? $scope.takeDepto3() : '';
             }
 
-            if (valor.refCedula) {
+            if (valor.refVecindad) {
                 vm.formWizard.departamentoVecindad = {
                     id: valor.refVecindad.fkDepartamento,
                     valor: valor.refVecindad.fkDepartamentoNombre
@@ -1077,10 +1078,19 @@
             $scope.tt2 = [];
             var h2, j2, p3;
             valor.estudiosSalud.forEach(function (value, key) {
-                h2 = value.fkEstudioSalud;
-                j2 = value.nombre + '(' + value.anioEstudio + ')';
-                p3 = value.fkEstudioSalud;
-                $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3});
+                if(value.nombre){
+                    if(value.anioEstudio){
+                        h2 = value.fkEstudioSalud;
+                        j2 = value.nombre + '(' + value.anioEstudio + ')';
+                        p3 = value.fkEstudioSalud;
+                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3}); 
+                    }else{
+                        h2 = value.fkEstudioSalud;
+                        j2 = value.nombre;
+                        p3 = value.fkEstudioSalud;
+                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3});
+                    }
+                }                
             });
 
             vm.formWizard.bundle = $scope.tt2;
@@ -1466,7 +1476,7 @@
                     "sabeLeer": vm.formWizard.sabeLeer ? vm.formWizard.sabeLeer : 'false',
                     "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
                     "fechaNacimiento": vm.formWizard.fechaNacimiento ? vm.formWizard.fechaNacimiento : null,
-                    "fkMunicipioNacimiento": vm.formWizard.municipio ? vm.formWizard.municipio.id : null,
+                    "fkMunicipioNacimiento": vm.formWizard.municipio.id ? vm.formWizard.municipio.id : vm.formWizard.pais.id,
                     "nacNoLibro": vm.formWizard.libro ? vm.formWizard.libro : "",
                     "nacNoFolio": vm.formWizard.folio ? vm.formWizard.folio : "",
                     "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
