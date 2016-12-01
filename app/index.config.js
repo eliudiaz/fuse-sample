@@ -12,9 +12,9 @@
     /** @ngInject */
     function config(IdleProvider, KeepaliveProvider)
     {
-        IdleProvider.idle(5);
-        IdleProvider.timeout(10);
+        IdleProvider.timeout(5); //5minutes
         KeepaliveProvider.interval(2);
+        IdleProvider.idle(120);
     }
 
 })();

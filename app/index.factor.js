@@ -4,18 +4,15 @@
 
     angular
             .module('fuse')
-            .factory('ws', hechoService);
+            .factory('ws', remoteServices);
 
     /** @ngInject */
-    function hechoService($resource, $http)
+    function remoteServices($resource, $http)
     {
-
-
         var path = localStorage.getItem("servicesPath") == null ?
                 "http://localhost:41825/MS_RRHH_Servicios/" :
                 localStorage.getItem("servicesPath");
 
-        var sessionId = localStorage.getItem("sessionId");
         var data = {
             saveHome: function () {
                 var r = $resource(path + 'personas/crea');
@@ -90,7 +87,8 @@
                 $http($headers).success(function (data, status, headers, config) {
                     var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                     var objectUrl = URL.createObjectURL(blob);
-                    window.open(objectUrl);
+//                    window.open(objectUrl);
+                    document.getElementById('my_iframe').src = objectUrl;
                 }).error(function (data, status, headers, config) {
                     console.error(data);
                 });
