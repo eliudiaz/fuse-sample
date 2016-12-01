@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-            .module('app.accessos')
+            .module('app.accesos')
             .controller('accessosController', accessosController);
 
     /** @ngInject */

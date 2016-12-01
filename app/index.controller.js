@@ -7,7 +7,7 @@
             .controller('IndexController', IndexController);
 
     /** @ngInject */
-    function IndexController(fuseTheming, Idle, $scope, sesion)
+    function IndexController($timeout, fuseTheming, Idle, $scope, sesion)
     {
         var vm = this;
 
@@ -18,8 +18,7 @@
 
 
         $scope.$on('IdleTimeout', function () {
-            alert(0);
-            sesion.exit();
+            $timeout(sesion.exit());
         });
     }
 })();
