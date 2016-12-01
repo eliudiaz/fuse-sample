@@ -3,10 +3,10 @@
 
     angular
             .module('fuse')
-            .factory('sesion', session);
+            .factory('sesion', sesion);
 
     /** @ngInject */
-    function session(localStorageService) {
+    function sesion(localStorageService) {
 
         function exit() {
             var url = localStorageService.get("context") + "/logout.jsp";
@@ -30,8 +30,20 @@
 
         }
 
+        function containsMenu(menu) {
+            if (menu == "ACCESOS_MENU") {
+                return false;
+            }
+            return true;
+        }
+
+        function containsAction(action) {
+            return true;
+        }
+
         return {
-            exit: exit, user: user, id: id, pushPath: pushPath, pullPath: pullPath
+            exit: exit, user: user, id: id, pushPath: pushPath, pullPath: pullPath,
+            containsMenu: containsMenu, containsAction: containsAction
         }
 
     }
