@@ -87,7 +87,8 @@
                 $http($headers).success(function (data, status, headers, config) {
                     var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                     var objectUrl = URL.createObjectURL(blob);
-                    window.open(objectUrl);
+//                    window.open(objectUrl);
+                    document.getElementById('my_iframe').src = objectUrl;
                 }).error(function (data, status, headers, config) {
                     console.error(data);
                 });
