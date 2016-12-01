@@ -18,7 +18,6 @@
 
 
         $scope.$on('IdleTimeout', function () {
-            alert("Su sessio ha expirado!");
             sesion.exit();
         });
     }
