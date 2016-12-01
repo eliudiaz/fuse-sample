@@ -17,6 +17,8 @@
 
         $scope.showReglon2 = false;
         $scope.showanioIngreso2 = false;
+        
+
 
         $scope.sg = sg.callSg();
 
@@ -187,22 +189,66 @@
         $scope.objSearchDinamico = [
             {id: 'REGLON', name: 'Reglon'},
             {id: 'UNIDAD_EJECUTORA', name: 'Unidad Ejecutora'},
-            {id: 'PUESTO_NOMINAL', name: 'Puesto Nominal'},
+            {id: 'PUESTO_NOMINAL', name: 'Puesto Funcional'},
             {id: 'CLASIFICACION_SERVICIO', name: 'Clasificacion Servicio'},
             {id: 'ANIO_INGRESO', name: 'Año Ingreso'}
         ]
 
         $scope.filtroDData = [];
 
+        var entryViewsAll = ws.reglon().query({}, function () {
+            $scope.reglonAry =  entryViewsAll;
+        }, function (error) {
+            workSpace.error = JSON.stringify(error.data);
+            $scope.Error();
+        });
+
+        var unidadEjecutora = ws.unidadEjecutora().query({}, function () {
+            $scope.unidadAry =  unidadEjecutora;
+        }, function (error) {
+            workSpace.error = JSON.stringify(error.data);
+            $scope.Error();
+        });
+
+        var clasificacionSer = ws.clasificacionSer().query({}, function () {
+            $scope.clasificaAry =  clasificacionSer;
+        }, function (error) {
+            workSpace.error = JSON.stringify(error.data);
+            $scope.Error();
+        });
+
+        var puestoFuncional = ws.puestoFuncional().query({}, function () {
+            $scope.puestoAry =  puestoFuncional;
+        }, function (error) {
+            workSpace.error = JSON.stringify(error.data);
+            $scope.Error();
+        });
+
         $scope.takeObcD = function (id) {
+            $scope.date1 = false;
+            $scope.reglon1 = false;
+            $scope.unidad1 = false;
+            $scope.puesto1 = false;
+            $scope.clasifica1 = false;
             switch (id) {
                 case "REGLON":
+                    $scope.reglon1 = true;
+                    $scope.filtroDData = [{id: "MAYOR", name: "MAYOR"}, {id: "MENOR", name: "MENOR"}, {id: "IGUAL", name: "IGUAL"}, {id: "ENTRE", name: "ENTRE"}];
+                     break;
                 case "ANIO_INGRESO":
+                    $scope.date1 = true;
                     $scope.filtroDData = [{id: "MAYOR", name: "MAYOR"}, {id: "MENOR", name: "MENOR"}, {id: "IGUAL", name: "IGUAL"}, {id: "ENTRE", name: "ENTRE"}];
                     break;
                 case "UNIDAD_EJECUTORA":
+                    $scope.unidad1 = true;
+                    $scope.filtroDData = [{id: 'IGUAL', name: 'IGUAL'}, {id: 'DIFERENTE', name: 'DIFERENTE'}];
+                    break;
                 case "PUESTO_NOMINAL":
+                    $scope.puesto1 = true;
+                    $scope.filtroDData = [{id: 'IGUAL', name: 'IGUAL'}, {id: 'DIFERENTE', name: 'DIFERENTE'}];
+                    break;
                 case "CLASIFICACION_SERVICIO":
+                    $scope.clasifica1 = true
                     $scope.filtroDData = [{id: 'IGUAL', name: 'IGUAL'}, {id: 'DIFERENTE', name: 'DIFERENTE'}];
                     break;
             }
@@ -219,26 +265,57 @@
         $scope.addDinamico = function () {
             switch (vm.basicForm2.objSearchDinamico) {
                 case "REGLON":
+                    if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
+                        if (vm.basicForm2.filtroReglon == 'ENTRE') {
+                            if (vm.basicForm2.input2FiltroReglon) {
+                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto:vm.basicForm2.inputFiltroReglon.valor, valor2: vm.basicForm2.input2FiltroReglon.id, valor2Texto:vm.basicForm2.input2FiltroReglon.valor});
+                            }
+                        } else {
+                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: '', valor2Texto:''});
+                        }
+                    }
+                    break;
                 case "ANIO_INGRESO":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
                         if (vm.basicForm2.filtroReglon == 'ENTRE') {
                             if (vm.basicForm2.input2FiltroReglon) {
-                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon});
+                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon , valor2: vm.basicForm2.input2FiltroReglon , valor2Texto: vm.basicForm2.input2FiltroReglon});
                             }
                         } else {
-                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon});
+                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: '', valor2Texto:''});
                         }
                     }
                     break;
-                case "UNIDAD_EJECUTORA":
                 case "PUESTO_NOMINAL":
                 case "CLASIFICACION_SERVICIO":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
-                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon});
+                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id,valor1Texto: vm.basicForm2.inputFiltroReglon.valor });
+                    }
+                    break;
+                case "UNIDAD_EJECUTORA":
+                    if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
+                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id,valor1Texto: vm.basicForm2.inputFiltroReglon.nombre });
                     }
                     break;
             }
             console.info(JSON.stringify($scope.searchObjDinamico));
+            vm.basicForm.primerNombre = null;
+            vm.basicForm.segundoNombre = null;
+            vm.basicForm.edad = null;
+            vm.basicForm.primerApellido = null;
+            vm.basicForm.segundoApellido = null;
+            vm.basicForm.sexo = null;
+            vm.basicForm.departamento = null;
+            vm.basicForm.municipio = null;
+            vm.basicForm.pueblo = null;
+            vm.basicForm.direccion = null;
+
+            vm.basicForm2.objSearchDinamico = null;
+            vm.basicForm2.filtroReglon = null;
+            vm.basicForm2.inputFiltroReglon = null;
+            vm.basicForm2.input2FiltroReglon = null;
+            vm.basicForm.fechaDesde = null;
+            vm.basicForm.fechaHasta = null;
         }
 
 

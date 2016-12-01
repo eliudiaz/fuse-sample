@@ -12,8 +12,8 @@
     /** @ngInject */
     function config(IdleProvider, KeepaliveProvider)
     {
-        IdleProvider.idle(5);
-        IdleProvider.timeout(10);
+        IdleProvider.idle(10000000000);
+        IdleProvider.timeout(100000000);
         KeepaliveProvider.interval(2);
     }
 

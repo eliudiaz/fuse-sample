@@ -9,17 +9,17 @@
     function session(localStorageService) {
 
         function exit() {
-            var url = localStorage.getItem("context") + "/logout.jsp";
-            localStorage.clear();
+            var url = localStorageService.get("context") + "/logout.jsp";
+            localStorageService.clearAll();
             window.location = url;
         }
 
         function user() {
-            return JSON.parse(localStorage.getItem("currentUser"));
+            return JSON.parse(localStorageService.get("currentUser"));
         }
 
         function id() {
-            return localStorage.getItem('sessionId');
+            return localStorageService.get('sessionId');
         }
 
         function pushPath() {
