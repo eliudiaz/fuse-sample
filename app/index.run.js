@@ -7,7 +7,7 @@
             .run(runBlock);
 
     /** @ngInject */
-    function runBlock($rootScope, $location, $timeout, $state, sesion)
+    function runBlock($rootScope, Notification, $timeout, $state, sesion)
     {
 
         // Activate loading indicator
@@ -22,6 +22,7 @@
             console.info("changing!!");
             console.info(sesion.authorized(next));
             if (sesion.user() == null) {
+                Notification.error("No hay sesion activa!");
                 sesion.exit();
             }
             if (!sesion.authorized(next)) {

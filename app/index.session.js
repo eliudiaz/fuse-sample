@@ -6,11 +6,11 @@
             .factory('sesion', sesion);
 
     /** @ngInject */
-    function sesion($filter) {
+    function sesion($filter, Notification) {
         function exit() {
+            Notification.error("Cerrando sesion...");
             var url = document.URL;
             url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
-//            var url =document.URL.substring(0,document.URL.indexOf("fuse")) // localStorage.getItem("context") + "/logout.jsp";
             localStorage.clear()
             window.location = url;
         }
