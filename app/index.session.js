@@ -8,7 +8,9 @@
     /** @ngInject */
     function sesion($filter) {
         function exit() {
-            var url = localStorage.getItem("context") + "/logout.jsp";
+            var url = document.URL;
+            url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
+//            var url =document.URL.substring(0,document.URL.indexOf("fuse")) // localStorage.getItem("context") + "/logout.jsp";
             localStorage.clear()
             window.location = url;
         }
