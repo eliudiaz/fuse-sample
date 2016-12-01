@@ -13,6 +13,7 @@
     function config(IdleProvider, KeepaliveProvider)
     {
         IdleProvider.timeout(5); //5minutes
+
         KeepaliveProvider.interval(2);
         IdleProvider.idle(120);
     }

@@ -542,6 +542,7 @@
 
         $scope.takeNivelEducativo = function (id) {
             var id = vm.formWizard.gradoAprobado.id;
+            if(id){
             var entryViewsnivelEducativoPadre = ws.nivelEducativoPadre(id).query({}, function () {
                 $scope.nivelEducativoPadre = [];
                 entryViewsnivelEducativoPadre.forEach(function (value, key) {
@@ -551,10 +552,12 @@
                 //workSpace.error = JSON.stringify(error.data);
                 // $scope.Error();
             });
+            }
         }
 
         $scope.takeNivelCarrera = function (id) {
             var id = vm.formWizard.gradoEstudia.id;
+            if(id){
             $scope.nivelEducativoPadrePadre = [];
             var entryViewsnivelEducativoPadre = ws.nivelEducativoCarrera(id).query({}, function () {
                 $scope.nivelEducativoPadrePadre = [];
@@ -570,11 +573,13 @@
                 //workSpace.error = JSON.stringify(error.data);
                 //$scope.Error();
             });
+                }
 
         }
 
         $scope.takeNivelEducativo2 = function (id) {
             var id = vm.formWizard.gradoAprobado2.id;
+            if(id){
             var entryViewsnivelEducativoPadre2 = ws.nivelEducativoPadre(id).query({}, function () {
                 $scope.nivelEducativoPadre2 = [];
                 entryViewsnivelEducativoPadre2.forEach(function (value, key) {
@@ -584,10 +589,12 @@
                 //workSpace.error = JSON.stringify(error.data);
                 //$scope.Error();
             });
+                }
         }
 
         $scope.takeNivelCarrera2 = function (id) {
             var id = vm.formWizard.gradoEstudia2.id;
+            if(id){
             $scope.nivelEducativoPadrePadre2 = [];
             var entryViewsnivelEducativoPadre2 = ws.nivelEducativoCarrera(id).query({}, function () {
                 $scope.nivelEducativoPadrePadre2 = [];
@@ -603,6 +610,7 @@
                // workSpace.error = JSON.stringify(error.data);
                // $scope.Error();
             });
+            }
         }
 
         $scope.takeReglon = function () {
@@ -634,6 +642,7 @@
 
         $scope.takeCumnidadaDis1 = function (id) {
             var id = vm.formWizard.comunidadDistrito.id;
+            if(id){
             var entryViewsComunidad = ws.comunidad2(id).query({}, function () {
                 $scope.nivel4R = [];
                 entryViewsComunidad.forEach(function (value, key) {
@@ -643,10 +652,12 @@
                // workSpace.error = JSON.stringify(error.data);
               //  $scope.Error();
             });
+            }
         }
 
         $scope.takeCumnidadaDis2 = function (id) {
             var id = vm.formWizard.comunidadDistritootroPuesto.id;
+            if(id){
             var entryViewsComunidad = ws.comunidad2(id).query({}, function () {
                 $scope.nivel4RotroPuesto = [];
                 entryViewsComunidad.forEach(function (value, key) {
@@ -656,6 +667,7 @@
                 //workSpace.error = JSON.stringify(error.data);
                 //$scope.Error();
             });
+            }
         }
 
         $scope.takeUnidadEje = function (id) {
@@ -769,6 +781,7 @@
 
         $scope.takeLugarE = function (id) {
             var id = vm.formWizard.lugarEspesificoDistrito.id;
+            if(id){
             var entryViewsComunidad = ws.comunidad(id).query({}, function () {
                 $scope.comunidad = [];
                 entryViewsComunidad.forEach(function (value, key) {
@@ -778,10 +791,12 @@
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
             });
+            }
         }
 
         $scope.takeLugarE2 = function (id) {
             var id = vm.formWizard.lugarEspesificoDistritootroPuesto.id;
+            if(id){
             var entryViewsComunidad2 = ws.comunidad(id).query({}, function () {
                 $scope.comunidad2 = [];
                 entryViewsComunidad2.forEach(function (value, key) {
@@ -791,6 +806,7 @@
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
             });
+            }
         }
 
         $scope.takeClasificaSer = function () {

@@ -8,20 +8,20 @@
     /** @ngInject */
     function sesion($filter, Notification) {
         function exit() {
+
             Notification.error("Cerrando sesion...");
             var url = document.URL;
             url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
             localStorage.clear()
 
-//            window.location = url;
         }
 
         function user() {
-            return JSON.parse(localStorage.getItem("currentUser"));
+            return JSON.parse(localStorageService.get("currentUser"));
         }
 
         function id() {
-            return localStorage.getItem('sessionId');
+            return localStorageService.get('sessionId');
         }
 
         function pushPath() {

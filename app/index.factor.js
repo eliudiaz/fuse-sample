@@ -13,6 +13,7 @@
                 "http://localhost:41825/MS_RRHH_Servicios/" :
                 localStorage.getItem("servicesPath");
 
+
         var data = {
             saveHome: function () {
                 var r = $resource(path + 'personas/crea');
