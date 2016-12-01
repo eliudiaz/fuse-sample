@@ -12,7 +12,8 @@
             var url = document.URL;
             url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
             localStorage.clear()
-            window.location = url;
+
+//            window.location = url;
         }
 
         function user() {

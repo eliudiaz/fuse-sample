@@ -89,6 +89,8 @@
         vm.formWizard.gradoEstudia = [];
         vm.formWizard.gradoCarrera2 = [];
         vm.formWizard.gradoEstudia2 = [];
+        vm.formWizard.comunidadDistritootroPuesto = [];
+        vm.formWizard.lugarEspesificoDistritootroPuesto = [];
 
         var update = false;
         var valor;
@@ -259,7 +261,15 @@
 
             $scope.sexoSet = $scope.lecturaJson.txtGenero;
             $scope.sexoSetShow = false;
-            vm.formWizard.sexo = $scope.getSexo($scope.lecturaJson.txtGenero);
+
+            if($scope.lecturaJson.txtGenero=="MASCULINO"){
+                vm.formWizard.sexo = "HOMBRE";
+            }else if($scope.lecturaJson.txtGenero=="FEMENINO"){
+                vm.formWizard.sexo = "MUJER";
+            }else{
+                vm.formWizard.sexo = $scope.lecturaJson.txtGenero;
+            }
+        
 
             $scope.nacionSet = $scope.lecturaJson.txtNacionalidad;
             $scope.nacionSetShow = false;
@@ -431,7 +441,10 @@
         });
 
         var entryViewsClasificacionSer = ws.clasificacionSer().query({}, function () {
-            $scope.clasificaServicio = entryViewsClasificacionSer;
+            $scope.clasificaServicio = [];
+            entryViewsClasificacionSer.forEach(function (value, key) {
+                $scope.clasificaServicio.push({id: value.id, valor: value.valor});
+            });
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
             $scope.Error();
@@ -568,8 +581,8 @@
                     $scope.nivelEducativoPadre2.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+                //workSpace.error = JSON.stringify(error.data);
+                //$scope.Error();
             });
         }
 
@@ -587,8 +600,8 @@
                     $scope.carreraShow2 = false;
                 }
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+               // workSpace.error = JSON.stringify(error.data);
+               // $scope.Error();
             });
         }
 
@@ -606,8 +619,12 @@
         }
 
         $scope.takeReglon2 = function (id) {
+            var id = vm.formWizard.reglonPresupuestariootroPuesto.id;
             var entryViewsPuestoNominal2 = ws.puestoNominal(id).query({}, function () {
-                $scope.puestoNominal2 = entryViewsPuestoNominal2;
+                $scope.puestoNominal2 = [];
+                entryViewsPuestoNominal2.forEach(function (value, key) {
+                    $scope.puestoNominal2.push({id: value.id, valor: value.valor});
+                });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
@@ -623,23 +640,27 @@
                     $scope.nivel4R.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+               // workSpace.error = JSON.stringify(error.data);
+              //  $scope.Error();
             });
         }
 
         $scope.takeCumnidadaDis2 = function (id) {
+            var id = vm.formWizard.comunidadDistritootroPuesto.id;
             var entryViewsComunidad = ws.comunidad2(id).query({}, function () {
-                $scope.nivel4RotroPuesto = entryViewsComunidad;
+                $scope.nivel4RotroPuesto = [];
+                entryViewsComunidad.forEach(function (value, key) {
+                    $scope.nivel4RotroPuesto.push({id: value.id, valor: value.valor});
+                });
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
+                //workSpace.error = JSON.stringify(error.data);
+                //$scope.Error();
             });
         }
 
         $scope.takeUnidadEje = function (id) {
             var id = vm.formWizard.unidadEjecutoraActual.id;
-            if (id == 445) {
+            if (id == 201) {
                 $scope.labelNivel1 = 'Nivel 1';
                 $scope.labelNivel2 = 'Nivel 2';
                 $scope.labelNivel3 = 'Nivel 3';
@@ -663,7 +684,8 @@
         }
 
         $scope.takeUnidadEje2 = function (id) {
-            if (id == 445) {
+            var id = vm.formWizard.unidadEjecutoraActualComisionado.id;
+            if (id == 201) {
                 $scope.labelNivel11 = 'Nivel 1';
                 $scope.labelNivel12 = 'Nivel 2';
             } else {
@@ -671,7 +693,10 @@
                 $scope.labelNivel12 = 'Lugar Específico';
             }
             var entryViewsDistrito2 = ws.distrito(id).query({}, function () {
-                $scope.distrito2 = entryViewsDistrito2;
+                $scope.distrito2 = [];
+                 entryViewsDistrito2.forEach(function (value, key) {
+                    $scope.distrito2.push({id: value.id, valor: value.valor});
+                });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
@@ -679,7 +704,8 @@
         }
 
         $scope.takeUnidadEje3 = function (id) {
-            if (id == 445) {
+            var id = vm.formWizard.unidadEjecutoraActualotroPuesto.id;
+            if (id == 201) {
                 $scope.labelNivel13 = 'Nivel 1';
                 $scope.labelNivel23 = 'Nivel 2';
                 $scope.labelNivel33 = 'Nivel 3';
@@ -692,7 +718,10 @@
                 $scope.lavel4Si2 = false;
             }
             var entryViewsDistrito3 = ws.distrito(id).query({}, function () {
-                $scope.distrito3 = entryViewsDistrito3;
+                $scope.distrito3 = [];
+                entryViewsDistrito3.forEach(function (value, key) {
+                    $scope.distrito3.push({id: value.id, valor: value.valor});
+                });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
@@ -713,8 +742,12 @@
         }
 
         $scope.takeDistrito2 = function (id) {
+            var id = vm.formWizard.distritoComisionado.id;
             var entryViewsLugarEspesifico2 = ws.lugarEspesifico(id).query({}, function () {
-                $scope.lugarEspesifico2 = entryViewsLugarEspesifico2;
+                $scope.lugarEspesifico2 = [];
+                entryViewsLugarEspesifico2.forEach(function (value, key) {
+                    $scope.lugarEspesifico2.push({id: value.id, valor: value.valor});
+                });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
@@ -722,8 +755,12 @@
         }
 
         $scope.takeDistrito3 = function (id) {
+            var id = vm.formWizard.distritootroPuesto.id;
             var entryViewsLugarEspesifico3 = ws.lugarEspesifico(id).query({}, function () {
-                $scope.lugarEspesifico3 = entryViewsLugarEspesifico3;
+                $scope.lugarEspesifico3 = [];
+                entryViewsLugarEspesifico3.forEach(function (value, key) {
+                    $scope.lugarEspesifico3.push({id: value.id, valor: value.valor});
+                });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
@@ -744,17 +781,25 @@
         }
 
         $scope.takeLugarE2 = function (id) {
+            var id = vm.formWizard.lugarEspesificoDistritootroPuesto.id;
             var entryViewsComunidad2 = ws.comunidad(id).query({}, function () {
-                $scope.comunidad2 = entryViewsComunidad2;
+                $scope.comunidad2 = [];
+                entryViewsComunidad2.forEach(function (value, key) {
+                    $scope.comunidad2.push({id: value.id, valor: value.valor});
+                });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
             });
         }
 
-        $scope.takeClasificaSer = function (id) {
+        $scope.takeClasificaSer = function () {
+            var id = vm.formWizard.clasificaServicio.id;
             var entryViewsClasificacionSerArea = ws.clasificacionSerArea(id).query({}, function () {
-                $scope.clasificacionSerArea = entryViewsClasificacionSerArea;
+                $scope.clasificacionSerArea = [];
+                entryViewsClasificacionSerArea.forEach(function (value, key) {
+                    $scope.clasificacionSerArea.push({id: value.id, valor: value.valor});
+                });
             }, function (error) {
                 workSpace.error = JSON.stringify(error.data);
                 $scope.Error();
@@ -805,12 +850,12 @@
         }
 
         $scope.pueblo = [
-            {id: 'MESTIZO_O_LADINO', name: 'Mestizo o Ladino'},
-            {id: 'MAYA', name: 'Maya'},
-            {id: 'GARIFUNA', name: 'Garifuna'},
-            {id: 'XINCA', name: 'Xinca'},
-            {id: 'OTRO', name: 'Otro'},
-            {id: 'NO_INDICA', name: 'No Inca'}
+            {id: "MESTIZO_O_LADINO", name: "MESTIZO_O_LADINO"},
+            {id: "MAYA", name: "MAYA"},
+            {id: "GARIFUNA", name: "GARIFUNA"},
+            {id: "XINCA", name: "XINCA"},
+            {id: "OTRO", name: "OTRO"},
+            {id: "NO_INDICA", name: "NO_INDICA"}
 
         ];
 
@@ -834,6 +879,10 @@
 
         try {
             valor = localStorageService.get('workSpace').person;
+            if(valor){
+                $scope.manualEnable = true;
+                $scope.actualizaa = true;
+            }
             valor.cui ? update = true : update = false;
             vm.formWizard.cui = valor.cui;
             vm.formWizard.primerNombre = valor.primerNombre;
@@ -890,12 +939,37 @@
                 id: valor.lugarResidencia.refLugarResidencia.fkMunicio,
                 valor: valor.lugarResidencia.refLugarResidencia.fkMunicioNombre
             };
-            vm.formWizard.departamentoResidencia ? $scope.takeDepto2() : '';
+            vm.formWizard.departamentoResidencia.id ? $scope.takeDepto2() : '';
 
-            vm.formWizard.pueblo = {
-                id: valor.fkPueblo,
-                name: valor.fkPueblo
-            };
+            
+             vm.formWizard.pueblo = {
+                    id: valor.fkPueblo,
+                    name: valor.fkPueblo
+                }
+              
+            vm.formWizard.pueblo ? $scope.takePueblo() : '';
+
+            if(valor.fkComunidadLinguistica){
+
+                var entryViewscomLing = ws.comLing().query({}, function () {
+                    entryViewscomLing.forEach(function (value, key) {
+                        if(value.id==valor.fkComunidadLinguistica){
+                            vm.formWizard.comunidadLinguistica = {
+                                id: valor.fkComunidadLinguistica,
+                                valor: value.valor
+                            };
+                        }
+                        $scope.comLing.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    workSpace.error = JSON.stringify(error.data);
+                    $scope.Error();
+                });
+                
+            }
+
+
+            
 
             if (valor.refCedula) {
                 vm.formWizard.departamentoCedula = {
@@ -909,7 +983,7 @@
                 vm.formWizard.departamentoCedula ? $scope.takeDepto3() : '';
             }
 
-            if (valor.refCedula) {
+            if (valor.refVecindad) {
                 vm.formWizard.departamentoVecindad = {
                     id: valor.refVecindad.fkDepartamento,
                     valor: valor.refVecindad.fkDepartamentoNombre
@@ -1004,10 +1078,19 @@
             $scope.tt2 = [];
             var h2, j2, p3;
             valor.estudiosSalud.forEach(function (value, key) {
-                h2 = value.fkEstudioSalud;
-                j2 = value.nombre + '(' + value.anioEstudio + ')';
-                p3 = value.fkEstudioSalud;
-                $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3});
+                if(value.nombre){
+                    if(value.anioEstudio){
+                        h2 = value.fkEstudioSalud;
+                        j2 = value.nombre + '(' + value.anioEstudio + ')';
+                        p3 = value.fkEstudioSalud;
+                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3}); 
+                    }else{
+                        h2 = value.fkEstudioSalud;
+                        j2 = value.nombre;
+                        p3 = value.fkEstudioSalud;
+                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3});
+                    }
+                }                
             });
 
             vm.formWizard.bundle = $scope.tt2;
@@ -1060,6 +1143,7 @@
                         id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutora,
                         nombre: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutoraNombre
                     };
+                    vm.formWizard.unidadEjecutoraActual.id ? $scope.takeUnidadEje() : '';
                     vm.formWizard.distrito = {
                         id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkDistrito,
                         valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreDistrito
@@ -1076,8 +1160,18 @@
                     };
                     vm.formWizard.comunidadDistrito ? $scope.takeCumnidadaDis1() : '';
 
+                    vm.formWizard.clasificaServicio = {
+                        id: valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicio,
+                        valor: valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicioNombre
+                    };
+                    vm.formWizard.clasificaServicio.id ? $scope.takeClasificaSer() : '';
+                    vm.formWizard.AreaclasificaServicio = {
+                        id: valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicio,
+                        valor: valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicioNombre
+                    };
 
 
+/*
                     $scope.takePuestoFunciona1 = valor.registroLaboral.puestos[key].fkPuestoFuncional;
                     $scope.takeRelon1 = valor.registroLaboral.puestos[key].fkPuestoNominalRenglon;
                     $scope.takeRelon1 ? $scope.takeReglon($scope.takeRelon1) : '';
@@ -1093,9 +1187,43 @@
                     $scope.takeClasServ1 = valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicio;
                     $scope.takeClasServ1 ? $scope.takeClasificaSer($scope.takeClasServ1) : '';
                     $scope.takeAreaServ1 = valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicio;
-
+                    */
 
                 } else {
+                    vm.formWizard.puestoFuncionalotroPuesto = {
+                        id: valor.registroLaboral.puestos[key].fkPuestoFuncional,
+                        valor: valor.registroLaboral.puestos[key].nombrePuestoFuncional
+                    };
+                    vm.formWizard.reglonPresupuestariootroPuesto = {
+                        id: valor.registroLaboral.puestos[key].fkPuestoNominalRenglon,
+                        valor: valor.registroLaboral.puestos[key].nombrePuestoNominalRenglon
+                    };
+                    vm.formWizard.reglonPresupuestariootroPuesto.id ? $scope.takeReglon2() : '';
+                    vm.formWizard.puestoNominalotroPuesto = {
+                        id: valor.registroLaboral.puestos[key].fkPuestoNominal,
+                        valor: valor.registroLaboral.puestos[key].nombrePuestoNominal
+                    };
+                    vm.formWizard.unidadEjecutoraActualotroPuesto = {
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutora,
+                        nombre: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutoraNombre
+                    };
+                    vm.formWizard.unidadEjecutoraActualotroPuesto.id ? $scope.takeUnidadEje3() : '';
+                    vm.formWizard.distritootroPuesto = {
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkDistrito,
+                        valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreDistrito
+                    };
+                    vm.formWizard.distritootroPuesto.id ? $scope.takeDistrito3() : '';
+                    vm.formWizard.lugarEspesificoDistritootroPuesto = {
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkLugarEspecifico,
+                        valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreLugarEspecifico
+                    };
+                    vm.formWizard.lugarEspesificoDistritootroPuesto.id ? $scope.takeLugarE2() : '';
+                    vm.formWizard.comunidadDistritootroPuesto = {
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad,
+                        valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreComunidad
+                    };
+                    vm.formWizard.comunidadDistritootroPuesto.id ? $scope.takeCumnidadaDis2() : '';
+/*
                     $scope.takeOtrop = "SI";
                     $scope.takePuestoFunciona2 = valor.registroLaboral.puestos[key].fkPuestoFuncional;
                     $scope.takeRelon22 = valor.registroLaboral.puestos[key].fkPuestoNominalRenglon;
@@ -1108,7 +1236,7 @@
                     $scope.takeLugarEspesific22 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkLugarEspecifico;
                     $scope.takeLugarEspesific22 ? $scope.takeLugarE2($scope.takeLugarEspesific22) : '';
                     $scope.takeComunida22 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad;
-
+                    */
                 }
                 contaP++;
             });
@@ -1120,7 +1248,7 @@
             }
 
 
-            $scope.manualEnable = false;
+          
 
         } catch (e) {
 
@@ -1229,12 +1357,12 @@
             var fkComunida2;
             if (vm.formWizard.nivel4otroPuesto) {
                 fkComunida2 = vm.formWizard.nivel4otroPuesto;
-            } else if (vm.formWizard.comunidadDistritootroPuesto) {
-                fkComunida2 = vm.formWizard.comunidadDistritootroPuesto;
-            } else if (vm.formWizard.lugarEspesificoDistritootroPuesto) {
-                fkComunida2 = vm.formWizard.lugarEspesificoDistritootroPuesto;
+            } else if (vm.formWizard.comunidadDistritootroPuesto.id) {
+                fkComunida2 = vm.formWizard.comunidadDistritootroPuesto.id;
+            } else if (vm.formWizard.lugarEspesificoDistritootroPuesto.id) {
+                fkComunida2 = vm.formWizard.lugarEspesificoDistritootroPuesto.id;
             } else {
-                fkComunida2 = vm.formWizard.distrito;
+                fkComunida2 = vm.formWizard.distrito.id;
             }
 
             if (vm.formWizard.puestoFuncionalotroPuesto) {
@@ -1244,14 +1372,14 @@
                         tipo: 'PRINCIPAL',
                         fkPuestoNominal: vm.formWizard.puestoNominal.id,
                         fkComunidad: fkComunida,
-                        fkClasificacionServicio: vm.formWizard.AreaclasificaServicio
+                        fkClasificacionServicio: vm.formWizard.AreaclasificaServicio.id
                     },
                     {
-                        fkPuestoFuncional: vm.formWizard.puestoFuncionalotroPuesto,
+                        fkPuestoFuncional: vm.formWizard.puestoFuncionalotroPuesto.id,
                         tipo: 'ADICIONAL',
-                        fkPuestoNominal: vm.formWizard.puestoNominalotroPuesto,
+                        fkPuestoNominal: vm.formWizard.puestoNominalotroPuesto.id,
                         fkComunidad: fkComunida2,
-                        fkClasificacionServicio: vm.formWizard.AreaclasificaServicio
+                        fkClasificacionServicio: vm.formWizard.AreaclasificaServicio.id
                     }
                 ];
             } else {
@@ -1261,7 +1389,7 @@
                         tipo: 'PRINCIPAL',
                         fkPuestoNominal: vm.formWizard.puestoNominal.id,
                         fkComunidad: fkComunida,
-                        fkClasificacionServicio: vm.formWizard.AreaclasificaServicio
+                        fkClasificacionServicio: vm.formWizard.AreaclasificaServicio.id
                     }
                 ];
             }
@@ -1348,12 +1476,12 @@
                     "sabeLeer": vm.formWizard.sabeLeer ? vm.formWizard.sabeLeer : 'false',
                     "sabeEscribir": vm.formWizard.sabeEscribir ? vm.formWizard.sabeEscribir : 'false',
                     "fechaNacimiento": vm.formWizard.fechaNacimiento ? vm.formWizard.fechaNacimiento : null,
-                    "fkMunicipioNacimiento": vm.formWizard.municipio ? vm.formWizard.municipio.id : null,
+                    "fkMunicipioNacimiento": vm.formWizard.municipio.id ? vm.formWizard.municipio.id : vm.formWizard.pais.id,
                     "nacNoLibro": vm.formWizard.libro ? vm.formWizard.libro : "",
                     "nacNoFolio": vm.formWizard.folio ? vm.formWizard.folio : "",
                     "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
                     "fkPueblo": vm.formWizard.pueblo.id ? vm.formWizard.pueblo.id : null,
-                    "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica ? vm.formWizard.comunidadLinguistica.id : null,
+                    "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica.id ? vm.formWizard.comunidadLinguistica.id : null,
                     "mrz": "<<<sdfsdf<<<sdfsdfd<<<",
                     "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
                     "fkMunicipioCedula": vm.formWizard.municipioCedula.id ? vm.formWizard.municipioCedula.id : null,
@@ -1372,7 +1500,7 @@
                     "registroAcademico": {
                         "ultimoGrado": studioUltimoGrado ? studioUltimoGrado : null,
                         "gradoActual": studioGradoActual ? studioGradoActual : null,
-                        "estudiaActualmente": studiaAc ? studiaAc : null
+                        "estudiaActualmente": studiaAc
                     },
                     "lugarResidencia": {
                         "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : "",

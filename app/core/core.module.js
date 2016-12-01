@@ -34,4 +34,5 @@
                         '720kb.datepicker',
                         'ngIdle'
                     ]);
+
 })();
