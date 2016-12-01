@@ -6,8 +6,8 @@
             .factory('sesion', sesion);
 
     /** @ngInject */
-    function sesion(localStorageService) {
-
+    function sesion(localStorageService, $filter) {
+        var cUser = null;
         function exit() {
             var url = localStorageService.get("context") + "/logout.jsp";
             localStorageService.clearAll();
@@ -15,7 +15,10 @@
         }
 
         function user() {
-            return JSON.parse(localStorageService.get("currentUser"));
+            if (cUser == null) {
+                cUser = angular.fromJson(localStorageService.get("currentUser"));
+            }
+            return cUser;
         }
 
         function id() {
@@ -34,11 +37,10 @@
             return localStorage.getItem("lectorPath");
         }
 
-        function containsMenu(menu) {
-            if (menu == "ACCESOS_MENU") {
-                return false;
-            }
-            return true;
+        function authorized(o) {
+            var u = user();
+            var f = $filter("filter")(u.accesos, {valor: o.url})[0];
+            return f != null || o.url == "/home";
         }
 
         function containsAction(action) {
@@ -50,7 +52,7 @@
             pushPath: pushPath,
             pullPath: pullPath,
             lectorPath: lectorPath,
-            containsMenu: containsMenu,
+            authorized: authorized,
             containsAction: containsAction
         }
 

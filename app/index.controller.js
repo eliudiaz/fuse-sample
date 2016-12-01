@@ -18,6 +18,7 @@
 
 
         $scope.$on('IdleTimeout', function () {
+            alert(0);
             sesion.exit();
         });
     }
