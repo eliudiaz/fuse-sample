@@ -6,19 +6,15 @@
             .factory('sesion', sesion);
 
     /** @ngInject */
-    function sesion(localStorageService, $filter) {
-        var cUser = null;
+    function sesion($filter) {
         function exit() {
-            var url = localStorageService.get("context") + "/logout.jsp";
-            localStorageService.clearAll();
+            var url = localStorage.getItem("context") + "/logout.jsp";
+            localStorage.clear()
             window.location = url;
         }
 
         function user() {
-            if (cUser == null) {
-                cUser = angular.fromJson(localStorageService.get("currentUser"));
-            }
-            return cUser;
+            return JSON.parse(localStorage.getItem("currentUser"));
         }
 
         function id() {
@@ -39,8 +35,11 @@
 
         function authorized(o) {
             var u = user();
-            var f = $filter("filter")(u.accesos, {valor: o.url})[0];
-            return f != null || o.url == "/home";
+            if (u.accesos) {
+                var f = $filter("filter")(u.accesos, {valor: o.url})[0];
+                return f != null || o.url == "/home";
+            }
+            return false;
         }
 
         function containsAction(action) {
@@ -48,7 +47,9 @@
         }
 
         return {
-            exit: exit, user: user, id: id,
+            exit: exit,
+            user: user,
+            id: id,
             pushPath: pushPath,
             pullPath: pullPath,
             lectorPath: lectorPath,

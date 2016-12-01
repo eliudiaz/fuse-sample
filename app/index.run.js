@@ -21,6 +21,9 @@
         {
             console.info("changing!!");
             console.info(sesion.authorized(next));
+            if (sesion.user() == null) {
+                sesion.exit();
+            }
             if (!sesion.authorized(next)) {
                 $state.go("app.home");
             }

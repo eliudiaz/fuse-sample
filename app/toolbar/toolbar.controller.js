@@ -68,7 +68,7 @@
 
 
         if (sesion.id() == null) {
-//            sesion.exit();
+            sesion.exit();
         }
 
         /**
