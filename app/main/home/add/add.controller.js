@@ -7,7 +7,7 @@
             .controller('addHomeRolController', addHomeRolController);
 
     /** @ngInject */
-    function addHomeRolController($scope, $timeout, $mdDialog, $state, workSpace,
+    function addHomeRolController($scope, $timeout, sesion, $mdDialog, $state, workSpace,
             localStorageService,
             f, ws, ioStuSalud, ioIdioma, $http, Notification) {
         var vm = this;
@@ -143,9 +143,9 @@
 
 
         $scope.lector = function () {
-            var sessionId = localStorage.getItem("sessionId");
-            var lectorPath = localStorage.getItem("lectorPath");
-            var pushPath = localStorage.getItem("pushPath");
+            var sessionId = sesion.id();
+            var lectorPath = sesion.lectorPath();
+            var pushPath = sesion.pushPath();
             $scope.checkID();
             document.getElementById('my_iframe').src
                     = lectorPath + "?x=" + sessionId + "&y=" + pushPath;
@@ -204,7 +204,7 @@
         }
 
         $scope.checkID = function () {
-            var pullPath = localStorage.getItem("pullPath") + "?sessionId=" + localStorage.getItem("sessionId");
+            var pullPath = sesion.pullPath() + "?sessionId=" + sesion.id();
             $http({
                 method: 'GET',
                 url: pullPath

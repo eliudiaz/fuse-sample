@@ -9,8 +9,6 @@
     /** @ngInject */
     function remoteServices($resource, $http)
     {
-
-
         var path = localStorage.getItem("servicesPath") == null ?
                 "http://localhost:41825/MS_RRHH_Servicios/" :
                 localStorage.getItem("servicesPath");

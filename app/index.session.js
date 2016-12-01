@@ -19,15 +19,19 @@
         }
 
         function id() {
-            return localStorageService.get('sessionId');
+            return localStorage.getItem('sessionId');
         }
 
         function pushPath() {
-
+            return localStorage.getItem("pushPath");
         }
 
         function pullPath() {
+            return localStorage.getItem("pullPath");
+        }
 
+        function lectorPath() {
+            return localStorage.getItem("lectorPath");
         }
 
         function containsMenu(menu) {
@@ -42,8 +46,12 @@
         }
 
         return {
-            exit: exit, user: user, id: id, pushPath: pushPath, pullPath: pullPath,
-            containsMenu: containsMenu, containsAction: containsAction
+            exit: exit, user: user, id: id,
+            pushPath: pushPath,
+            pullPath: pullPath,
+            lectorPath: lectorPath,
+            containsMenu: containsMenu,
+            containsAction: containsAction
         }
 
     }
