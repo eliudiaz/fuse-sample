@@ -10,7 +10,7 @@
     function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast, localStorageService, $state, sesion)
     {
         var vm = this;
-
+  
         // Data
         $rootScope.global = {
             search: ''

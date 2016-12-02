@@ -1099,12 +1099,12 @@
                         h2 = value.fkEstudioSalud;
                         j2 = value.nombre + '(' + value.anioEstudio + ')';
                         p3 = value.fkEstudioSalud;
-                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3}); 
+                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3, anioEstudio:value.anioEstudio}); 
                     }else{
                         h2 = value.fkEstudioSalud;
                         j2 = value.nombre;
                         p3 = value.fkEstudioSalud;
-                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3});
+                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3, anioEstudio:''});
                     }
                 }                
             });
@@ -1335,10 +1335,15 @@
                 ido.push({fkIdioma: vm.formWizard.bundleID[key].id});
             });
             var salu = [];
+            var contaSalud = 0;
             try {
                 vm.formWizard.bundle.forEach(function (value, key) {
                     salu.push({fkEstudioSalud: vm.formWizard.bundle[key].id, anioEstudio: vm.formWizard.bundle[key].anioEstudio});
+                    contaSalud++;
                 });
+                if(contaSalud==0){
+                    salu.push({fkEstudioSalud: '', anioEstudio: ''});
+                }
             } catch (e) {
                 salu.push({fkEstudioSalud: '', anioEstudio: ''});
             }
