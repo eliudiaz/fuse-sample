@@ -68,7 +68,7 @@
 
 
         if (sesion.id() == null) {
-//            sesion.exit();
+            sesion.exit();
         }
 
         /**
@@ -111,7 +111,7 @@
          */
         function logout()
         {
-           // sesion.exit();
+            sesion.exit();
         }
 
         /**
