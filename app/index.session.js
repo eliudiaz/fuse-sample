@@ -12,6 +12,7 @@
             var url = document.URL;
             url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
             localStorage.clear()
+            console.debug("logout complete!!");
             window.location = url;
         }
 
@@ -37,7 +38,7 @@
 
         function authorized(o) {
             var u = user();
-            if (u.accesos) {
+            if (u && u.accesos) {
                 var f = $filter("filter")(u.accesos, {valor: o.url})[0];
                 return f != null || o.url == "/home";
             }
