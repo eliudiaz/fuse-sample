@@ -1466,7 +1466,7 @@
                         "estudiaActualmente": studiaAc
                     },
                     "lugarResidencia": {
-                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : "",
+                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : vm.formWizard.paisResidencia.id,
                         "direccion": vm.formWizard.detalleResidencia
                     },
                     "idiomas": ido,
@@ -1524,7 +1524,7 @@
                         "estudiaActualmente": studiaAc
                     },
                     "lugarResidencia": {
-                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : "",
+                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : vm.formWizard.paisResidencia.id,
                         "direccion": vm.formWizard.detalleResidencia ? vm.formWizard.detalleResidencia : null
                     },
                     "idiomas": ido,
@@ -1581,7 +1581,7 @@
                         "estudiaActualmente": studiaAc
                     },
                     "lugarResidencia": {
-                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : "",
+                        "fkMunicipio": vm.formWizard.municipioResidencia.id ? vm.formWizard.municipioResidencia.id : vm.formWizard.paisResidencia.id,
                         "direccion": vm.formWizard.detalleResidencia
                     },
                     "idiomas": ido,
