@@ -174,7 +174,7 @@
                     "clave": vm.basicForm.password,
                     "confirmacionClave": vm.basicForm.password2,
                     "cui": vm.basicForm.cui,
-                    "root": true,
+                    "root": false,
                     "roles": ro,
                     "resetClave": vm.basicForm.cc
                 };
