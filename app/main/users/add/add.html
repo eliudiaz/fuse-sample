@@ -1,19 +1,19 @@
 <style type="text/css" media="screen">
-	.md-primary-bg{
-		    background-color: #075993 !important;
-	}
+    .md-primary-bg{
+        background-color: #075993 !important;
+    }
 </style>
 <header class="headerNew">
 </header>
 
 <div class="contentBase">
-	<article>
-		<h1 style=" padding: 0;    margin: 0;"> Nuevo Usuario: </h1> 
-	</article>
-	
-	<div style=" width: 100%; margin: 0 auto; border: 1px solid; padding: 15px; margin-bottom: 25px;">
-		<form name="basicForm" class="md-inline-form" novalidate>
-	        <div class="form-title"></div>
+    <article>
+        <h1 style=" padding: 0;    margin: 0;"> Nuevo Usuario: </h1>
+    </article>
+
+    <div style=" width: 100%; margin: 0 auto; border: 1px solid; padding: 15px; margin-bottom: 25px;">
+        <form name="basicForm" class="md-inline-form" novalidate>
+            <div class="form-title"></div>
             <div layout="column" layout-gt-sm="row">
                 <md-input-container flex="50">
                     <input ng-disabled="bloqueo" type="text" name="cui" ng-model="vm.basicForm.cui"
@@ -24,18 +24,18 @@
                             <span>CUI es requerido</span>
                         </div>
                         <div ng-message="pattern">
-                                                <span>CUI NO VALIDO.</span>
-                                            </div>
+                            <span>CUI NO VALIDO.</span>
+                        </div>
                     </div>
                 </md-input-container>
                 <md-input-container flex ="30">
                     <button ng-click="schNormalCui()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Buscar</span><div class="md-ripple-container"></div></button>
                 </md-input-container>
-                <md-input-container flex="30" flex-gt-xs="50" style="text-align: right;">
-                    <md-checkbox ng-disabled="manualEnable" ng-change="check()" ng-model="vm.basicForm.super" aria-label="Checkbox 1">
-                        Super Usuario
-                    </md-checkbox>
-                </md-input-container>
+                <!--                <md-input-container flex="30" flex-gt-xs="50" style="text-align: right;">
+                                    <md-checkbox ng-disabled="manualEnable" ng-change="check()" ng-model="vm.basicForm.super" aria-label="Checkbox 1">
+                                        Super Usuario
+                                    </md-checkbox>
+                                </md-input-container>-->
                 <md-input-container ng-show="ccY" flex="30" flex-gt-xs="50" style="text-align: right;">
                     <md-checkbox ng-disabled="manualEnable" ng-model="vm.basicForm.cc" aria-label="Checkbox 1">
                         Cambiar Contraseña
@@ -65,7 +65,7 @@
                 </md-input-container>
             </div>
             <div layout="column" layout-gt-sm="row">
-                
+
                 <md-input-container flex>
                     <input ng-disabled="pasa" type="text" name="usuario" ng-model="vm.basicForm.usuario"
                            placeholder="Usuario" required>
@@ -76,8 +76,8 @@
                         </div>
                     </div>
                 </md-input-container>
-                
-            
+
+
             </div>
 
             <div layout="column" layout-gt-sm="row">
@@ -112,27 +112,27 @@
                             <span>Correo es requerido</span>
                         </div>
                         <div ng-message="pattern">
-                                                <span>Correo NO VALIDO.</span>
-                                            </div>
+                            <span>Correo NO VALIDO.</span>
+                        </div>
                     </div>
                 </md-input-container>
-                
+
             </div>
             <div layout="column" layout-gt-sm="row">
                 <md-input-container ng-if="!vm.basicForm.super" flex>
-                  <label>Roles</label>
+                    <label>Roles</label>
                     <oi-select ng-disabled="pasa" oi-options="item.nombre for item in shopArr track by item.id"
-                    ng-model="vm.basicForm.bundle"
-                    multiple
-                    placeholder="Select" required></oi-select>
+                               ng-model="vm.basicForm.bundle"
+                               multiple
+                               placeholder="Select" required></oi-select>
                 </md-input-container>
             </div>
 
-                    <md-button ng-click="save()" type="button" class="md-raised md-accent" aria-label="Submit"
-                               ng-disabled="basicForm.$invalid || basicForm.$pristine">
-                        Guardar
-                    </md-button>
-                </form>
-	</div>
+            <md-button ng-click="save()" type="button" class="md-raised md-accent" aria-label="Submit"
+                       ng-disabled="basicForm.$invalid || basicForm.$pristine">
+                Guardar
+            </md-button>
+        </form>
+    </div>
 
 </div>
