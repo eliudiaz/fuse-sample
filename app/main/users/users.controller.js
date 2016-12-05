@@ -41,7 +41,7 @@
             if (ob.length > 0) {
                 // Appending dialog to document.body to cover sidenav in docs app
                 var confirm = $mdDialog.confirm()
-                        .title('Seguro que desea Eliminar el Registro?')
+                        .title('Seguro que desea eliminar el registro?')
                         .textContent('Se eliminara el registro selecto a continuacion')
                         .ariaLabel('Lucky day')
                         .targetEvent(ev)

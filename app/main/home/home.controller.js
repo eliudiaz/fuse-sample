@@ -17,7 +17,7 @@
 
         $scope.showReglon2 = false;
         $scope.showanioIngreso2 = false;
-        
+
 
 
         $scope.sg = sg.callSg();
@@ -61,7 +61,7 @@
             if (ob.length > 0) {
                 // Appending dialog to document.body to cover sidenav in docs app
                 var confirm = $mdDialog.confirm()
-                        .title('Seguro que desea Eliminar el Registro?')
+                        .title('Seguro que desea eliminar el registro?')
                         .textContent('Se eliminara el registro selecto a continuacion')
                         .ariaLabel('Lucky day')
                         .targetEvent(ev)
@@ -197,28 +197,28 @@
         $scope.filtroDData = [];
 
         var entryViewsAll = ws.reglon().query({}, function () {
-            $scope.reglonAry =  entryViewsAll;
+            $scope.reglonAry = entryViewsAll;
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
             $scope.Error();
         });
 
         var unidadEjecutora = ws.unidadEjecutora().query({}, function () {
-            $scope.unidadAry =  unidadEjecutora;
+            $scope.unidadAry = unidadEjecutora;
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
             $scope.Error();
         });
 
         var clasificacionSer = ws.clasificacionSer().query({}, function () {
-            $scope.clasificaAry =  clasificacionSer;
+            $scope.clasificaAry = clasificacionSer;
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
             $scope.Error();
         });
 
         var puestoFuncional = ws.puestoFuncional().query({}, function () {
-            $scope.puestoAry =  puestoFuncional;
+            $scope.puestoAry = puestoFuncional;
         }, function (error) {
             workSpace.error = JSON.stringify(error.data);
             $scope.Error();
@@ -234,7 +234,7 @@
                 case "REGLON":
                     $scope.reglon1 = true;
                     $scope.filtroDData = [{id: "MAYOR", name: "MAYOR"}, {id: "MENOR", name: "MENOR"}, {id: "IGUAL", name: "IGUAL"}, {id: "ENTRE", name: "ENTRE"}];
-                     break;
+                    break;
                 case "ANIO_INGRESO":
                     $scope.date1 = true;
                     $scope.filtroDData = [{id: "MAYOR", name: "MAYOR"}, {id: "MENOR", name: "MENOR"}, {id: "IGUAL", name: "IGUAL"}, {id: "ENTRE", name: "ENTRE"}];
@@ -268,10 +268,10 @@
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
                         if (vm.basicForm2.filtroReglon == 'ENTRE') {
                             if (vm.basicForm2.input2FiltroReglon) {
-                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto:vm.basicForm2.inputFiltroReglon.valor, valor2: vm.basicForm2.input2FiltroReglon.id, valor2Texto:vm.basicForm2.input2FiltroReglon.valor});
+                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: vm.basicForm2.input2FiltroReglon.id, valor2Texto: vm.basicForm2.input2FiltroReglon.valor});
                             }
                         } else {
-                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: '', valor2Texto:''});
+                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: '', valor2Texto: ''});
                         }
                     }
                     break;
@@ -279,22 +279,22 @@
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
                         if (vm.basicForm2.filtroReglon == 'ENTRE') {
                             if (vm.basicForm2.input2FiltroReglon) {
-                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon , valor2: vm.basicForm2.input2FiltroReglon , valor2Texto: vm.basicForm2.input2FiltroReglon});
+                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon, valor2Texto: vm.basicForm2.input2FiltroReglon});
                             }
                         } else {
-                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: '', valor2Texto:''});
+                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: '', valor2Texto: ''});
                         }
                     }
                     break;
                 case "PUESTO_NOMINAL":
                 case "CLASIFICACION_SERVICIO":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
-                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id,valor1Texto: vm.basicForm2.inputFiltroReglon.valor });
+                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor});
                     }
                     break;
                 case "UNIDAD_EJECUTORA":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
-                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id,valor1Texto: vm.basicForm2.inputFiltroReglon.nombre });
+                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.nombre});
                     }
                     break;
             }
