@@ -124,7 +124,7 @@
                     .clickOutsideToClose(true)
                     .parent(angular.element(document.body))
                     .title('Guardado')
-                    .textContent('Usuario Guardado Con Exito')
+                    .textContent('Transaccion finalizada')
                     .ariaLabel('Alert Dialog Demo')
                     .ok('Aceptar')
                     .targetEvent(ev)
@@ -148,7 +148,7 @@
             var sessionId = sesion.id();
             var lectorPath = sesion.lectorPath();
             var pushPath = sesion.pushPath();
-            $rootScope.loadingProgress = true;
+            sesion.starT();
             $scope.checkID();
             document.getElementById('my_iframe').src
                     = lectorPath + "?x=" + sessionId + "&y=" + pushPath;
@@ -214,7 +214,7 @@
             }).then(function successCallback(response) {
                 $scope.lecturaJson = response.data;
                 $scope.cargarDatosLector();
-                $rootScope.loadingProgress = false;
+                sesion.endT();
                 $timeout($scope.checkID, 2000);
             }, function errorCallback(response) {
                 console.error(response);
@@ -1597,7 +1597,7 @@
             }
 
 
-
+            startT();
             if (update) {
                 $scope.entryUp = ws.UpdatePersonas(vm.formWizard.cui);
                 var EntryUp = $scope.entryUp.update(sendJSON, function () {
@@ -1618,9 +1618,10 @@
                 });
             }
             console.info('SEND', JSON.stringify(sendJSON));
-        }
+        };
 
         $scope.Error = function (id) {
+            endT();
             $mdDialog.show({
                 controller: function ($scope, $mdDialog, workSpace) {
                     $scope.closeDialog = function () {
@@ -1640,7 +1641,7 @@
                 parent: angular.element('body'),
                 clickOutsideToClose: true
             });
-        }
+        };
 
 
     }

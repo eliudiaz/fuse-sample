@@ -6,7 +6,7 @@
             .factory('sesion', sesion);
 
     /** @ngInject */
-    function sesion($filter, Notification) {
+    function sesion($rootScope, $filter, Notification) {
         function exit() {
             Notification.error("No hay sesion activa!");
             Notification.error("Cerrando sesion...");
@@ -17,9 +17,17 @@
 //            window.location = url;
         }
 
+        function startT() {
+            $rootScope.loadingProgress = true;
+        }
+
+        function endT() {
+            $rootScope.loadingProgress = false;
+        }
+
         function reject($state) {
             Notification.error("Acceso denegado!");
-            $state.go("app.home");
+//            $state.go("app.home");
         }
 
         function user() {
@@ -64,7 +72,9 @@
             lectorPath: lectorPath,
             authorized: authorized,
             containsAction: containsAction,
-            reject: reject
+            reject: reject,
+            startT: startT,
+            endT: endT
         }
 
     }
