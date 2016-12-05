@@ -6,14 +6,28 @@
             .factory('sesion', sesion);
 
     /** @ngInject */
-    function sesion($filter, Notification) {
+    function sesion($rootScope, $filter, Notification) {
         function exit() {
+            Notification.error("No hay sesion activa!");
             Notification.error("Cerrando sesion...");
             var url = document.URL;
             url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
-            localStorage.clear()
             console.debug("logout complete!!");
+            localStorage.clear();
             window.location = url;
+        }
+
+        function startT() {
+            $rootScope.loadingProgress = true;
+        }
+
+        function endT() {
+            $rootScope.loadingProgress = false;
+        }
+
+        function reject($state) {
+            Notification.error("Acceso denegado!");
+            $state.go("app.home");
         }
 
         function user() {
@@ -57,7 +71,10 @@
             pullPath: pullPath,
             lectorPath: lectorPath,
             authorized: authorized,
-            containsAction: containsAction
+            containsAction: containsAction,
+            reject: reject,
+            startT: startT,
+            endT: endT
         }
 
     }

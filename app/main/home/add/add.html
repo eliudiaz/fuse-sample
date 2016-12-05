@@ -29,9 +29,9 @@
                     <md-tab-body>
                         <form name="wizardStep1" class="md-inline-form" ms-form-wizard-form novalidate>
                             <article>
-                                <button ng-click="manual()" class="
-                                        md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
-                                        type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>
+                                <!--                                <button ng-click="manual()" class="
+                                                                        md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
+                                                                        type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>-->
                                 <button ng-click="lector()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
@@ -388,7 +388,7 @@
                                         ng-change="takeDepto2()"
                                         >
                                     </oi-select>
-                                
+
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>Municipio</label>
@@ -398,10 +398,10 @@
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         placeholder="Selecciona"
                                         ng-disabled="paisCheckV2"
-                                        
+
                                         >
                                     </oi-select>
-                                   
+
                                 </md-input-container>
 
                             </div>
@@ -1122,11 +1122,11 @@
                 </md-button>
                 <md-button class="md-raised md-warn" ng-click="sendForm(); msWizard.resetForm();" ng-show="msWizard.isLastStep()"
                            ng-disabled="msWizard.formsIncomplete()">
-                    Enviar
+                    Guardar
                 </md-button>
-                <md-button class="md-raised md-warn" ng-click="sendForm(); msWizard.resetForm();" ng-show="actualizaa"
+                <md-button class="md-raised md-warn" ng-click="sendForm(); msWizard.resetForm();" ng-show="showActualizaBtn && !msWizard.isLastStep()"
                            ng-disabled="msWizard.formsIncomplete()">
-                    Actualizar
+                    Guardar
                 </md-button>
             </div>
 

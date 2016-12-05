@@ -7,7 +7,7 @@
             .factory('ws', remoteServices);
 
     /** @ngInject */
-    function remoteServices($resource, $http)
+    function remoteServices($resource, $http, sesion)
     {
         var path = localStorage.getItem("servicesPath") == null ?
                 "http://localhost:41825/MS_RRHH_Servicios/" :
@@ -86,9 +86,9 @@
             fileDownload: function ($headers) {
                 $headers.responseType = "arraybuffer";
                 $http($headers).success(function (data, status, headers, config) {
+                    sesion.endT();
                     var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                     var objectUrl = URL.createObjectURL(blob);
-//                    window.open(objectUrl);
                     document.getElementById('my_iframe').src = objectUrl;
                 }).error(function (data, status, headers, config) {
                     console.error(data);
