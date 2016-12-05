@@ -330,7 +330,22 @@
 
         }
 
-
+        $scope.getHuellasIzq = function () {
+            var huellas = $scope.chkLeftThumb ? "pulgar," : "";
+            huellas = $scope.chkLeftIndex ? "indice," : huellas;
+            huellas = $scope.chkLeftMiddle ? "medio," : huellas;
+            huellas = $scope.chkLeftRing ? "anular," : huellas;
+            huellas = $scope.chkLeftLittle ? "meñique," : huellas;
+            return huellas;
+        };
+        $scope.getHuellasDer = function () {
+            var huellas = $scope.chkRightThumb ? "pulgar," : "";
+            huellas = $scope.chkRightIndex ? "indice," : huellas;
+            huellas = $scope.chkRightMiddle ? "medio," : huellas;
+            huellas = $scope.chkRightRing ? "anular," : huellas;
+            huellas = $scope.chkRightLittle ? "meñique," : huellas;
+            return huellas;
+        };
         $scope.getSexo = function (sexo) {
             switch (sexo) {
                 case "MASCULINO":
@@ -1414,14 +1429,14 @@
                     "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
                     "fkPueblo": vm.formWizard.pueblo.id ? vm.formWizard.pueblo.id : null,
                     "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica ? vm.formWizard.comunidadLinguistica.id : null,
-                    "mrz": "<<<sdfsdf<<<sdfsdfd<<<",
+                    "mrz": $scope.txtMRZ2_1,
                     "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
                     "fkMunicipioCedula": null,
                     "fkMunicipioCedulaNombre": vm.formWizard.municipioCedula,
                     "fkMunicipioVecindadNombre": vm.formWizard.municipioVecindad,
                     "fkMunicipioVecindad": null,
-                    "huellaManoDer": $scope.chkRightThumb,
-                    "huellaManoIzq": $scope.chkLeftThumb,
+                    "huellaManoDer": $scope.getHuellasDer(),
+                    "huellaManoIzq": $scope.getHuellasIzq(),
                     "estadoCivil": vm.formWizard.estadoCivil,
                     "sexo": vm.formWizard.sexo,
                     "registroLaboral": {
@@ -1475,12 +1490,12 @@
                     "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
                     "fkPueblo": vm.formWizard.pueblo.id ? vm.formWizard.pueblo.id : null,
                     "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica.id ? vm.formWizard.comunidadLinguistica.id : null,
-                    "mrz": "<<<sdfsdf<<<sdfsdfd<<<",
+                    "mrz": $scope.txtMRZ2_1,
                     "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
                     "fkMunicipioCedula": vm.formWizard.municipioCedula.id ? vm.formWizard.municipioCedula.id : null,
                     "fkMunicipioVecindad": vm.formWizard.municipioVecindad.id ? vm.formWizard.municipioVecindad.id : null,
-                    "huellaManoDer": "indice,medio",
-                    "huellaManoIzq": "indice,anular",
+                    "huellaManoDer": $scope.getHuellasDer(),
+                    "huellaManoIzq": $scope.getHuellasIzq(),
                     "estadoCivil": vm.formWizard.estadoCivil ? vm.formWizard.estadoCivil : null,
                     "sexo": vm.formWizard.sexo ? vm.formWizard.sexo : null,
                     "registroLaboral": {
@@ -1536,8 +1551,8 @@
                     "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
                     "fkMunicipioCedula": vm.formWizard.municipioCedula.id ? vm.formWizard.municipioCedula.id : null,
                     "fkMunicipioVecindad": vm.formWizard.municipioVecindad.id ? vm.formWizard.municipioVecindad.id : null,
-                    "huellaManoDer": $scope.huellaManoDer,
-                    "huellaManoIzq": $scope.huellaManoIzq,
+                    "huellaManoDer": $scope.getHuellasDer(),
+                    "huellaManoIzq": $scope.getHuellasIzq(),
                     "estadoCivil": vm.formWizard.estadoCivil ? vm.formWizard.estadoCivil : null,
                     "sexo": vm.formWizard.sexo,
                     "registroLaboral": {
@@ -1591,7 +1606,7 @@
         };
 
         $scope.Error = function (id) {
-            endT();
+            sesion.endT();
             $mdDialog.show({
                 controller: function ($scope, $mdDialog, workSpace) {
                     $scope.closeDialog = function () {
