@@ -22,12 +22,10 @@
             console.info("changing!!");
             console.info(sesion.authorized(next));
             if (sesion.user() == null) {
-                Notification.error("No hay sesion activa!");
                 sesion.exit();
             }
             if (!sesion.authorized(next)) {
-                Notification.error("Acceso denegado!");
-                $state.go("app.home");
+                sesion.reject($state);
             }
             $timeout(function ()
             {
