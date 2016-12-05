@@ -11,8 +11,8 @@
             Notification.error("Cerrando sesion...");
             var url = document.URL;
             url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
-            localStorage.clear()
             console.debug("logout complete!!");
+            localStorage.clear();
             window.location = url;
         }
 

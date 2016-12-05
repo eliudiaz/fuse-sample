@@ -26,6 +26,7 @@
                 sesion.exit();
             }
             if (!sesion.authorized(next)) {
+                Notification.error("Acceso denegado!");
                 $state.go("app.home");
             }
             $timeout(function ()
