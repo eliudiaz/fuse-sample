@@ -388,7 +388,7 @@
                                         ng-change="takeDepto2()"
                                         >
                                     </oi-select>
-                                
+
                                 </md-input-container>
                                 <md-input-container flex="50">
                                     <label>Municipio</label>
@@ -398,10 +398,10 @@
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         placeholder="Selecciona"
                                         ng-disabled="paisCheckV2"
-                                        
+
                                         >
                                     </oi-select>
-                                   
+
                                 </md-input-container>
 
                             </div>
@@ -1122,11 +1122,11 @@
                 </md-button>
                 <md-button class="md-raised md-warn" ng-click="sendForm(); msWizard.resetForm();" ng-show="msWizard.isLastStep()"
                            ng-disabled="msWizard.formsIncomplete()">
-                    Enviar
+                    Guardar
                 </md-button>
-                <md-button class="md-raised md-warn" ng-click="sendForm(); msWizard.resetForm();" ng-show="actualizaa"
+                <md-button class="md-raised md-warn" ng-click="sendForm(); msWizard.resetForm();" ng-show="showActualizaBtn && !msWizard.isLastStep()"
                            ng-disabled="msWizard.formsIncomplete()">
-                    Actualizar
+                    Guardar
                 </md-button>
             </div>
 

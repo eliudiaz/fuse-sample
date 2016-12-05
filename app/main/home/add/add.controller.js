@@ -7,7 +7,7 @@
             .controller('addHomeRolController', addHomeRolController);
 
     /** @ngInject */
-    function addHomeRolController($rootScope, $scope, $timeout, sesion, $mdDialog, $state, workSpace,
+    function addHomeRolController($scope, $timeout, sesion, $mdDialog, $state, workSpace,
             localStorageService,
             f, ws, ioStuSalud, ioIdioma, $http, Notification) {
         var vm = this;
@@ -124,7 +124,7 @@
                     .clickOutsideToClose(true)
                     .parent(angular.element(document.body))
                     .title('Guardado')
-                    .textContent('Transaccion finalizada')
+                    .textContent('Transaccion finalizada!')
                     .ariaLabel('Alert Dialog Demo')
                     .ok('Aceptar')
                     .targetEvent(ev)
@@ -897,9 +897,10 @@
 
         try {
             valor = localStorageService.get('workSpace').person;
+            $scope.showActualizaBtn = false;
             if (valor) {
                 $scope.manualEnable = true;
-                $scope.actualizaa = true;
+                $scope.showActualizaBtn = true;
             }
             valor.cui ? update = true : update = false;
             vm.formWizard.cui = valor.cui;
@@ -1189,23 +1190,6 @@
                     };
 
 
-                    /*
-                     $scope.takePuestoFunciona1 = valor.registroLaboral.puestos[key].fkPuestoFuncional;
-                     $scope.takeRelon1 = valor.registroLaboral.puestos[key].fkPuestoNominalRenglon;
-                     $scope.takeRelon1 ? $scope.takeReglon($scope.takeRelon1) : '';
-                     $scope.takePuestoNominal1 = valor.registroLaboral.puestos[key].fkPuestoNominal;
-                     $scope.takeClsServe1 = valor.registroLaboral.puestos[key].fkClasificacionServicio;
-                     $scope.takeunidadEjecutora1 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutora;
-                     $scope.takeunidadEjecutora1 ? $scope.takeUnidadEje($scope.takeunidadEjecutora1) : '';
-                     $scope.takeDistrito1 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkDistrito;
-                     $scope.takeDistrito1 ? $scope.takeDistrito($scope.takeDistrito1) : '';
-                     $scope.takeLugarEspesific1 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkLugarEspecifico;
-                     $scope.takeLugarEspesific1 ? $scope.takeLugarE($scope.takeLugarEspesific1) : '';
-                     $scope.takeComunidad1 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad;
-                     $scope.takeClasServ1 = valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicio;
-                     $scope.takeClasServ1 ? $scope.takeClasificaSer($scope.takeClasServ1) : '';
-                     $scope.takeAreaServ1 = valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicio;
-                     */
 
                 } else {
                     vm.formWizard.puestoFuncionalotroPuesto = {
@@ -1241,20 +1225,6 @@
                         valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreComunidad
                     };
                     vm.formWizard.comunidadDistritootroPuesto.id ? $scope.takeCumnidadaDis2() : '';
-                    /*
-                     $scope.takeOtrop = "SI";
-                     $scope.takePuestoFunciona2 = valor.registroLaboral.puestos[key].fkPuestoFuncional;
-                     $scope.takeRelon22 = valor.registroLaboral.puestos[key].fkPuestoNominalRenglon;
-                     $scope.takeRelon22 ? $scope.takeReglon2($scope.takeRelon22) : '';
-                     $scope.takePuestoNominal2 = valor.registroLaboral.puestos[key].fkPuestoNominal;
-                     $scope.takeunidadEjecutora2 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutora;
-                     $scope.takeunidadEjecutora2 ? $scope.takeUnidadEje3($scope.takeunidadEjecutora2) : '';
-                     $scope.takeDistrito22 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkDistrito;
-                     $scope.takeDistrito22 ? $scope.takeDistrito3($scope.takeDistrito22) : '';
-                     $scope.takeLugarEspesific22 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkLugarEspecifico;
-                     $scope.takeLugarEspesific22 ? $scope.takeLugarE2($scope.takeLugarEspesific22) : '';
-                     $scope.takeComunida22 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad;
-                     */
                 }
                 contaP++;
             });
@@ -1312,7 +1282,7 @@
                     .clickOutsideToClose(true)
                     .parent(angular.element(document.body))
                     .title('Guardado')
-                    .textContent('Usuario Guardado Con Exito')
+                    .textContent('Transaccion finalizada!')
                     .ariaLabel('Alert Dialog Demo')
                     .ok('Aceptar')
                     .targetEvent(ev)
@@ -1588,7 +1558,7 @@
                     },
                     "idiomas": ido,
                     "dpi": {
-                        "noSerie": 112323123,
+                        "noSerie": vm.formWizard.nserie ? vm.formWizard.nserie : null,
                         "fechaEmision": vm.formWizard.fchCreacionDpi ? vm.formWizard.fchCreacionDpi : null,
                         "fechaVencimiento": vm.formWizard.fchVenceDpi ? vm.formWizard.fchVenceDpi : null
                     },
@@ -1597,7 +1567,7 @@
             }
 
 
-            startT();
+            sesion.startT();
             if (update) {
                 $scope.entryUp = ws.UpdatePersonas(vm.formWizard.cui);
                 var EntryUp = $scope.entryUp.update(sendJSON, function () {

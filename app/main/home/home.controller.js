@@ -7,7 +7,7 @@
             .controller('homeController', homeController);
 
     /** @ngInject */
-    function homeController($rootScope, $scope, $state, $timeout, $mdDialog, workSpace, localStorageService, ws,
+    function homeController(sesion, $scope, $state, $timeout, $mdDialog, workSpace, localStorageService, ws,
             sg, Notification) {
         var vm = this;
 
@@ -50,9 +50,7 @@
 
 
         $scope.excel = function () {
-            //ESTA VARIABLE CONTIENE EL API Y LAS VARIABLES QE NECESITA PARA EJECUTARSE
-            // SEGUN LA ULTIMA ACTIVIDADA BUSQUEDA NORMAL,AVANZADA O CUI TODO QUEDA REGUISTRADO
-
+            sesion.startT();
             console.info('Ultima Busqueda Generada', $scope.lastSearchRef);
             $scope.lastSearchRef.api($scope.lastSearchRef.obj);
         };
@@ -457,7 +455,7 @@
 
 
         $scope.edit = function () {
-            $rootScope.loadingProgress = true;
+            sesion.startT();
             var ob = $scope.gridOptions.api.getSelectedRows();
             var per;
             if (ob.length > 0) {
@@ -465,7 +463,7 @@
                     per = entryViewsAll;
                     workSpace.person = per;
                     localStorageService.set('workSpace', workSpace);
-                    $rootScope.loadingProgress = false;
+                    sesion.endT();
                     $state.go("app.home_add");
 
                     console.info(JSON.stringify(ob));
