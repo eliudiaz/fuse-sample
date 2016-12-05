@@ -81,6 +81,11 @@
         $scope.columnDefs.push({headerName: "Estado", field: "estado", filter: 'text', filterParams: {apply: true}});
         $scope.columnDefs.push({headerName: "Fecha Creacion", field: "fechaCreacion", filter: 'text', filterParams: {apply: true}});
         $scope.columnDefs.push({headerName: "Creado Por", field: "creadoPor", filter: 'text', filterParams: {apply: true}});
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> feature/fingerprint-detection
 
 
         $scope.nuevo = function () {
@@ -100,6 +105,7 @@
             workSpace.user.correo = ob[0].correo;
             workSpace.user.usuario = ob[0].usuario;
             workSpace.user.estado = ob[0].estado;
+            workSpace.user.cui = ob[0].cui;
             workSpace.user.nombres = ob[0].nombres;
             workSpace.user.apellidos = ob[0].apellidos;
             workSpace.user.fechaCreacion = ob[0].fechaCreacion;

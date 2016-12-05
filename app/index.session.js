@@ -13,7 +13,7 @@
             url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
             localStorage.clear()
             console.debug("logout complete!!");
-            window.location = url;
+//            window.location = url;
         }
 
         function user() {
