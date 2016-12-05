@@ -7,7 +7,8 @@
             .controller('homeController', homeController);
 
     /** @ngInject */
-    function homeController($scope, $state, $timeout, $mdDialog, workSpace, localStorageService, ws, sg, Notification) {
+    function homeController($rootScope, $scope, $state, $timeout, $mdDialog, workSpace, localStorageService, ws,
+            sg, Notification) {
         var vm = this;
 
         vm.basicForm = {};
@@ -456,6 +457,7 @@
 
 
         $scope.edit = function () {
+            $rootScope.loadingProgress = true;
             var ob = $scope.gridOptions.api.getSelectedRows();
             var per;
             if (ob.length > 0) {
@@ -463,6 +465,7 @@
                     per = entryViewsAll;
                     workSpace.person = per;
                     localStorageService.set('workSpace', workSpace);
+                    $rootScope.loadingProgress = false;
                     $state.go("app.home_add");
 
                     console.info(JSON.stringify(ob));
