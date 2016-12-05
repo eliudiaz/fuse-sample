@@ -256,9 +256,13 @@
         $scope.searchObjDinamico = {
             filtros: []
         };
+        $scope.searchObjDinamico2 = {
+            filtros: []
+        };
 
         $scope.out = function (id) {
             $scope.searchObjDinamico.filtros.splice(id, 1);
+            $scope.searchObjDinamico2.filtros.splice(id, 1);
         }
 
         $scope.addDinamico = function () {
@@ -267,10 +271,12 @@
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
                         if (vm.basicForm2.filtroReglon == 'ENTRE') {
                             if (vm.basicForm2.input2FiltroReglon) {
-                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: vm.basicForm2.input2FiltroReglon.id, valor2Texto: vm.basicForm2.input2FiltroReglon.valor});
+                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor2: vm.basicForm2.input2FiltroReglon.id});
+                                $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: vm.basicForm2.input2FiltroReglon.id, valor2Texto: vm.basicForm2.input2FiltroReglon.valor});
                             }
                         } else {
-                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: '', valor2Texto: ''});
+                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor2: null});
+                            $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: null, valor2Texto: ''});
                         }
                     }
                     break;
@@ -278,22 +284,26 @@
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
                         if (vm.basicForm2.filtroReglon == 'ENTRE') {
                             if (vm.basicForm2.input2FiltroReglon) {
-                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon, valor2Texto: vm.basicForm2.input2FiltroReglon});
+                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon});
+                                $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon, valor2Texto: vm.basicForm2.input2FiltroReglon});
                             }
                         } else {
-                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: '', valor2Texto: ''});
+                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor2: null});
+                            $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: null, valor2Texto: ''});
                         }
                     }
                     break;
                 case "PUESTO_NOMINAL":
                 case "CLASIFICACION_SERVICIO":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
-                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor});
+                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id});
+                        $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor});
                     }
                     break;
                 case "UNIDAD_EJECUTORA":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
-                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.nombre});
+                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id});
+                        $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.nombre});
                     }
                     break;
             }
@@ -430,6 +440,7 @@
                 $scope.Error();
             });
 
+            console.info('SEND_',JSON.stringify($scope.searchObjDinamico));
 
         }
 
