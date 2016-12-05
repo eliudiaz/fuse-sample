@@ -148,7 +148,7 @@
             var sessionId = sesion.id();
             var lectorPath = sesion.lectorPath();
             var pushPath = sesion.pushPath();
-            sesion.starT();
+            sesion.startT();
             $scope.checkID();
             document.getElementById('my_iframe').src
                     = lectorPath + "?x=" + sessionId + "&y=" + pushPath;
