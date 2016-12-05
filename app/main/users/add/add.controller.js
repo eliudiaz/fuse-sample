@@ -1,12 +1,12 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.users.add')
-        .controller('addUserController', addUserController);
+            .module('app.users.add')
+            .controller('addUserController', addUserController);
 
     /** @ngInject */
-    function addUserController($scope, $timeout, $mdDialog, $state, workSpace, localStorageService, ws, ioRoles,f) {
+    function addUserController($scope, $timeout, $mdDialog, $state, workSpace, localStorageService, ws, ioRoles, f) {
         var vm = this;
         // Data
         vm.basicForm = {};
@@ -31,7 +31,8 @@
             vm.basicForm.usuario = localStorageService.get('workSpace').user.usuario;
             vm.basicForm.correo = localStorageService.get('workSpace').user.correo;
             vm.basicForm.bundle = localStorageService.get('workSpace').user.roles;
-            if(vm.basicForm.bundle.length<=0){
+            vm.basicForm.super = false;
+            if (vm.basicForm.bundle.length <= 0) {
                 vm.basicForm.super = true;
                 $scope.bloqueo = true;
             }
@@ -42,27 +43,27 @@
 
 
 
-        $scope.showAlert = function(ev) {
+        $scope.showAlert = function (ev) {
             $mdDialog.show(
-                $mdDialog.alert()
-                .parent(angular.element(document.querySelector('#popupContainer')))
-                .clickOutsideToClose(true)
-                .parent(angular.element(document.body))
-                .title('Guardado')
-                .textContent('Usuario Guardado Con Exito')
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Aceptar')
-                .targetEvent(ev)
-            );
+                    $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#popupContainer')))
+                    .clickOutsideToClose(true)
+                    .parent(angular.element(document.body))
+                    .title('Guardado')
+                    .textContent('Usuario Guardado Con Exito')
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Aceptar')
+                    .targetEvent(ev)
+                    );
         };
 
         if (workSpace.user.id) {
             vm.basicForm.cui = workSpace.user.user;
         }
 
-        var entryViews = ws.allRol().query({}, function() {
+        var entryViews = ws.allRol().query({}, function () {
             $scope.departamento = entryViews;
-        }, function(error) {
+        }, function (error) {
             workSpace.error = JSON.stringify(error.data);
             $scope.Error();
         });
@@ -74,79 +75,79 @@
         $scope.bundle = [];
         //MULTI
 
-        if(update){
+        if (update) {
             //$scope.bundle.;
         }
 
-        $scope.schNormalCui = function() {
+        $scope.schNormalCui = function () {
             var obj = {
                 cui: vm.basicForm.cui
             };
 
-            if(!vm.basicForm.super){
-                 $scope.entryUp = ws.searchPersona();
-            var EntryUp = $scope.entryUp.post(obj, function() {
-               if(EntryUp.length>0){
-                  $scope.pasa = false;
-                  vm.basicForm.nombre = EntryUp[0].primerNombre;
-                  vm.basicForm.apellido = EntryUp[0].primerApellido;
-                  f('nombre');
+            if (!vm.basicForm.super) {
+                $scope.entryUp = ws.searchPersona();
+                var EntryUp = $scope.entryUp.post(obj, function () {
+                    if (EntryUp.length > 0) {
+                        $scope.pasa = false;
+                        vm.basicForm.nombre = EntryUp[0].primerNombre;
+                        vm.basicForm.apellido = EntryUp[0].primerApellido;
+                        f('nombre');
 
-               }else{
-                 workSpace.error = 'CUI NO ENCONTRADO';
-                 $scope.Error();
-                 $scope.pasa = true;
-               }
+                    } else {
+                        workSpace.error = 'CUI NO ENCONTRADO';
+                        $scope.Error();
+                        $scope.pasa = true;
+                    }
 
-                console.info(JSON.stringify(EntryUp));
-            }, function(error) {
-                workSpace.error = error.data.message;
-                $scope.Error();
-            });
+                    console.info(JSON.stringify(EntryUp));
+                }, function (error) {
+                    workSpace.error = error.data.message;
+                    $scope.Error();
+                });
 
-            }else{
+            } else {
                 $scope.bloqueo = true;
                 $scope.pasa = false;
-                 f('nombre');
+                f('nombre');
             }
-           
+
 
         }
 
-        $scope.check = function(){
-            if(vm.basicForm.super){
+        $scope.check = function () {
+            if (vm.basicForm.super) {
                 $scope.pasa = false;
                 $scope.bloqueo = true;
                 f('nombre');
-            }else{
+            } else {
                 $scope.pasa = true;
                 $scope.bloqueo = false;
             }
         }
 
-        $scope.save = function() {
+        $scope.save = function () {
             var ro = [];
 
             if (vm.basicForm.bundle) {
-                vm.basicForm.bundle.forEach(function(value, key) {
-                    ro.push({ id: vm.basicForm.bundle[key].id });
+                vm.basicForm.bundle.forEach(function (value, key) {
+                    ro.push({id: vm.basicForm.bundle[key].id});
                 });
             }
 
-            if(vm.basicForm.super){
-                 var obj = {
-                        "cui": 1111111111111,
-                        "usuario": vm.basicForm.usuario,
-                        "correo": vm.basicForm.correo,
-                        "estado": "ACTIVO",
-                        "clave": vm.basicForm.password,
-                        "confirmacionClave": vm.basicForm.password2,
-                        "nombres": vm.basicForm.nombre,
-                        "apellidos": vm.basicForm.apellido,
-                        "creadoPor": "admin",
-                        "root": true
-                    };
-            }else{
+            if (vm.basicForm.super) {
+                var obj = {
+                    "cui": 1111111111111,
+                    "usuario": vm.basicForm.usuario,
+                    "correo": vm.basicForm.correo,
+                    "estado": "ACTIVO",
+                    "clave": vm.basicForm.password,
+                    "confirmacionClave": vm.basicForm.password2,
+                    "nombres": vm.basicForm.nombre,
+                    "apellidos": vm.basicForm.apellido,
+                    "creadoPor": "admin",
+                    "root": true
+                };
+            } else {
                 var obj = {
                     "usuario": vm.basicForm.usuario,
                     "estado": "ACTIVO",
@@ -157,12 +158,12 @@
                     "clave": vm.basicForm.password,
                     "confirmacionClave": vm.basicForm.password2,
                     "cui": vm.basicForm.cui,
-                    "root": true,
+                    "root": false,
                     "roles": ro
                 };
             }
 
-            if(update){
+            if (update) {
                 var obj = {
                     "usuario": vm.basicForm.usuario,
                     "estado": "ACTIVO",
@@ -173,28 +174,28 @@
                     "clave": vm.basicForm.password,
                     "confirmacionClave": vm.basicForm.password2,
                     "cui": vm.basicForm.cui,
-                    "root": true,
+                    "root": false,
                     "roles": ro,
                     "resetClave": vm.basicForm.cc
-                };       
+                };
             }
 
-            
+
             if (update) {
                 $scope.entryUp = ws.UpdateUser(valor);
-                var EntryUp = $scope.entryUp.update(obj, function() {
+                var EntryUp = $scope.entryUp.update(obj, function () {
                     $scope.showAlert();
                     $state.go("app.users");
-                }, function(error) {
+                }, function (error) {
                     workSpace.error = JSON.stringify(error.data);
                     $scope.Error();
                 });
             } else {
                 $scope.entry = ws.saveUser();
-                var entry = $scope.entry.save(obj, function() {
+                var entry = $scope.entry.save(obj, function () {
                     $scope.showAlert();
                     $state.go("app.users");
-                }, function(error) {
+                }, function (error) {
 
                     workSpace.error = JSON.stringify(error.data);
                     $scope.Error();
@@ -203,23 +204,23 @@
 
         }
 
-        $scope.Error = function(id) {
+        $scope.Error = function (id) {
             $mdDialog.show({
-                controller: function($scope, $mdDialog, workSpace) {
-                    $scope.closeDialog = function() {
+                controller: function ($scope, $mdDialog, workSpace) {
+                    $scope.closeDialog = function () {
                         $mdDialog.hide();
                     }
                 },
                 template: '<md-dialog>' +
-                    ' <md-dialog-content>' +
-                    '  Error: ' + workSpace.error + '' +
-                    '</md-dialog-content>' +
-                    '  <md-dialog-actions>' +
-                    '    <md-button ng-click="closeDialog()" class="md-primary">' +
-                    '      Close' +
-                    '    </md-button>' +
-                    '  </md-dialog-actions>' +
-                    '</md-dialog>',
+                        ' <md-dialog-content>' +
+                        '  Error: ' + workSpace.error + '' +
+                        '</md-dialog-content>' +
+                        '  <md-dialog-actions>' +
+                        '    <md-button ng-click="closeDialog()" class="md-primary">' +
+                        '      Close' +
+                        '    </md-button>' +
+                        '  </md-dialog-actions>' +
+                        '</md-dialog>',
                 parent: angular.element('body'),
                 clickOutsideToClose: true
             });

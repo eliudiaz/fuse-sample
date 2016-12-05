@@ -9,8 +9,8 @@
         </div>
 
         <div class="logo" layout="row" layout-align="start center">
-            <span class="logo-image">F</span>
-            <span class="logo-text">FUSE</span>
+            <span class="logo-image">MS</span>
+            <span class="logo-text">Sistema RRHH</span>
         </div>
 
         <md-progress-circular id="toolbar-progress" ng-if="$root.loadingProgress" class="md-accent"
@@ -29,7 +29,8 @@
                            translate translate-attr-aria-label="TOOLBAR.USER_SETTINGS">
                     <div layout="row" layout-align="space-between center">
                         <div class="avatar-wrapper">
-                            <img md-menu-align-target class="avatar" src="assets/images/avatars/profile.jpg">
+                            <!--<img md-menu-align-target class="avatar" src="assets/images/avatars/profile.jpg">-->
+                            <img md-menu-align-target class="avatar"  src="data:image/png;base64,{{vm.user.img}}">
                             <md-icon md-font-icon ng-class="vm.userStatus.icon"
                                      ng-style="{'color': vm.userStatus.color }"
                                      class="icon status s16">
@@ -77,7 +78,7 @@
 
                     <md-menu-item class="md-indent">
                         <md-icon md-font-icon="icon-logout" class="icon"></md-icon>
-                        <md-button ng-click="vm.logout()">Logout</md-button>
+                        <md-button ng-click="vm.logout()">Salir</md-button>
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>

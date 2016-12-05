@@ -41,7 +41,7 @@
             if (ob.length > 0) {
                 // Appending dialog to document.body to cover sidenav in docs app
                 var confirm = $mdDialog.confirm()
-                        .title('Seguro que desea Eliminar el Registro?')
+                        .title('Seguro que desea eliminar el registro?')
                         .textContent('Se eliminara el registro selecto a continuacion')
                         .ariaLabel('Lucky day')
                         .targetEvent(ev)
@@ -82,7 +82,6 @@
         $scope.columnDefs.push({headerName: "Fecha Creacion", field: "fechaCreacion", filter: 'text', filterParams: {apply: true}});
         $scope.columnDefs.push({headerName: "Creado Por", field: "creadoPor", filter: 'text', filterParams: {apply: true}});
 
-
         $scope.nuevo = function () {
             workSpace.user.correo = '';
             workSpace.user.usuario = '';
@@ -100,6 +99,7 @@
             workSpace.user.correo = ob[0].correo;
             workSpace.user.usuario = ob[0].usuario;
             workSpace.user.estado = ob[0].estado;
+            workSpace.user.cui = ob[0].cui;
             workSpace.user.nombres = ob[0].nombres;
             workSpace.user.apellidos = ob[0].apellidos;
             workSpace.user.fechaCreacion = ob[0].fechaCreacion;

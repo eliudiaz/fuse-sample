@@ -244,22 +244,22 @@
                 </md-input-container>
                 <md-input-container flex ng-if="date1">
                     <datepicker style="width: 200px;" date-format="dd-MM-yyyy" selector="form-control">
-                    <div class="input-group">
-                        <input class="form-control" ng-model="vm.basicForm2.inputFiltroReglon" placeholder="Fecha" style="height: 34px; padding-left: 30px;"  />
-                    </div>
+                        <div class="input-group">
+                            <input class="form-control" ng-model="vm.basicForm2.inputFiltroReglon" placeholder="Fecha" style="height: 34px; padding-left: 30px;"  />
+                        </div>
                     </datepicker>
                 </md-input-container>
                 <md-input-container flex ng-if="showReglon2 && date1">
                     <div ng-if="date1">
                         <datepicker  style="width: 200px;" date-format="dd-MM-yyyy" selector="form-control">
-                        <div class="input-group">
-                            <input class="form-control" ng-model="vm.basicForm2.input2FiltroReglon" placeholder="Fecha " style="height: 34px; padding-left: 30px;"  />
-                        </div>
-                        </datepicker>    
+                            <div class="input-group">
+                                <input class="form-control" ng-model="vm.basicForm2.input2FiltroReglon" placeholder="Fecha " style="height: 34px; padding-left: 30px;"  />
+                            </div>
+                        </datepicker>
                     </div>
                 </md-input-container>
                 <md-input-container flex ng-show="showReglon2">
-                    
+
                     <div ng-if="reglon1">
                         <label>Valor 2</label>
                         <oi-select
@@ -323,15 +323,14 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </md-input-container>
-                <button ng-click="addDinamico()" class="
-                        md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Crear</span><div class="md-ripple-container"></div></button>
-
+                <button ng-click="addDinamico()"
+                        class="md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
+                        type="button"><span class="ng-scope">(+)</span><div class="md-ripple-container"></div></button>
             </div>
-
-            <md-button ng-click="schDinamic()" type="button" class="md-raised md-accent" aria-label="Submit"
-                       ng-disabled="basicForm2.$invalid || basicForm2.$pristine">
+            <!--ng-disabled="basicForm2.$invalid || basicForm2.$pristine"-->
+            <md-button ng-click="schDinamic()" type="button" class="md-raised md-accent" aria-label="Submit">
                 Realizar Busqueda
             </md-button>
             <button ng-click="clear()" class="
@@ -345,10 +344,10 @@
             <i class="ion-search" style="font-size: 22px;"></i>
             <button ng-click="schNormalCui()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Buscar</span><div class="md-ripple-container"></div></button>
             <button ng-click="showOpcionesF()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">(+) Opciones</span><div class="md-ripple-container"></div></button>
-            
+
 
             <button ng-click="showDinamicoF()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">(+) Avanzadas</span><div class="md-ripple-container"></div></button>
-            
+
 
 
             <button ng-disabled="{{sg.persona.nuevo}}" ng-click="add()" class="md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple" type="button"><span class="ng-scope">Nuevo (+)</span><div class="md-ripple-container"></div></button>

@@ -124,7 +124,7 @@
                     .clickOutsideToClose(true)
                     .parent(angular.element(document.body))
                     .title('Guardado')
-                    .textContent('Usuario Guardado Con Exito')
+                    .textContent('Transaccion finalizada!')
                     .ariaLabel('Alert Dialog Demo')
                     .ok('Aceptar')
                     .targetEvent(ev)
@@ -148,6 +148,7 @@
             var sessionId = sesion.id();
             var lectorPath = sesion.lectorPath();
             var pushPath = sesion.pushPath();
+            sesion.startT();
             $scope.checkID();
             document.getElementById('my_iframe').src
                     = lectorPath + "?x=" + sessionId + "&y=" + pushPath;
@@ -213,6 +214,7 @@
             }).then(function successCallback(response) {
                 $scope.lecturaJson = response.data;
                 $scope.cargarDatosLector();
+                sesion.endT();
                 $timeout($scope.checkID, 2000);
             }, function errorCallback(response) {
                 console.error(response);
@@ -262,14 +264,14 @@
             $scope.sexoSet = $scope.lecturaJson.txtGenero;
             $scope.sexoSetShow = false;
 
-            if($scope.lecturaJson.txtGenero=="MASCULINO"){
+            if ($scope.lecturaJson.txtGenero == "MASCULINO") {
                 vm.formWizard.sexo = "HOMBRE";
-            }else if($scope.lecturaJson.txtGenero=="FEMENINO"){
+            } else if ($scope.lecturaJson.txtGenero == "FEMENINO") {
                 vm.formWizard.sexo = "MUJER";
-            }else{
+            } else {
                 vm.formWizard.sexo = $scope.lecturaJson.txtGenero;
             }
-        
+
 
             $scope.nacionSet = $scope.lecturaJson.txtNacionalidad;
             $scope.nacionSetShow = false;
@@ -328,7 +330,22 @@
 
         }
 
-
+        $scope.getHuellasIzq = function () {
+            var huellas = $scope.chkLeftThumb ? "pulgar," : "";
+            huellas = $scope.chkLeftIndex ? "indice," : huellas;
+            huellas = $scope.chkLeftMiddle ? "medio," : huellas;
+            huellas = $scope.chkLeftRing ? "anular," : huellas;
+            huellas = $scope.chkLeftLittle ? "meñique," : huellas;
+            return huellas;
+        };
+        $scope.getHuellasDer = function () {
+            var huellas = $scope.chkRightThumb ? "pulgar," : "";
+            huellas = $scope.chkRightIndex ? "indice," : huellas;
+            huellas = $scope.chkRightMiddle ? "medio," : huellas;
+            huellas = $scope.chkRightRing ? "anular," : huellas;
+            huellas = $scope.chkRightLittle ? "meñique," : huellas;
+            return huellas;
+        };
         $scope.getSexo = function (sexo) {
             switch (sexo) {
                 case "MASCULINO":
@@ -542,74 +559,74 @@
 
         $scope.takeNivelEducativo = function (id) {
             var id = vm.formWizard.gradoAprobado.id;
-            if(id){
-            var entryViewsnivelEducativoPadre = ws.nivelEducativoPadre(id).query({}, function () {
-                $scope.nivelEducativoPadre = [];
-                entryViewsnivelEducativoPadre.forEach(function (value, key) {
-                    $scope.nivelEducativoPadre.push({id: value.id, valor: value.valor});
+            if (id) {
+                var entryViewsnivelEducativoPadre = ws.nivelEducativoPadre(id).query({}, function () {
+                    $scope.nivelEducativoPadre = [];
+                    entryViewsnivelEducativoPadre.forEach(function (value, key) {
+                        $scope.nivelEducativoPadre.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    //workSpace.error = JSON.stringify(error.data);
+                    // $scope.Error();
                 });
-            }, function (error) {
-                //workSpace.error = JSON.stringify(error.data);
-                // $scope.Error();
-            });
             }
         }
 
         $scope.takeNivelCarrera = function (id) {
             var id = vm.formWizard.gradoEstudia.id;
-            if(id){
-            $scope.nivelEducativoPadrePadre = [];
-            var entryViewsnivelEducativoPadre = ws.nivelEducativoCarrera(id).query({}, function () {
+            if (id) {
                 $scope.nivelEducativoPadrePadre = [];
-                entryViewsnivelEducativoPadre.forEach(function (value, key) {
-                    $scope.nivelEducativoPadrePadre.push({id: value.id, valor: value.valor});
+                var entryViewsnivelEducativoPadre = ws.nivelEducativoCarrera(id).query({}, function () {
+                    $scope.nivelEducativoPadrePadre = [];
+                    entryViewsnivelEducativoPadre.forEach(function (value, key) {
+                        $scope.nivelEducativoPadrePadre.push({id: value.id, valor: value.valor});
+                    });
+                    if ($scope.nivelEducativoPadrePadre.length > 0) {
+                        $scope.carreraShow = true;
+                    } else {
+                        $scope.carreraShow = false;
+                    }
+                }, function (error) {
+                    //workSpace.error = JSON.stringify(error.data);
+                    //$scope.Error();
                 });
-                if ($scope.nivelEducativoPadrePadre.length > 0) {
-                    $scope.carreraShow = true;
-                } else {
-                    $scope.carreraShow = false;
-                }
-            }, function (error) {
-                //workSpace.error = JSON.stringify(error.data);
-                //$scope.Error();
-            });
-                }
+            }
 
         }
 
         $scope.takeNivelEducativo2 = function (id) {
             var id = vm.formWizard.gradoAprobado2.id;
-            if(id){
-            var entryViewsnivelEducativoPadre2 = ws.nivelEducativoPadre(id).query({}, function () {
-                $scope.nivelEducativoPadre2 = [];
-                entryViewsnivelEducativoPadre2.forEach(function (value, key) {
-                    $scope.nivelEducativoPadre2.push({id: value.id, valor: value.valor});
+            if (id) {
+                var entryViewsnivelEducativoPadre2 = ws.nivelEducativoPadre(id).query({}, function () {
+                    $scope.nivelEducativoPadre2 = [];
+                    entryViewsnivelEducativoPadre2.forEach(function (value, key) {
+                        $scope.nivelEducativoPadre2.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    //workSpace.error = JSON.stringify(error.data);
+                    //$scope.Error();
                 });
-            }, function (error) {
-                //workSpace.error = JSON.stringify(error.data);
-                //$scope.Error();
-            });
-                }
+            }
         }
 
         $scope.takeNivelCarrera2 = function (id) {
             var id = vm.formWizard.gradoEstudia2.id;
-            if(id){
-            $scope.nivelEducativoPadrePadre2 = [];
-            var entryViewsnivelEducativoPadre2 = ws.nivelEducativoCarrera(id).query({}, function () {
+            if (id) {
                 $scope.nivelEducativoPadrePadre2 = [];
-                entryViewsnivelEducativoPadre2.forEach(function (value, key) {
-                    $scope.nivelEducativoPadrePadre2.push({id: value.id, valor: value.valor});
+                var entryViewsnivelEducativoPadre2 = ws.nivelEducativoCarrera(id).query({}, function () {
+                    $scope.nivelEducativoPadrePadre2 = [];
+                    entryViewsnivelEducativoPadre2.forEach(function (value, key) {
+                        $scope.nivelEducativoPadrePadre2.push({id: value.id, valor: value.valor});
+                    });
+                    if ($scope.nivelEducativoPadrePadre2.length > 0) {
+                        $scope.carreraShow2 = true;
+                    } else {
+                        $scope.carreraShow2 = false;
+                    }
+                }, function (error) {
+                    // workSpace.error = JSON.stringify(error.data);
+                    // $scope.Error();
                 });
-                if ($scope.nivelEducativoPadrePadre2.length > 0) {
-                    $scope.carreraShow2 = true;
-                } else {
-                    $scope.carreraShow2 = false;
-                }
-            }, function (error) {
-               // workSpace.error = JSON.stringify(error.data);
-               // $scope.Error();
-            });
             }
         }
 
@@ -642,31 +659,31 @@
 
         $scope.takeCumnidadaDis1 = function (id) {
             var id = vm.formWizard.comunidadDistrito.id;
-            if(id){
-            var entryViewsComunidad = ws.comunidad2(id).query({}, function () {
-                $scope.nivel4R = [];
-                entryViewsComunidad.forEach(function (value, key) {
-                    $scope.nivel4R.push({id: value.id, valor: value.valor});
+            if (id) {
+                var entryViewsComunidad = ws.comunidad2(id).query({}, function () {
+                    $scope.nivel4R = [];
+                    entryViewsComunidad.forEach(function (value, key) {
+                        $scope.nivel4R.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    // workSpace.error = JSON.stringify(error.data);
+                    //  $scope.Error();
                 });
-            }, function (error) {
-               // workSpace.error = JSON.stringify(error.data);
-              //  $scope.Error();
-            });
             }
         }
 
         $scope.takeCumnidadaDis2 = function (id) {
             var id = vm.formWizard.comunidadDistritootroPuesto.id;
-            if(id){
-            var entryViewsComunidad = ws.comunidad2(id).query({}, function () {
-                $scope.nivel4RotroPuesto = [];
-                entryViewsComunidad.forEach(function (value, key) {
-                    $scope.nivel4RotroPuesto.push({id: value.id, valor: value.valor});
+            if (id) {
+                var entryViewsComunidad = ws.comunidad2(id).query({}, function () {
+                    $scope.nivel4RotroPuesto = [];
+                    entryViewsComunidad.forEach(function (value, key) {
+                        $scope.nivel4RotroPuesto.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    //workSpace.error = JSON.stringify(error.data);
+                    //$scope.Error();
                 });
-            }, function (error) {
-                //workSpace.error = JSON.stringify(error.data);
-                //$scope.Error();
-            });
             }
         }
 
@@ -706,7 +723,7 @@
             }
             var entryViewsDistrito2 = ws.distrito(id).query({}, function () {
                 $scope.distrito2 = [];
-                 entryViewsDistrito2.forEach(function (value, key) {
+                entryViewsDistrito2.forEach(function (value, key) {
                     $scope.distrito2.push({id: value.id, valor: value.valor});
                 });
             }, function (error) {
@@ -781,31 +798,31 @@
 
         $scope.takeLugarE = function (id) {
             var id = vm.formWizard.lugarEspesificoDistrito.id;
-            if(id){
-            var entryViewsComunidad = ws.comunidad(id).query({}, function () {
-                $scope.comunidad = [];
-                entryViewsComunidad.forEach(function (value, key) {
-                    $scope.comunidad.push({id: value.id, valor: value.valor});
+            if (id) {
+                var entryViewsComunidad = ws.comunidad(id).query({}, function () {
+                    $scope.comunidad = [];
+                    entryViewsComunidad.forEach(function (value, key) {
+                        $scope.comunidad.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    workSpace.error = JSON.stringify(error.data);
+                    $scope.Error();
                 });
-            }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
-            });
             }
         }
 
         $scope.takeLugarE2 = function (id) {
             var id = vm.formWizard.lugarEspesificoDistritootroPuesto.id;
-            if(id){
-            var entryViewsComunidad2 = ws.comunidad(id).query({}, function () {
-                $scope.comunidad2 = [];
-                entryViewsComunidad2.forEach(function (value, key) {
-                    $scope.comunidad2.push({id: value.id, valor: value.valor});
+            if (id) {
+                var entryViewsComunidad2 = ws.comunidad(id).query({}, function () {
+                    $scope.comunidad2 = [];
+                    entryViewsComunidad2.forEach(function (value, key) {
+                        $scope.comunidad2.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    workSpace.error = JSON.stringify(error.data);
+                    $scope.Error();
                 });
-            }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
-            });
             }
         }
 
@@ -895,9 +912,10 @@
 
         try {
             valor = localStorageService.get('workSpace').person;
-            if(valor){
+            $scope.showActualizaBtn = false;
+            if (valor) {
                 $scope.manualEnable = true;
-                $scope.actualizaa = true;
+                $scope.showActualizaBtn = true;
             }
             valor.cui ? update = true : update = false;
             vm.formWizard.cui = valor.cui;
@@ -957,19 +975,19 @@
             };
             vm.formWizard.departamentoResidencia.id ? $scope.takeDepto2() : '';
 
-            
-             vm.formWizard.pueblo = {
-                    id: valor.fkPueblo,
-                    name: valor.fkPueblo
-                }
-              
+
+            vm.formWizard.pueblo = {
+                id: valor.fkPueblo,
+                name: valor.fkPueblo
+            }
+
             vm.formWizard.pueblo ? $scope.takePueblo() : '';
 
-            if(valor.fkComunidadLinguistica){
+            if (valor.fkComunidadLinguistica) {
 
                 var entryViewscomLing = ws.comLing().query({}, function () {
                     entryViewscomLing.forEach(function (value, key) {
-                        if(value.id==valor.fkComunidadLinguistica){
+                        if (value.id == valor.fkComunidadLinguistica) {
                             vm.formWizard.comunidadLinguistica = {
                                 id: valor.fkComunidadLinguistica,
                                 valor: value.valor
@@ -981,11 +999,11 @@
                     workSpace.error = JSON.stringify(error.data);
                     $scope.Error();
                 });
-                
+
             }
 
 
-            
+
 
             if (valor.refCedula) {
                 vm.formWizard.departamentoCedula = {
@@ -1094,19 +1112,19 @@
             $scope.tt2 = [];
             var h2, j2, p3;
             valor.estudiosSalud.forEach(function (value, key) {
-                if(value.nombre){
-                    if(value.anioEstudio){
+                if (value.nombre) {
+                    if (value.anioEstudio) {
                         h2 = value.fkEstudioSalud;
                         j2 = value.nombre + '(' + value.anioEstudio + ')';
                         p3 = value.fkEstudioSalud;
-                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3, anioEstudio:value.anioEstudio}); 
-                    }else{
+                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3, anioEstudio: value.anioEstudio});
+                    } else {
                         h2 = value.fkEstudioSalud;
                         j2 = value.nombre;
                         p3 = value.fkEstudioSalud;
-                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3, anioEstudio:''});
+                        $scope.tt2.push({id: h2, valor: j2, fkEstudioSalud: p3, anioEstudio: ''});
                     }
-                }                
+                }
             });
 
             vm.formWizard.bundle = $scope.tt2;
@@ -1187,23 +1205,6 @@
                     };
 
 
-/*
-                    $scope.takePuestoFunciona1 = valor.registroLaboral.puestos[key].fkPuestoFuncional;
-                    $scope.takeRelon1 = valor.registroLaboral.puestos[key].fkPuestoNominalRenglon;
-                    $scope.takeRelon1 ? $scope.takeReglon($scope.takeRelon1) : '';
-                    $scope.takePuestoNominal1 = valor.registroLaboral.puestos[key].fkPuestoNominal;
-                    $scope.takeClsServe1 = valor.registroLaboral.puestos[key].fkClasificacionServicio;
-                    $scope.takeunidadEjecutora1 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutora;
-                    $scope.takeunidadEjecutora1 ? $scope.takeUnidadEje($scope.takeunidadEjecutora1) : '';
-                    $scope.takeDistrito1 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkDistrito;
-                    $scope.takeDistrito1 ? $scope.takeDistrito($scope.takeDistrito1) : '';
-                    $scope.takeLugarEspesific1 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkLugarEspecifico;
-                    $scope.takeLugarEspesific1 ? $scope.takeLugarE($scope.takeLugarEspesific1) : '';
-                    $scope.takeComunidad1 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad;
-                    $scope.takeClasServ1 = valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicio;
-                    $scope.takeClasServ1 ? $scope.takeClasificaSer($scope.takeClasServ1) : '';
-                    $scope.takeAreaServ1 = valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicio;
-                    */
 
                 } else {
                     vm.formWizard.puestoFuncionalotroPuesto = {
@@ -1239,20 +1240,6 @@
                         valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreComunidad
                     };
                     vm.formWizard.comunidadDistritootroPuesto.id ? $scope.takeCumnidadaDis2() : '';
-/*
-                    $scope.takeOtrop = "SI";
-                    $scope.takePuestoFunciona2 = valor.registroLaboral.puestos[key].fkPuestoFuncional;
-                    $scope.takeRelon22 = valor.registroLaboral.puestos[key].fkPuestoNominalRenglon;
-                    $scope.takeRelon22 ? $scope.takeReglon2($scope.takeRelon22) : '';
-                    $scope.takePuestoNominal2 = valor.registroLaboral.puestos[key].fkPuestoNominal;
-                    $scope.takeunidadEjecutora2 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkUnidadEjecutora;
-                    $scope.takeunidadEjecutora2 ? $scope.takeUnidadEje3($scope.takeunidadEjecutora2) : '';
-                    $scope.takeDistrito22 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkDistrito;
-                    $scope.takeDistrito22 ? $scope.takeDistrito3($scope.takeDistrito22) : '';
-                    $scope.takeLugarEspesific22 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkLugarEspecifico;
-                    $scope.takeLugarEspesific22 ? $scope.takeLugarE2($scope.takeLugarEspesific22) : '';
-                    $scope.takeComunida22 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad;
-                    */
                 }
                 contaP++;
             });
@@ -1264,7 +1251,7 @@
             }
 
 
-          
+
 
         } catch (e) {
 
@@ -1310,7 +1297,7 @@
                     .clickOutsideToClose(true)
                     .parent(angular.element(document.body))
                     .title('Guardado')
-                    .textContent('Usuario Guardado Con Exito')
+                    .textContent('Transaccion finalizada!')
                     .ariaLabel('Alert Dialog Demo')
                     .ok('Aceptar')
                     .targetEvent(ev)
@@ -1341,7 +1328,7 @@
                     salu.push({fkEstudioSalud: vm.formWizard.bundle[key].id, anioEstudio: vm.formWizard.bundle[key].anioEstudio});
                     contaSalud++;
                 });
-                if(contaSalud==0){
+                if (contaSalud == 0) {
                     salu.push({fkEstudioSalud: '', anioEstudio: ''});
                 }
             } catch (e) {
@@ -1442,14 +1429,14 @@
                     "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
                     "fkPueblo": vm.formWizard.pueblo.id ? vm.formWizard.pueblo.id : null,
                     "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica ? vm.formWizard.comunidadLinguistica.id : null,
-                    "mrz": "<<<sdfsdf<<<sdfsdfd<<<",
+                    "mrz": $scope.txtMRZ2_1,
                     "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
                     "fkMunicipioCedula": null,
                     "fkMunicipioCedulaNombre": vm.formWizard.municipioCedula,
                     "fkMunicipioVecindadNombre": vm.formWizard.municipioVecindad,
                     "fkMunicipioVecindad": null,
-                    "huellaManoDer": $scope.chkRightThumb,
-                    "huellaManoIzq": $scope.chkLeftThumb,
+                    "huellaManoDer": $scope.getHuellasDer(),
+                    "huellaManoIzq": $scope.getHuellasIzq(),
                     "estadoCivil": vm.formWizard.estadoCivil,
                     "sexo": vm.formWizard.sexo,
                     "registroLaboral": {
@@ -1503,12 +1490,12 @@
                     "nacNoPartida": vm.formWizard.partida ? vm.formWizard.partida : "",
                     "fkPueblo": vm.formWizard.pueblo.id ? vm.formWizard.pueblo.id : null,
                     "fkComunidadLinguistica": vm.formWizard.comunidadLinguistica.id ? vm.formWizard.comunidadLinguistica.id : null,
-                    "mrz": "<<<sdfsdf<<<sdfsdfd<<<",
+                    "mrz": $scope.txtMRZ2_1,
                     "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
                     "fkMunicipioCedula": vm.formWizard.municipioCedula.id ? vm.formWizard.municipioCedula.id : null,
                     "fkMunicipioVecindad": vm.formWizard.municipioVecindad.id ? vm.formWizard.municipioVecindad.id : null,
-                    "huellaManoDer": "indice,medio",
-                    "huellaManoIzq": "indice,anular",
+                    "huellaManoDer": $scope.getHuellasDer(),
+                    "huellaManoIzq": $scope.getHuellasIzq(),
                     "estadoCivil": vm.formWizard.estadoCivil ? vm.formWizard.estadoCivil : null,
                     "sexo": vm.formWizard.sexo ? vm.formWizard.sexo : null,
                     "registroLaboral": {
@@ -1564,8 +1551,8 @@
                     "noCedula": vm.formWizard.ncedula ? vm.formWizard.ncedula : null,
                     "fkMunicipioCedula": vm.formWizard.municipioCedula.id ? vm.formWizard.municipioCedula.id : null,
                     "fkMunicipioVecindad": vm.formWizard.municipioVecindad.id ? vm.formWizard.municipioVecindad.id : null,
-                    "huellaManoDer": $scope.huellaManoDer,
-                    "huellaManoIzq": $scope.huellaManoIzq,
+                    "huellaManoDer": $scope.getHuellasDer(),
+                    "huellaManoIzq": $scope.getHuellasIzq(),
                     "estadoCivil": vm.formWizard.estadoCivil ? vm.formWizard.estadoCivil : null,
                     "sexo": vm.formWizard.sexo,
                     "registroLaboral": {
@@ -1586,7 +1573,7 @@
                     },
                     "idiomas": ido,
                     "dpi": {
-                        "noSerie": 112323123,
+                        "noSerie": vm.formWizard.nserie ? vm.formWizard.nserie : null,
                         "fechaEmision": vm.formWizard.fchCreacionDpi ? vm.formWizard.fchCreacionDpi : null,
                         "fechaVencimiento": vm.formWizard.fchVenceDpi ? vm.formWizard.fchVenceDpi : null
                     },
@@ -1595,7 +1582,7 @@
             }
 
 
-
+            sesion.startT();
             if (update) {
                 $scope.entryUp = ws.UpdatePersonas(vm.formWizard.cui);
                 var EntryUp = $scope.entryUp.update(sendJSON, function () {
@@ -1616,9 +1603,10 @@
                 });
             }
             console.info('SEND', JSON.stringify(sendJSON));
-        }
+        };
 
         $scope.Error = function (id) {
+            sesion.endT();
             $mdDialog.show({
                 controller: function ($scope, $mdDialog, workSpace) {
                     $scope.closeDialog = function () {
@@ -1638,7 +1626,7 @@
                 parent: angular.element('body'),
                 clickOutsideToClose: true
             });
-        }
+        };
 
 
     }
