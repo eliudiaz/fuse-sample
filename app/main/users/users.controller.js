@@ -81,12 +81,6 @@
         $scope.columnDefs.push({headerName: "Estado", field: "estado", filter: 'text', filterParams: {apply: true}});
         $scope.columnDefs.push({headerName: "Fecha Creacion", field: "fechaCreacion", filter: 'text', filterParams: {apply: true}});
         $scope.columnDefs.push({headerName: "Creado Por", field: "creadoPor", filter: 'text', filterParams: {apply: true}});
-<<<<<<< HEAD
-=======
-
-
->>>>>>> feature/fingerprint-detection
-
 
         $scope.nuevo = function () {
             workSpace.user.correo = '';

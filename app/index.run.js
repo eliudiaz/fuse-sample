@@ -25,9 +25,9 @@
                 Notification.error("No hay sesion activa!");
                 sesion.exit();
             }
-//            if (!sesion.authorized(next)) {
-//                $state.go("app.home");
-//            }
+            if (!sesion.authorized(next)) {
+                $state.go("app.home");
+            }
             $timeout(function ()
             {
                 $rootScope.loadingProgress = false;
