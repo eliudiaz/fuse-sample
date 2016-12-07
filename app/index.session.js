@@ -14,7 +14,7 @@
             url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
             console.debug("logout complete!!");
             localStorage.clear();
-//            window.location = url;
+            window.location = url;
         }
 
         function startT() {
@@ -27,7 +27,7 @@
 
         function reject($state) {
             Notification.error("Acceso denegado!");
-//            $state.go("app.home");
+            $state.go("app.home");
         }
 
         function user() {
