@@ -32,7 +32,7 @@
                                 <!--                                <button ng-click="manual()" class="
                                                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                                                         type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>-->
-                                <button ng-click="lector()" class="
+                                <button ng-click="lector2()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
                             </article>
@@ -40,7 +40,7 @@
                                 <md-input-container flex="100" flex-gt-xs="50">
                                     <input type="text" name="cui" id="cui" ng-model="vm.formWizard.cui"
                                            placeholder="CUI"
-                                           required ng-disabled="manualEnable" ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
+                                           required  ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
                                     <div ng-messages="wizardStep1.cui.$error"
                                          ng-show="wizardStep1.cui"
                                          role="alert">
@@ -875,7 +875,9 @@
                                         </div>
                                     </div>
                                 </md-input-container>
-                                <md-input-container flex="50" >
+
+                                <md-input-container ng-show="comunidad[0].id" flex="50" >
+
                                     <div>{{labelNivel3}}</div>
                                     <oi-select
                                         oi-options="item.valor for (key, item) in comunidad"
@@ -885,7 +887,7 @@
                                         ng-change="takeCumnidadaDis1()"
                                         ></oi-select>
                                 </md-input-container>
-                                <md-input-container flex="50" ng-show="lavel4Si">
+                                <md-input-container flex="50" ng-show="nivel4R[0].id">
                                     <div>{{labelNivel4}}</div>
                                     <md-select ng-model="vm.formWizard.nivel4">
                                         <md-option ng-repeat="state in nivel4R" ng-value="state.id" ng-selected="state.id == takeNivel4">

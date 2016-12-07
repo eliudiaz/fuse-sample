@@ -436,25 +436,35 @@
 
         }
 
+         $scope.yearsA = [];
+        var yy = new Date().getFullYear();
+        for (var i = 1960; i <= yy; i++) {
+            $scope.yearsA.push({id: i, name: i});
+        }
+
         $scope.schDinamic = function () {
             sesion.startT();
             try {
-                $scope.entryUp2 = ws.searchPersonaAvs();
+                if($scope.searchObjDinamico.filtros.length>0){
+                    $scope.entryUp2 = ws.searchPersonaAvs();
+                    $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: ws.searchPersonaAvsDownload};
 
-//            $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: 'http://localhost:41825/MS_RRHH_Servicios/home/busquedaAvanzada'};
-                $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: ws.searchPersonaAvsDownload};
+                    var EntryUp2 = $scope.entryUp2.post($scope.searchObjDinamico, function () {
+                        $scope.gridOptions.api.setRowData(EntryUp2);
+                    }, function (error) {
+                        workSpace.error = JSON.stringify(error.data);
+                        $scope.Error();
+                    });
 
-                var EntryUp2 = $scope.entryUp2.post($scope.searchObjDinamico, function () {
-                    $scope.gridOptions.api.setRowData(EntryUp2);
-                }, function (error) {
-                    workSpace.error = JSON.stringify(error.data);
-                    $scope.Error();
-                });
-
-                console.info('SEND_', JSON.stringify($scope.searchObjDinamico));
+                    console.info('SEND_',JSON.stringify($scope.searchObjDinamico));
+                }else{
+                    Notification.error('Agrega un Filtro completando los combos de arriba y presionando el boton (+)');
+                }
             } catch (e) {
+                
             }
             sesion.endT();
+
         }
 
         $scope.add = function () {

@@ -1192,6 +1192,9 @@
                         id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad,
                         valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreComunidad
                     };
+
+                    $scope.takeNivel4 = valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad2;
+
                     vm.formWizard.comunidadDistrito ? $scope.takeCumnidadaDis1() : '';
 
                     vm.formWizard.clasificaServicio = {
@@ -1240,6 +1243,11 @@
                         valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreComunidad
                     };
                     vm.formWizard.comunidadDistritootroPuesto.id ? $scope.takeCumnidadaDis2() : '';
+                    vm.formWizard.nivel4otroPuesto = {
+                        id: valor.registroLaboral.puestos[key].refUnidadNotificadora.fkComunidad2,
+                        valor: valor.registroLaboral.puestos[key].refUnidadNotificadora.nombreComunidad2
+                    };
+
                 }
                 contaP++;
             });
@@ -1364,7 +1372,7 @@
 
             var fkComunida2;
             if (vm.formWizard.nivel4otroPuesto) {
-                fkComunida2 = vm.formWizard.nivel4otroPuesto;
+                fkComunida2 = vm.formWizard.nivel4otroPuesto.id;
             } else if (vm.formWizard.comunidadDistritootroPuesto.id) {
                 fkComunida2 = vm.formWizard.comunidadDistritootroPuesto.id;
             } else if (vm.formWizard.lugarEspesificoDistritootroPuesto.id) {
