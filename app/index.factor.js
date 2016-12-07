@@ -119,6 +119,13 @@
                 });
                 return r;
             },
+            searchPersonaAvsDownload: function (payload) {
+                data.fileDownload({
+                    url: path + 'home/busquedaAvanzada?download=true',
+                    method: "POST",
+                    data: payload
+                });
+            },
             saveAccess: function () {
                 var r = $resource(path + 'accesos/crea');
                 return r;

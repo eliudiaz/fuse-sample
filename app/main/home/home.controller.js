@@ -186,7 +186,7 @@
 
 
         $scope.objSearchDinamico = [
-            {id: 'REGLON', name: 'Reglon'},
+            {id: 'RENGLON', name: 'Renglon'},
             {id: 'UNIDAD_EJECUTORA', name: 'Unidad Ejecutora'},
             {id: 'PUESTO_NOMINAL', name: 'Puesto Funcional'},
             {id: 'CLASIFICACION_SERVICIO', name: 'Clasificacion Servicio'},
@@ -230,7 +230,7 @@
             $scope.puesto1 = false;
             $scope.clasifica1 = false;
             switch (id) {
-                case "REGLON":
+                case "RENGLON":
                     $scope.reglon1 = true;
                     $scope.filtroDData = [{id: "MAYOR", name: "MAYOR"}, {id: "MENOR", name: "MENOR"}, {id: "IGUAL", name: "IGUAL"}, {id: "ENTRE", name: "ENTRE"}];
                     break;
@@ -256,21 +256,27 @@
         $scope.searchObjDinamico = {
             filtros: []
         };
+        $scope.searchObjDinamico2 = {
+            filtros: []
+        };
 
         $scope.out = function (id) {
             $scope.searchObjDinamico.filtros.splice(id, 1);
+            $scope.searchObjDinamico2.filtros.splice(id, 1);
         }
 
         $scope.addDinamico = function () {
             switch (vm.basicForm2.objSearchDinamico) {
-                case "REGLON":
+                case "RENGLON":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
                         if (vm.basicForm2.filtroReglon == 'ENTRE') {
                             if (vm.basicForm2.input2FiltroReglon) {
-                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: vm.basicForm2.input2FiltroReglon.id, valor2Texto: vm.basicForm2.input2FiltroReglon.valor});
+                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor2: vm.basicForm2.input2FiltroReglon.id});
+                                $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: vm.basicForm2.input2FiltroReglon.id, valor2Texto: vm.basicForm2.input2FiltroReglon.valor});
                             }
                         } else {
-                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: '', valor2Texto: ''});
+                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor2: null});
+                            $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor, valor2: null, valor2Texto: ''});
                         }
                     }
                     break;
@@ -278,22 +284,26 @@
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
                         if (vm.basicForm2.filtroReglon == 'ENTRE') {
                             if (vm.basicForm2.input2FiltroReglon) {
-                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon, valor2Texto: vm.basicForm2.input2FiltroReglon});
+                                $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon});
+                                $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: vm.basicForm2.input2FiltroReglon, valor2Texto: vm.basicForm2.input2FiltroReglon});
                             }
                         } else {
-                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: '', valor2Texto: ''});
+                            $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor2: null});
+                            $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon, valor1Texto: vm.basicForm2.inputFiltroReglon, valor2: null, valor2Texto: ''});
                         }
                     }
                     break;
                 case "PUESTO_NOMINAL":
                 case "CLASIFICACION_SERVICIO":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
-                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor});
+                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id});
+                        $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.valor});
                     }
                     break;
                 case "UNIDAD_EJECUTORA":
                     if (vm.basicForm2.objSearchDinamico && vm.basicForm2.filtroReglon && vm.basicForm2.inputFiltroReglon) {
-                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.nombre});
+                        $scope.searchObjDinamico.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id});
+                        $scope.searchObjDinamico2.filtros.push({campo: vm.basicForm2.objSearchDinamico, comparador: vm.basicForm2.filtroReglon, valor1: vm.basicForm2.inputFiltroReglon.id, valor1Texto: vm.basicForm2.inputFiltroReglon.nombre});
                     }
                     break;
             }
@@ -372,65 +382,79 @@
         }
 
         $scope.schNormal = function () {
-            var obj = {
-                cui: vm.basicForm.cui ? vm.basicForm.cui : null,
-                edad: vm.basicForm.edad ? vm.basicForm.edad : null,
-                primerNombre: vm.basicForm.primerNombre ? vm.basicForm.primerNombre : null,
-                segundoNombre: vm.basicForm.segundoNombre ? vm.basicForm.segundoNombre : null,
-                primerApellido: vm.basicForm.primerApellido ? vm.basicForm.primerApellido : null,
-                segundoApellido: vm.basicForm.segundoApellido ? vm.basicForm.segundoApellido : null,
-                sexo: vm.basicForm.sexo ? vm.basicForm.sexo : null,
-                fechaNacInicio: vm.basicForm.fechaDesde ? vm.basicForm.fechaDesde : null,
-                fechaNacFin: vm.basicForm.fechaHasta ? vm.basicForm.fechaHasta : null,
-                departamento: vm.basicForm.departamento ? vm.basicForm.departamento : null,
-                municipio: vm.basicForm.municipio ? vm.basicForm.municipio : null,
-                direccion: vm.basicForm.direccion ? vm.basicForm.direccion : null,
-                pueblo: vm.basicForm.pueblo ? vm.basicForm.pueblo : null
-            };
+            sesion.startT();
+            try {
+                var obj = {
+                    cui: vm.basicForm.cui ? vm.basicForm.cui : null,
+                    edad: vm.basicForm.edad ? vm.basicForm.edad : null,
+                    primerNombre: vm.basicForm.primerNombre ? vm.basicForm.primerNombre : null,
+                    segundoNombre: vm.basicForm.segundoNombre ? vm.basicForm.segundoNombre : null,
+                    primerApellido: vm.basicForm.primerApellido ? vm.basicForm.primerApellido : null,
+                    segundoApellido: vm.basicForm.segundoApellido ? vm.basicForm.segundoApellido : null,
+                    sexo: vm.basicForm.sexo ? vm.basicForm.sexo : null,
+                    fechaNacInicio: vm.basicForm.fechaDesde ? vm.basicForm.fechaDesde : null,
+                    fechaNacFin: vm.basicForm.fechaHasta ? vm.basicForm.fechaHasta : null,
+                    departamento: vm.basicForm.departamento ? vm.basicForm.departamento : null,
+                    municipio: vm.basicForm.municipio ? vm.basicForm.municipio : null,
+                    direccion: vm.basicForm.direccion ? vm.basicForm.direccion : null,
+                    pueblo: vm.basicForm.pueblo ? vm.basicForm.pueblo : null
+                };
 
-            $scope.lastSearchRef = {obj: obj, api: ws.searchNormalDownload};
+                $scope.lastSearchRef = {obj: obj, api: ws.searchNormalDownload};
 
-            $scope.entryUp = ws.searchPersona();
-            var EntryUp = $scope.entryUp.post(obj, function () {
-                $scope.gridOptions.api.setRowData(EntryUp);
-            }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
-            });
+                $scope.entryUp = ws.searchPersona();
+                var EntryUp = $scope.entryUp.post(obj, function () {
+                    $scope.gridOptions.api.setRowData(EntryUp);
+                }, function (error) {
+                    workSpace.error = JSON.stringify(error.data);
+                    $scope.Error();
+                });
+            } catch (e) {
+            }
+            sesion.endT();
         }
 
         $scope.schNormalCui = function () {
-            var obj = {
-                cui: vm.basicForm.search
-            };
+            sesion.startT();
+            try {
+                var obj = {
+                    cui: vm.basicForm.search
+                };
 
-            $scope.lastSearchRef = {obj: obj, api: ws.searchNormalDownload};
+                $scope.lastSearchRef = {obj: obj, api: ws.searchNormalDownload};
 
-            $scope.entryUp = ws.searchPersona();
-            var EntryUp = $scope.entryUp.post(obj, function () {
-                $scope.gridOptions.api.setRowData(EntryUp);
-            }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
-            });
-
+                $scope.entryUp = ws.searchPersona();
+                var EntryUp = $scope.entryUp.post(obj, function () {
+                    $scope.gridOptions.api.setRowData(EntryUp);
+                }, function (error) {
+                    workSpace.error = JSON.stringify(error.data);
+                    $scope.Error();
+                });
+            } catch (e) {
+            }
+            sesion.endT();
 
         }
 
         $scope.schDinamic = function () {
+            sesion.startT();
+            try {
+                $scope.entryUp2 = ws.searchPersonaAvs();
 
-            $scope.entryUp2 = ws.searchPersonaAvs();
+//            $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: 'http://localhost:41825/MS_RRHH_Servicios/home/busquedaAvanzada'};
+                $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: ws.searchPersonaAvsDownload};
 
-            $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: 'http://localhost:41825/MS_RRHH_Servicios/home/busquedaAvanzada'};
+                var EntryUp2 = $scope.entryUp2.post($scope.searchObjDinamico, function () {
+                    $scope.gridOptions.api.setRowData(EntryUp2);
+                }, function (error) {
+                    workSpace.error = JSON.stringify(error.data);
+                    $scope.Error();
+                });
 
-            var EntryUp2 = $scope.entryUp2.post($scope.searchObjDinamico, function () {
-                $scope.gridOptions.api.setRowData(EntryUp2);
-            }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
-                $scope.Error();
-            });
-
-
+                console.info('SEND_', JSON.stringify($scope.searchObjDinamico));
+            } catch (e) {
+            }
+            sesion.endT();
         }
 
         $scope.add = function () {
