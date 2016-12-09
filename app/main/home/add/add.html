@@ -39,7 +39,7 @@
                             <div layout="column" layout-gt-xs="row" flex>
                                 <md-input-container flex="100" flex-gt-xs="50">
                                     <input type="text" name="cui" id="cui" ng-model="vm.formWizard.cui"
-                                           placeholder="CUI"
+                                           placeholder="CUI" ng-disabled="manualEnable"
                                            required  ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
                                     <div ng-messages="wizardStep1.cui.$error"
                                          ng-show="wizardStep1.cui"
