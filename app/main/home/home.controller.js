@@ -307,7 +307,6 @@
                     }
                     break;
             }
-            console.info(JSON.stringify($scope.searchObjDinamico));
             vm.basicForm.primerNombre = null;
             vm.basicForm.segundoNombre = null;
             vm.basicForm.edad = null;
@@ -363,7 +362,6 @@
 
 
         $scope.takeDepto = function (id) {
-            console.info('ASDF_', id);
             for (var i in $scope.deptoMuni) {
                 if (i == id) {
                     $scope.municipios = $scope.deptoMuni[id];
@@ -456,7 +454,6 @@
                         $scope.Error();
                     });
 
-                    console.info('SEND_',JSON.stringify($scope.searchObjDinamico));
                 }else{
                     Notification.error('Agrega un Filtro completando los combos de arriba y presionando el boton (+)');
                 }
@@ -500,7 +497,6 @@
                     sesion.endT();
                     $state.go("app.home_add");
 
-                    console.info(JSON.stringify(ob));
                 }, function (error) {
                     workSpace.error = JSON.stringify(error.data);
                     $scope.Error();
