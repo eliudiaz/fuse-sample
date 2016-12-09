@@ -16,7 +16,7 @@
 
         var data = {
             saveHome: function () {
-                var r = $resource(path + 'personas/crea');
+                var r = $resource(path + 'personas/crea?sesion=' + sesion.id());
                 return r;
             },
             allUser: function () {
@@ -68,7 +68,7 @@
                 return r;
             },
             UpdatePersonas: function (id) {
-                var r = $resource(path + 'personas/mod/' + id, null, {
+                var r = $resource(path + 'personas/mod/' + id + '?sesion=' + sesion.id(), null, {
                     'update': {method: 'PUT'}
                 });
                 return r;
