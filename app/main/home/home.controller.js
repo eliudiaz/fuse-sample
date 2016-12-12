@@ -110,6 +110,10 @@
             vm.basicForm.fechaHasta = null;
 
             $scope.searchObjDinamico.filtros = [];
+            $scope.searchObjDinamico2.filtros = [];
+
+            $scope.closeNave('frmD');
+            $scope.closeNave('frmN');
 
             var entryViewsAll = ws.allPersonas().query({}, function () {
                 $scope.gridOptions.api.setRowData(entryViewsAll);
