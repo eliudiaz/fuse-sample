@@ -61,9 +61,9 @@
         $scope.labelNivel4 = 'Nivel 4';
 
         $scope.labelNivel11 = 'Distrito';
-        $scope.labelNivel22 = 'Lugar Específico';
-        $scope.labelNivel33 = 'Comunidad';
-        $scope.labelNivel44 = 'Nivel 4';
+        $scope.labelNivel12 = 'Lugar Específico';
+        $scope.labelNivel1313 = 'Comunidad';
+        $scope.labelNivel1414 = 'Nivel 4';
 
         $scope.labelNivel13 = 'Distrito';
         $scope.labelNivel23 = 'Lugar Específico';
@@ -703,6 +703,21 @@
             }
         }
 
+        $scope.takeCumnidadaDis3 = function (id) {
+            var id = vm.formWizard.comunidadDistritoComisionado.id;
+            if (id) {
+                var entryViewsComunidad2 = ws.comunidad2(id).query({}, function () {
+                    $scope.nivel4RotroPuesto2 = [];
+                    entryViewsComunidad2.forEach(function (value, key) {
+                        $scope.nivel4RotroPuesto2.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    //workSpace.error = error.data;
+                    //$scope.Error();
+                });
+            }
+        }
+
         $scope.takeUnidadEje = function (id) {
             var id = vm.formWizard.unidadEjecutoraActual.id;
             if (id == 201) {
@@ -737,15 +752,25 @@
             if (id == 201) {
                 $scope.labelNivel11 = 'Nivel 1';
                 $scope.labelNivel12 = 'Nivel 2';
+                $scope.labelNivel1313 = 'Nivel 3';
+                $scope.labelNivel1414 = 'Nivel 4';
             } else {
                 $scope.labelNivel11 = 'Distrito';
                 $scope.labelNivel12 = 'Lugar Específico';
+                $scope.labelNivel1313 = 'Comunidad';
+                $scope.labelNivel1414 = 'Nivel 4';
             }
             var entryViewsDistrito2 = ws.distrito(id).query({}, function () {
                 $scope.distrito2 = [];
                 entryViewsDistrito2.forEach(function (value, key) {
                     $scope.distrito2.push({id: value.id, valor: value.valor});
                 });
+                vm.formWizard.distritoComisionado = {};
+                vm.formWizard.lugarEspesificoDistritoComisionado = {};
+                vm.formWizard.comunidadDistritoComisionado = {};
+                vm.formWizard.nivel4Comisionado = {};
+                $scope.nivel4RotroPuesto2 = [];
+                $scope.comunidad3 = [];
             }, function (error) {
                 workSpace.error = error.data;
                 $scope.Error();
@@ -775,6 +800,8 @@
                 vm.formWizard.distritootroPuesto = {};
                 vm.formWizard.lugarEspesificoDistritootroPuesto = {};
                 vm.formWizard.comunidadDistritootroPuesto = {};
+                vm.formWizard.nivel4otroPuesto = {};
+                $scope.nivel4RotroPuesto = {};
             }, function (error) {
                 workSpace.error = error.data;
                 $scope.Error();
@@ -844,6 +871,21 @@
                     $scope.comunidad2 = [];
                     entryViewsComunidad2.forEach(function (value, key) {
                         $scope.comunidad2.push({id: value.id, valor: value.valor});
+                    });
+                }, function (error) {
+                    workSpace.error = error.data;
+                    $scope.Error();
+                });
+            }
+        }
+
+        $scope.takeLugarE3 = function (id) {
+            var id = vm.formWizard.lugarEspesificoDistritoComisionado.id;
+            if (id) {
+                var entryViewsComunidad3 = ws.comunidad(id).query({}, function () {
+                    $scope.comunidad3 = [];
+                    entryViewsComunidad3.forEach(function (value, key) {
+                        $scope.comunidad3.push({id: value.id, valor: value.valor});
                     });
                 }, function (error) {
                     workSpace.error = error.data;
@@ -1202,6 +1244,30 @@
                         entryViewsLugarEspesifico2.forEach(function (value, key) {
                             $scope.lugarEspesifico2.push({id: value.id, valor: value.valor});
                         });
+                        var id3 = vm.formWizard.lugarEspesificoDistritoComisionado.id;
+                        if (id3) {
+                            var entryViewsComunidad3 = ws.comunidad(id3).query({}, function () {
+                                $scope.comunidad3 = [];
+                                entryViewsComunidad3.forEach(function (value, key) {
+                                    $scope.comunidad3.push({id: value.id, valor: value.valor});
+                                });
+                                var id4 = vm.formWizard.comunidadDistritoComisionado.id;
+                                if (id4) {
+                                    var entryViewsComunidad2 = ws.comunidad2(id4).query({}, function () {
+                                        $scope.nivel4RotroPuesto2 = [];
+                                        entryViewsComunidad2.forEach(function (value, key) {
+                                            $scope.nivel4RotroPuesto2.push({id: value.id, valor: value.valor});
+                                        });
+                                    }, function (error) {
+                                        //workSpace.error = error.data;
+                                        //$scope.Error();
+                                    });
+                                }
+                            }, function (error) {
+                                workSpace.error = error.data;
+                                $scope.Error();
+                            });
+                        }
                     }, function (error) {
                         workSpace.error = error.data;
                         $scope.Error();
@@ -1228,6 +1294,21 @@
                     valor: valor.registroLaboral.refUnidadNotificadoraComisionado.nombreLugarEspecifico
                 };
             }
+
+            if (valor.registroLaboral.refUnidadNotificadoraComisionado) {
+                vm.formWizard.comunidadDistritoComisionado = {
+                    id: valor.registroLaboral.refUnidadNotificadoraComisionado.fkComunidad,
+                    valor: valor.registroLaboral.refUnidadNotificadoraComisionado.nombreComunidad
+                };
+            }
+
+            if (valor.registroLaboral.refUnidadNotificadoraComisionado) {
+                vm.formWizard.nivel4Comisionado = {
+                    id: valor.registroLaboral.refUnidadNotificadoraComisionado.fkComunidad2,
+                    valor: valor.registroLaboral.refUnidadNotificadoraComisionado.nombreComunidad2
+                };
+            }
+
 
 
 
@@ -1564,10 +1645,11 @@
                     contaSalud++;
                 });
                 if (contaSalud == 0) {
-                    salu.push({fkEstudioSalud: '', anioEstudio: ''});
+                    salu = null;
                 }
             } catch (e) {
-                salu.push({fkEstudioSalud: '', anioEstudio: ''});
+                salu = null;
+                ///salu.push({fkEstudioSalud: '', anioEstudio: ''});
             }
 
 
@@ -1609,12 +1691,14 @@
             }
 
             var fkComunida3;
-            if (vm.formWizard.lugarEspesificoDistritoComisionado) {
+            if (vm.formWizard.nivel4Comisionado) {
+                fkComunida3 = vm.formWizard.nivel4Comisionado.id;
+            } else if (vm.formWizard.comunidadDistritoComisionado) {
+                fkComunida3 = vm.formWizard.comunidadDistritoComisionado.id;
+            } else if (vm.formWizard.lugarEspesificoDistritoComisionado.id) {
                 fkComunida3 = vm.formWizard.lugarEspesificoDistritoComisionado.id;
-            } else if (vm.formWizard.comunidadDistritootroPuesto.id) {
-                fkComunida3 = vm.formWizard.comunidadDistritootroPuesto.id;
-            } else if (vm.formWizard.unidadEjecutoraActualComisionado) {
-                fkComunida3 = vm.formWizard.unidadEjecutoraActualComisionado.id;
+            } else { 
+                fkComunida3 = vm.formWizard.distritoComisionado.id;
             }
 
 

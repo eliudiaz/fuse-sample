@@ -38,8 +38,8 @@
                             </article>
                             <div layout="column" layout-gt-xs="row" flex>
                                 <md-input-container flex="100" flex-gt-xs="50">
-                                    <input type="text" name="cui" id="cui" ng-model="vm.formWizard.cui"
-                                           placeholder="CUI" ng-disabled="manualEnable"
+                                    <input type="text" ng-disabled="manualEnable" name="cui" id="cui" ng-model="vm.formWizard.cui"
+                                           placeholder="CUI" 
                                            required  ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
                                     <div ng-messages="wizardStep1.cui.$error"
                                          ng-show="wizardStep1.cui"
@@ -989,8 +989,34 @@
                                         oi-options="item.valor for (key, item) in lugarEspesifico2"
                                         ng-model="vm.formWizard.lugarEspesificoDistritoComisionado"
                                         oi-select-options="{newItem: 'autocomplete'}"
+                                        ng-change="takeLugarE3()"
                                         placeholder=""
                                         ></oi-select>
+                                </md-input-container>
+                                <md-input-container flex="50" ng-show="comunidad3[0].id" >
+                                    <div> {{labelNivel1313}} </div>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in comunidad3"
+                                        ng-model="vm.formWizard.comunidadDistritoComisionado"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        ng-change="takeCumnidadaDis3()"
+                                        placeholder=""
+                                        ></oi-select>
+                                </md-input-container>
+                                <md-input-container flex="50" ng-show="nivel4RotroPuesto2[0].id">
+                                    <div>{{labelNivel1414}}</div>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in nivel4RotroPuesto2"
+                                        ng-model="vm.formWizard.nivel4Comisionado"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder=""
+                                        ></oi-select>
+                                    <div ng-show="!vm.formWizard.comunidadDistrito" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                        <div >
+                                            <span>
+                                                {{labelNivel4}} es Requerido.</span>
+                                        </div>
+                                    </div>
                                 </md-input-container>
 
                             </div>
@@ -1082,7 +1108,7 @@
                                         placeholder=""
                                         ></oi-select>
                                 </md-input-container>
-                                <md-input-container flex="50" ng-show="nivel4otroPuesto[0].id">
+                                <md-input-container flex="50" ng-show="nivel4RotroPuesto[0].id">
                                     <div>{{labelNivel43}}</div>
                                     <oi-select
                                         oi-options="item.valor for (key, item) in nivel4RotroPuesto"
