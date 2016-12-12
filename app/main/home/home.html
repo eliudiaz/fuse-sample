@@ -243,19 +243,21 @@
                     </div>
                 </md-input-container>
                 <md-input-container flex ng-if="date1">
-                    <datepicker style="width: 200px;" date-format="dd-MM-yyyy" selector="form-control">
-                        <div class="input-group">
-                            <input class="form-control" ng-model="vm.basicForm2.inputFiltroReglon" placeholder="Fecha" style="height: 34px; padding-left: 30px;"  />
-                        </div>
-                    </datepicker>
+                    <label>Año</label>
+                    <md-select ng-model="vm.basicForm2.inputFiltroReglon" required>
+                            <md-option ng-repeat="state in yearsA" ng-value="state.id">
+                                {{state.name}}
+                            </md-option>
+                        </md-select>
                 </md-input-container>
                 <md-input-container flex ng-if="showReglon2 && date1">
                     <div ng-if="date1">
-                        <datepicker  style="width: 200px;" date-format="dd-MM-yyyy" selector="form-control">
-                            <div class="input-group">
-                                <input class="form-control" ng-model="vm.basicForm2.input2FiltroReglon" placeholder="Fecha " style="height: 34px; padding-left: 30px;"  />
-                            </div>
-                        </datepicker>
+                        <label>Año</label>
+                        <md-select ng-model="vm.basicForm2.input2FiltroReglon" required>
+                            <md-option ng-repeat="state in yearsA" ng-value="state.id">
+                                {{state.name}}
+                            </md-option>
+                        </md-select>
                     </div>
                 </md-input-container>
                 <md-input-container flex ng-show="showReglon2">

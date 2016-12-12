@@ -74,11 +74,11 @@
                         var entryViewsAll = ws.allPersonas().query({}, function () {
                             $scope.gridOptions.api.setRowData(entryViewsAll);
                         }, function (error) {
-                            workSpace.error = JSON.stringify(error.data);
+                            workSpace.error = error.data;
                             $scope.Error();
                         });
                     }, function (error) {
-                        workSpace.error = JSON.stringify(error.data);
+                        workSpace.error = error.data;
                         $scope.Error();
                     });
 
@@ -114,7 +114,7 @@
             var entryViewsAll = ws.allPersonas().query({}, function () {
                 $scope.gridOptions.api.setRowData(entryViewsAll);
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
+                workSpace.error = error.data;
                 $scope.Error();
             });
         }
@@ -159,7 +159,7 @@
             var entryViewsAll = ws.allPersonas().query({}, function () {
                 $scope.gridOptions.api.setRowData(entryViewsAll);
             }, function (error) {
-                workSpace.error = JSON.stringify(error.data);
+                workSpace.error = error.data;
                 $scope.Error();
             });
 
@@ -198,28 +198,28 @@
         var entryViewsAll = ws.reglon().query({}, function () {
             $scope.reglonAry = entryViewsAll;
         }, function (error) {
-            workSpace.error = JSON.stringify(error.data);
+            workSpace.error = error.data;
             $scope.Error();
         });
 
         var unidadEjecutora = ws.unidadEjecutora().query({}, function () {
             $scope.unidadAry = unidadEjecutora;
         }, function (error) {
-            workSpace.error = JSON.stringify(error.data);
+            workSpace.error = error.data;
             $scope.Error();
         });
 
         var clasificacionSer = ws.clasificacionSer().query({}, function () {
             $scope.clasificaAry = clasificacionSer;
         }, function (error) {
-            workSpace.error = JSON.stringify(error.data);
+            workSpace.error = error.data;
             $scope.Error();
         });
 
         var puestoFuncional = ws.puestoFuncional().query({}, function () {
             $scope.puestoAry = puestoFuncional;
         }, function (error) {
-            workSpace.error = JSON.stringify(error.data);
+            workSpace.error = error.data;
             $scope.Error();
         });
 
@@ -307,7 +307,6 @@
                     }
                     break;
             }
-            console.info(JSON.stringify($scope.searchObjDinamico));
             vm.basicForm.primerNombre = null;
             vm.basicForm.segundoNombre = null;
             vm.basicForm.edad = null;
@@ -335,14 +334,14 @@
         var entryViewsPuestoFuncional = ws.puestoFuncional().query({}, function () {
             $scope.puestoFuncional = entryViewsPuestoFuncional;
         }, function (error) {
-            workSpace.error = JSON.stringify(error.data);
+            workSpace.error = error.data;
             $scope.Error();
         });
 
         var entryViewsReglon = ws.reglon().query({}, function () {
             $scope.reglon = entryViewsReglon;
         }, function (error) {
-            workSpace.error = JSON.stringify(error.data);
+            workSpace.error = error.data;
             $scope.Error();
         });
 
@@ -350,7 +349,7 @@
         var entryViewsDepto = ws.depto().query({}, function () {
             $scope.depto3 = entryViewsDepto;
         }, function (error) {
-            workSpace.error = JSON.stringify(error.data);
+            workSpace.error = error.data;
             $scope.Error();
         });
 
@@ -363,7 +362,6 @@
 
 
         $scope.takeDepto = function (id) {
-            console.info('ASDF_', id);
             for (var i in $scope.deptoMuni) {
                 if (i == id) {
                     $scope.municipios = $scope.deptoMuni[id];
@@ -406,7 +404,7 @@
                 var EntryUp = $scope.entryUp.post(obj, function () {
                     $scope.gridOptions.api.setRowData(EntryUp);
                 }, function (error) {
-                    workSpace.error = JSON.stringify(error.data);
+                    workSpace.error = error.data;
                     $scope.Error();
                 });
             } catch (e) {
@@ -427,7 +425,7 @@
                 var EntryUp = $scope.entryUp.post(obj, function () {
                     $scope.gridOptions.api.setRowData(EntryUp);
                 }, function (error) {
-                    workSpace.error = JSON.stringify(error.data);
+                    workSpace.error = error.data;
                     $scope.Error();
                 });
             } catch (e) {
@@ -436,25 +434,34 @@
 
         }
 
+        $scope.yearsA = [];
+        var yy = new Date().getFullYear();
+        for (var i = 1960; i <= yy; i++) {
+            $scope.yearsA.push({id: i, name: i});
+        }
+
         $scope.schDinamic = function () {
             sesion.startT();
             try {
-                $scope.entryUp2 = ws.searchPersonaAvs();
+                if ($scope.searchObjDinamico.filtros.length > 0) {
+                    $scope.entryUp2 = ws.searchPersonaAvs();
+                    $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: ws.searchPersonaAvsDownload};
 
-//            $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: 'http://localhost:41825/MS_RRHH_Servicios/home/busquedaAvanzada'};
-                $scope.lastSearchRef = {obj: $scope.searchObjDinamico, api: ws.searchPersonaAvsDownload};
+                    var EntryUp2 = $scope.entryUp2.post($scope.searchObjDinamico, function () {
+                        $scope.gridOptions.api.setRowData(EntryUp2);
+                    }, function (error) {
+                        workSpace.error = error.data;
+                        $scope.Error();
+                    });
 
-                var EntryUp2 = $scope.entryUp2.post($scope.searchObjDinamico, function () {
-                    $scope.gridOptions.api.setRowData(EntryUp2);
-                }, function (error) {
-                    workSpace.error = JSON.stringify(error.data);
-                    $scope.Error();
-                });
-
-                console.info('SEND_', JSON.stringify($scope.searchObjDinamico));
+                } else {
+                    Notification.error('Agrega un Filtro completando los combos de arriba y presionando el boton (+)');
+                }
             } catch (e) {
+
             }
             sesion.endT();
+
         }
 
         $scope.add = function () {
@@ -490,9 +497,8 @@
                     sesion.endT();
                     $state.go("app.home_add");
 
-                    console.info(JSON.stringify(ob));
                 }, function (error) {
-                    workSpace.error = JSON.stringify(error.data);
+                    workSpace.error = error.data;
                     $scope.Error();
                 });
 

@@ -10,13 +10,13 @@
     function remoteServices($resource, $http, sesion)
     {
         var path = localStorage.getItem("servicesPath") == null ?
-                "http://localhost:41825/MS_RRHH_Servicios/" :
+                "http://45.79.200.203:8080/MS_RRHH_Servicios/" :
                 localStorage.getItem("servicesPath");
 
 
         var data = {
             saveHome: function () {
-                var r = $resource(path + 'personas/crea');
+                var r = $resource(path + 'personas/crea?sesion=' + sesion.id());
                 return r;
             },
             allUser: function () {
@@ -24,17 +24,17 @@
                 return r;
             },
             saveUser: function () {
-                var r = $resource(path + 'usuarios/crea');
+                var r = $resource(path + 'usuarios/crea?sesion=' + sesion.id());
                 return r;
             },
             UpdateUser: function (id) {
-                var r = $resource(path + 'usuarios/mod/' + id, null, {
+                var r = $resource(path + 'usuarios/mod/' + id + '?sesion=' + sesion.id(), null, {
                     'update': {method: 'PUT'}
                 });
                 return r;
             },
             deleteUser: function (id) {
-                var r = $resource(path + 'usuarios/disable/' + id, null, {
+                var r = $resource(path + 'usuarios/disable/' + id + '?sesion=' + sesion.id(), null, {
                     'delete': {method: 'DELETE', isArray: true}
                 });
                 return r;
@@ -44,17 +44,17 @@
                 return r;
             },
             saveRol: function () {
-                var r = $resource(path + 'roles/crea');
+                var r = $resource(path + 'roles/crea?sesion=' + sesion.id());
                 return r;
             },
             UpdateRol: function (id) {
-                var r = $resource(path + 'roles/mod/' + id, null, {
+                var r = $resource(path + 'roles/mod/' + id + '?sesion=' + sesion.id(), null, {
                     'update': {method: 'PUT'}
                 });
                 return r;
             },
             deleteRol: function (id) {
-                var r = $resource(path + 'roles/disable/' + id, null, {
+                var r = $resource(path + 'roles/disable/' + id + '?sesion=' + sesion.id(), null, {
                     'delete': {method: 'DELETE', isArray: true}
                 });
                 return r;
@@ -68,7 +68,7 @@
                 return r;
             },
             UpdatePersonas: function (id) {
-                var r = $resource(path + 'personas/mod/' + id, null, {
+                var r = $resource(path + 'personas/mod/' + id + '?sesion=' + sesion.id(), null, {
                     'update': {method: 'PUT'}
                 });
                 return r;
@@ -127,17 +127,17 @@
                 });
             },
             saveAccess: function () {
-                var r = $resource(path + 'accesos/crea');
+                var r = $resource(path + 'accesos/crea' + '?sesion=' + sesion.id());
                 return r;
             },
             UpdateAccess: function (id) {
-                var r = $resource(path + 'accesos/mod/' + id, null, {
+                var r = $resource(path + 'accesos/mod/' + id + '?sesion=' + sesion.id(), null, {
                     'update': {method: 'PUT'}
                 });
                 return r;
             },
             deleteAcess: function (id) {
-                var r = $resource(path + 'accesos/disable/' + id, null, {
+                var r = $resource(path + 'accesos/disable/' + id + '?sesion=' + sesion.id(), null, {
                     'delete': {method: 'DELETE', isArray: true}
                 });
                 return r;

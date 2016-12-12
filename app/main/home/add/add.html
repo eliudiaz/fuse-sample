@@ -39,8 +39,8 @@
                             <div layout="column" layout-gt-xs="row" flex>
                                 <md-input-container flex="100" flex-gt-xs="50">
                                     <input type="text" name="cui" id="cui" ng-model="vm.formWizard.cui"
-                                           placeholder="CUI"
-                                           required ng-disabled="manualEnable" ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
+                                           placeholder="CUI" ng-disabled="manualEnable"
+                                           required  ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
                                     <div ng-messages="wizardStep1.cui.$error"
                                          ng-show="wizardStep1.cui"
                                          role="alert">
@@ -296,6 +296,7 @@
                                     <label>{{paisSet}}</label>
                                     <div ng-if="!paisSetShow"> {{paisSet}} </div>
                                     <oi-select
+                                        ng-disabled="manualEnable"
                                         ng-if="paisSetShow"
                                         oi-options="item.valor for (key, item) in pais"
                                         ng-model="vm.formWizard.pais"
@@ -497,6 +498,7 @@
                                     <label>{{deptoCedSet}}</label>
                                     <div ng-if="!deptoCedSetShow"> {{deptoCedSet}} </div>
                                     <oi-select
+                                        ng-disabled="manualEnable"
                                         ng-if="deptoCedSetShow"
                                         oi-options="item.valor for (key, item) in depto3"
                                         ng-model="vm.formWizard.departamentoCedula"
@@ -510,6 +512,7 @@
                                     <label>{{muniCedSet}}</label>
                                     <div ng-if="!muniCedSetShow"> {{muniCedSet}} </div>
                                     <oi-select
+                                        ng-disabled="manualEnable"
                                         ng-if="muniCedSetShow"
                                         oi-options="item.valor for (key, item) in muni3"
                                         ng-model="vm.formWizard.municipioCedula"
@@ -671,7 +674,9 @@
                                         ng-change="takeNivelCarrera2()"
                                         >
                                 </md-input-container>
-                                <md-input-container ng-show="carreraShow2" flex="50">
+                            </div>
+                            <div ng-show="showEscolaridad" layout="column" layout-gt-xs="row">
+                                <md-input-container ng-show="carreraShow2" flex="100">
                                     <label>Carrera</label>
                                     <oi-select
                                         oi-options="item.valor for (key, item) in nivelEducativoPadrePadre2"
@@ -771,7 +776,7 @@
                                 <md-input-container flex="50" >
                                     <label>Puesto de acuerdo a funciones</label>
                                     <oi-select
-                                        oi-options="item.valor for (key, item) in puestoFuncional"
+                                        oi-options="item.valor for (key, item) in shopArrFn($query)"
                                         ng-model="vm.formWizard.puestoFuncional"
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         placeholder="Selecciona"
@@ -875,7 +880,9 @@
                                         </div>
                                     </div>
                                 </md-input-container>
-                                <md-input-container flex="50" >
+
+                                <md-input-container ng-show="comunidad[0].id" flex="50" >
+
                                     <div>{{labelNivel3}}</div>
                                     <oi-select
                                         oi-options="item.valor for (key, item) in comunidad"
@@ -885,7 +892,7 @@
                                         ng-change="takeCumnidadaDis1()"
                                         ></oi-select>
                                 </md-input-container>
-                                <md-input-container flex="50" ng-show="lavel4Si">
+                                <md-input-container flex="50" ng-show="nivel4R[0].id">
                                     <div>{{labelNivel4}}</div>
                                     <md-select ng-model="vm.formWizard.nivel4">
                                         <md-option ng-repeat="state in nivel4R" ng-value="state.id" ng-selected="state.id == takeNivel4">
@@ -1007,7 +1014,7 @@
                                 <md-input-container  ng-show="otroPuestoSI" flex="50" >
                                     <label>Puesto de acuerdo a funciones</label>
                                     <oi-select
-                                        oi-options="item.valor for (key, item) in puestoFuncional"
+                                        oi-options="item.valor for (key, item) in shopArrFn($query)"
                                         ng-model="vm.formWizard.puestoFuncionalotroPuesto"
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         placeholder=""
@@ -1065,7 +1072,7 @@
                                         placeholder=""
                                         ></oi-select>
                                 </md-input-container>
-                                <md-input-container flex="50" >
+                                <md-input-container flex="50" ng-show="comunidad2[0].id" >
                                     <div> {{labelNivel33}} </div>
                                     <oi-select
                                         oi-options="item.valor for (key, item) in comunidad2"
@@ -1075,7 +1082,7 @@
                                         placeholder=""
                                         ></oi-select>
                                 </md-input-container>
-                                <md-input-container flex="50" ng-show="lavel4Si2">
+                                <md-input-container flex="50" ng-show="nivel4otroPuesto[0].id">
                                     <div>{{labelNivel43}}</div>
                                     <oi-select
                                         oi-options="item.valor for (key, item) in nivel4RotroPuesto"
