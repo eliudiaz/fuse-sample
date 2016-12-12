@@ -32,7 +32,7 @@
                                 <!--                                <button ng-click="manual()" class="
                                                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                                                         type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>-->
-                                <button ng-click="lector2()" class="
+                                <button ng-click="lector()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
                             </article>
@@ -677,14 +677,14 @@
                             </div>
                             <div ng-show="showEscolaridad" layout="column" layout-gt-xs="row">
                                 <md-input-container ng-show="carreraShow2" flex="100">
-                                        <label>Carrera</label>
-                                        <oi-select
-                                            oi-options="item.valor for (key, item) in nivelEducativoPadrePadre2"
-                                            ng-model="vm.formWizard.gradoCarrera2"
-                                            oi-select-options="{newItem: 'autocomplete'}"
-                                            placeholder="Selecciona"
-                                            >
-                                    </md-input-container>
+                                    <label>Carrera</label>
+                                    <oi-select
+                                        oi-options="item.valor for (key, item) in nivelEducativoPadrePadre2"
+                                        ng-model="vm.formWizard.gradoCarrera2"
+                                        oi-select-options="{newItem: 'autocomplete'}"
+                                        placeholder="Selecciona"
+                                        >
+                                </md-input-container>
                             </div>
                             <div layout="column" layout-gt-xs="row">
                                 <md-input-container flex="50" >
