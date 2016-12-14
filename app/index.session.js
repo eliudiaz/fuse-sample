@@ -11,7 +11,7 @@
             Notification.error("No hay sesion activa!");
             Notification.error("Cerrando sesion...");
             var url = document.URL;
-            url = url.substring(0, url.indexOf("fuse")) + "logout.jsp";
+            url = url.substring(0, url.indexOf("app")) + "logout.jsp";
             console.debug("logout complete!!");
             localStorage.clear();
             window.location = url;
