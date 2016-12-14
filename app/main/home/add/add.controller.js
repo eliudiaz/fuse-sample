@@ -150,8 +150,10 @@
             var pushPath = sesion.pushPath();
             sesion.startT();
             $scope.checkID();
+//            document.getElementById('my_iframe').src
+//                    = lectorPath + "?x=" + sessionId + "&y=" + pushPath;
             document.getElementById('my_iframe').src
-                    = lectorPath + "?x=" + sessionId + "&y=" + pushPath;
+                    = "edcracken://" + sessionId + ";" + pushPath;
         };
 
         $scope.lector2 = function () {
@@ -1697,7 +1699,7 @@
                 fkComunida3 = vm.formWizard.comunidadDistritoComisionado.id;
             } else if (vm.formWizard.lugarEspesificoDistritoComisionado.id) {
                 fkComunida3 = vm.formWizard.lugarEspesificoDistritoComisionado.id;
-            } else { 
+            } else {
                 fkComunida3 = vm.formWizard.distritoComisionado.id;
             }
 
