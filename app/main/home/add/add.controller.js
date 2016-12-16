@@ -1695,6 +1695,8 @@
             }
 
             var fkComunida3;
+
+            if (vm.formWizard.esComisinado == 'SI') {
             if (vm.formWizard.nivel4Comisionado.id) {
                 fkComunida3 = vm.formWizard.nivel4Comisionado.id;
             } else if (vm.formWizard.comunidadDistritoComisionado.id) {
@@ -1704,7 +1706,7 @@
             } else if (vm.formWizard.distritoComisionado.id){ 
                 fkComunida3 = vm.formWizard.distritoComisionado.id;
             }
-
+            }
 
             if (vm.formWizard.puestoFuncionalotroPuesto) {
                 var puestosD = [
