@@ -91,6 +91,8 @@
         vm.formWizard.gradoEstudia2 = [];
         vm.formWizard.comunidadDistritootroPuesto = [];
         vm.formWizard.lugarEspesificoDistritootroPuesto = [];
+        vm.formWizard.lugarEspesificoDistritoComisionado = [];
+        vm.formWizard.distritoComisionado = [];
 
         var update = false;
         var valor;
@@ -1693,13 +1695,13 @@
             }
 
             var fkComunida3;
-            if (vm.formWizard.nivel4Comisionado) {
+            if (vm.formWizard.nivel4Comisionado.id) {
                 fkComunida3 = vm.formWizard.nivel4Comisionado.id;
-            } else if (vm.formWizard.comunidadDistritoComisionado) {
+            } else if (vm.formWizard.comunidadDistritoComisionado.id) {
                 fkComunida3 = vm.formWizard.comunidadDistritoComisionado.id;
             } else if (vm.formWizard.lugarEspesificoDistritoComisionado.id) {
                 fkComunida3 = vm.formWizard.lugarEspesificoDistritoComisionado.id;
-            } else {
+            } else if (vm.formWizard.distritoComisionado.id){ 
                 fkComunida3 = vm.formWizard.distritoComisionado.id;
             }
 
