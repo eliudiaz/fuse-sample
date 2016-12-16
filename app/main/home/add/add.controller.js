@@ -1683,6 +1683,7 @@
                 fkComunida = vm.formWizard.distrito.id;
             }
 
+
             var fkComunida2;
             if (vm.formWizard.nivel4otroPuesto) {
                 fkComunida2 = vm.formWizard.nivel4otroPuesto.id;
