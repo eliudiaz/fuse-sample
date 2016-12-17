@@ -93,6 +93,9 @@
         vm.formWizard.lugarEspesificoDistritootroPuesto = [];
         vm.formWizard.lugarEspesificoDistritoComisionado = [];
         vm.formWizard.distritoComisionado = [];
+        vm.formWizard.nivel4otroPuesto = [];
+        vm.formWizard.distrito = [];
+        vm.formWizard.distritootroPuesto = [];
 
         var update = false;
         var valor;
@@ -1685,15 +1688,21 @@
 
 
             var fkComunida2;
-            if (vm.formWizard.nivel4otroPuesto) {
-                fkComunida2 = vm.formWizard.nivel4otroPuesto.id;
-            } else if (vm.formWizard.comunidadDistritootroPuesto.id) {
-                fkComunida2 = vm.formWizard.comunidadDistritootroPuesto.id;
-            } else if (vm.formWizard.lugarEspesificoDistritootroPuesto.id) {
-                fkComunida2 = vm.formWizard.lugarEspesificoDistritootroPuesto.id;
-            } else {
-                fkComunida2 = vm.formWizard.distrito.id;
-            }
+             if (vm.formWizard.otroPuesto == 'SI') {
+                if (vm.formWizard.nivel4otroPuesto.id) {
+                    fkComunida2 = vm.formWizard.nivel4otroPuesto.id;
+                } else if (vm.formWizard.comunidadDistritootroPuesto.id) {
+                    fkComunida2 = vm.formWizard.comunidadDistritootroPuesto.id;
+                } else if (vm.formWizard.lugarEspesificoDistritootroPuesto.id) {
+                    fkComunida2 = vm.formWizard.lugarEspesificoDistritootroPuesto.id;
+                } else if (vm.formWizard.distritootroPuesto.id){
+                    fkComunida2 = vm.formWizard.distritootroPuesto.id;
+                } else{
+                    fkComunida2 = vm.formWizard.unidadEjecutoraActualotroPuesto.id;
+                }
+
+             }
+            
 
             var fkComunida3;
 
@@ -1711,7 +1720,7 @@
                 }
             }
 
-            if (vm.formWizard.puestoFuncionalotroPuesto) {
+            if (vm.formWizard.otroPuesto == 'SI') {
                 var puestosD = [
                     {
                         fkPuestoFuncional: vm.formWizard.puestoFuncional.id,
@@ -1922,7 +1931,7 @@
                 };
             }
 
-            console.info(JSON.stringify(sendJSON));
+           // console.info(JSON.stringify(sendJSON));
             sesion.startT();
             if (update) {
                 $scope.entryUp = ws.UpdatePersonas(vm.formWizard.cui);
