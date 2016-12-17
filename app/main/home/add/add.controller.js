@@ -1698,15 +1698,17 @@
             var fkComunida3;
 
             if (vm.formWizard.esComisinado == 'SI') {
-            if (vm.formWizard.nivel4Comisionado.id) {
-                fkComunida3 = vm.formWizard.nivel4Comisionado.id;
-            } else if (vm.formWizard.comunidadDistritoComisionado.id) {
-                fkComunida3 = vm.formWizard.comunidadDistritoComisionado.id;
-            } else if (vm.formWizard.lugarEspesificoDistritoComisionado.id) {
-                fkComunida3 = vm.formWizard.lugarEspesificoDistritoComisionado.id;
-            } else if (vm.formWizard.distritoComisionado.id){ 
-                fkComunida3 = vm.formWizard.distritoComisionado.id;
-            }
+                if (vm.formWizard.nivel4Comisionado && vm.formWizard.nivel4Comisionado.id) {
+                    fkComunida3 = vm.formWizard.nivel4Comisionado.id;
+                } else if (vm.formWizard.comunidadDistritoComisionado
+                        && vm.formWizard.comunidadDistritoComisionado.id) {
+                    fkComunida3 = vm.formWizard.comunidadDistritoComisionado.id;
+                } else if (vm.formWizard.lugarEspesificoDistritoComisionado &&
+                        vm.formWizard.lugarEspesificoDistritoComisionado.id) {
+                    fkComunida3 = vm.formWizard.lugarEspesificoDistritoComisionado.id;
+                } else if (vm.formWizard.distritoComisionado && vm.formWizard.distritoComisionado.id) {
+                    fkComunida3 = vm.formWizard.distritoComisionado.id;
+                }
             }
 
             if (vm.formWizard.puestoFuncionalotroPuesto) {
