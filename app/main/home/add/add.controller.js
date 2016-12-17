@@ -1959,7 +1959,7 @@
                 },
                 template: '<md-dialog>' +
                         ' <md-dialog-content>' +
-                        ' Error:  ' + workSpace.error + '' +
+                        workSpace.error +
                         '</md-dialog-content>' +
                         '  <md-dialog-actions>' +
                         '    <md-button ng-click="closeDialog()" class="md-primary">' +
