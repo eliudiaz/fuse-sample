@@ -1588,6 +1588,7 @@
             } else {
                 $scope.comisionadoSI = false;
             }
+            $scope.comunidad3 = [];
         }
 
         $scope.otroPuestoSI = false;
@@ -1688,21 +1689,21 @@
 
 
             var fkComunida2;
-             if (vm.formWizard.otroPuesto == 'SI') {
+            if (vm.formWizard.otroPuesto == 'SI') {
                 if (vm.formWizard.nivel4otroPuesto.id) {
                     fkComunida2 = vm.formWizard.nivel4otroPuesto.id;
                 } else if (vm.formWizard.comunidadDistritootroPuesto.id) {
                     fkComunida2 = vm.formWizard.comunidadDistritootroPuesto.id;
                 } else if (vm.formWizard.lugarEspesificoDistritootroPuesto.id) {
                     fkComunida2 = vm.formWizard.lugarEspesificoDistritootroPuesto.id;
-                } else if (vm.formWizard.distritootroPuesto.id){
+                } else if (vm.formWizard.distritootroPuesto.id) {
                     fkComunida2 = vm.formWizard.distritootroPuesto.id;
-                } else{
+                } else {
                     fkComunida2 = vm.formWizard.unidadEjecutoraActualotroPuesto.id;
                 }
 
-             }
-            
+            }
+
 
             var fkComunida3;
 
@@ -1931,7 +1932,7 @@
                 };
             }
 
-           // console.info(JSON.stringify(sendJSON));
+            // console.info(JSON.stringify(sendJSON));
             sesion.startT();
             if (update) {
                 $scope.entryUp = ws.UpdatePersonas(vm.formWizard.cui);
