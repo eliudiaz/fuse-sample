@@ -1777,7 +1777,7 @@
 
 
 
-            if ($scope.txtMRZ2_1) {
+            if ($scope.txtMRZ2_1 || update) {
                 var sendJSON = {
                     "foto": $scope.img,
                     "cui": vm.formWizard.cui ? vm.formWizard.cui : null,
@@ -1894,6 +1894,7 @@
                         "fechaEmision": vm.formWizard.fchCreacionDpi ? vm.formWizard.fchCreacionDpi : null,
                         "fechaVencimiento": vm.formWizard.fchVenceDpi ? vm.formWizard.fchVenceDpi : null
                     },
+
                     "estudiosSalud": salu ? salu : null
                 };
             }
@@ -1949,8 +1950,10 @@
                     "idiomas": ido,
                     "dpi": {
                         "noSerie": vm.formWizard.nserie ? vm.formWizard.nserie : null,
-                        "fechaEmision": vm.formWizard.fchCreacionDpi ? vm.formWizard.fchCreacionDpi : null,
-                        "fechaVencimiento": vm.formWizard.fchVenceDpi ? vm.formWizard.fchVenceDpi : null
+                        "fechaEmision": null,
+                        "fechaEmisionTexto": vm.formWizard.fchCreacionDpi,
+                        "fechaVencimiento": null,
+                        "fechaVencimientoTexto": vm.formWizard.fchVenceDpi
                     },
                     "estudiosSalud": salu
                 };
