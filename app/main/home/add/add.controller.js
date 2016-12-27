@@ -1747,6 +1747,8 @@
                     fkComunida3 = vm.formWizard.lugarEspesificoDistritoComisionado.id;
                 } else if (vm.formWizard.distritoComisionado && vm.formWizard.distritoComisionado.id) {
                     fkComunida3 = vm.formWizard.distritoComisionado.id;
+                } else if (vm.formWizard.unidadEjecutoraActualComisionado && vm.formWizard.unidadEjecutoraActualComisionado.id) {
+                    fkComunida3 = vm.formWizard.unidadEjecutoraActualComisionado.id;
                 }
             }
 
@@ -1964,7 +1966,7 @@
                 };
             }
 
-            // console.info(JSON.stringify(sendJSON));
+             //console.info(JSON.stringify(sendJSON));
             sesion.startT();
             if (update) {
                 $scope.entryUp = ws.UpdatePersonas(vm.formWizard.cui);

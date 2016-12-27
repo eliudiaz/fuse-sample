@@ -32,13 +32,13 @@
                                 <!--                                <button ng-click="manual()" class="
                                                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                                                         type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>-->
-                                <button ng-click="lector2()" class="
+                                <button ng-click="lector()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
                             </article>
                             <div layout="column" layout-gt-xs="row" flex>
                                 <md-input-container flex="100" flex-gt-xs="50">
-                                    <input type="text" name="cui" id="cui" ng-model="vm.formWizard.cui"
+                                    <input type="text" name="cui" id="cui" ng-disabled="manualEnable" ng-model="vm.formWizard.cui"
                                            placeholder="CUI" 
                                            required  ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
                                     <div ng-messages="wizardStep1.cui.$error"
@@ -89,14 +89,8 @@
                                 <md-input-container flex flex-gt-xs="50">
                                     <input type="text" name="segundoNombre" id="segundoNombre" ng-model="vm.formWizard.segundoNombre"
                                            placeholder="Segundo Nombre"
-                                           required ng-disabled="manualEnable">
-                                    <div ng-messages="wizardStep2.segundoNombre.$error"
-                                         ng-show="!vm.formWizard.segundoNombre"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>Segundo Nombres es Requerido.</span>
-                                        </div>
-                                    </div>
+                                           ng-disabled="manualEnable">
+                                   
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
                                     <input type="text" name="tercerNombre" id="tercerNombre" ng-model="vm.formWizard.tercerNombre"
@@ -130,14 +124,8 @@
                                 <md-input-container flex flex-gt-xs="50">
                                     <input type="text" name="segundoApellido" id="segundoApellido" ng-model="vm.formWizard.segundoApellido"
                                            placeholder="Segundo Apellido"
-                                           required ng-disabled="manualEnable">
-                                    <div ng-messages="wizardStep2.segundoApellido.$error"
-                                         ng-show="wizardStep2.segundoApellido"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>Segundo Apellido es Requerido.</span>
-                                        </div>
-                                    </div>
+                                            ng-disabled="manualEnable">
+                                    
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
                                     <input type="text" name="tercerApellido" id="tercerApellido" ng-model="vm.formWizard.tercerApellido"
@@ -201,14 +189,8 @@
                                 <md-input-container flex flex-gt-xs="50">
                                     <input ng-disabled="manualEnable" type="text" name="nserie" id="nserie" ng-model="vm.formWizard.nserie"
                                            placeholder="No. Serie"
-                                           required >
-                                    <div ng-messages="wizardStep2.nserie.$error"
-                                         ng-show="wizardStep2.nserie"
-                                         role="alert">
-                                        <div ng-message="required">
-                                            <span>No. Serie es Requerido.</span>
-                                        </div>
-                                    </div>
+                                           >
+                                   
                                 </md-input-container>
 
                                 <md-input-container flex flex-gt-xs="50">
@@ -987,15 +969,9 @@
                                         ng-model="vm.formWizard.distritoComisionado"
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         placeholder=""
-                                        required
                                         ng-change="takeDistrito2()"
                                         ></oi-select>
-                                        <div ng-show="!vm.formWizard.distritoComisionado.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
-                                            <span>
-                                                Distrito es Requerido.</span>
-                                        </div>
-                                    </div>
+                                        
                                 </md-input-container>
                                 <md-input-container ng-if="comisionadoSI" flex="50" >
                                     <div>{{labelNivel12}}</div>
@@ -1005,14 +981,9 @@
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         ng-change="takeLugarE3()"
                                         placeholder=""
-                                        required
+                                        
                                         ></oi-select>
-                                        <div ng-show="!vm.formWizard.lugarEspesificoDistritoComisionado.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
-                                            <span>
-                                                Lugar espesifico Actual es Requerido.</span>
-                                        </div>
-                                    </div>
+                                       
                                 </md-input-container>
                                 <md-input-container flex="50" ng-if="comunidad3[0].id" >
                                     <div> {{labelNivel1313}} </div>
