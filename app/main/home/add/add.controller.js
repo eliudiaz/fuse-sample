@@ -1245,12 +1245,21 @@
                     entryViewsDistrito2.forEach(function (value, key) {
                         $scope.distrito2.push({id: value.id, valor: value.valor});
                     });
+                    vm.formWizard.distritoComisionado = {
+                            id: valor.registroLaboral.refUnidadNotificadoraComisionado.fkDistrito,
+                            valor: valor.registroLaboral.refUnidadNotificadoraComisionado.nombreDistrito
+                        };
+
                     var id2 = vm.formWizard.distritoComisionado.id;
                     var entryViewsLugarEspesifico2 = ws.lugarEspesifico(id2).query({}, function () {
                         $scope.lugarEspesifico2 = [];
                         entryViewsLugarEspesifico2.forEach(function (value, key) {
                             $scope.lugarEspesifico2.push({id: value.id, valor: value.valor});
                         });
+                        vm.formWizard.lugarEspesificoDistritoComisionado = {
+                            id: valor.registroLaboral.refUnidadNotificadoraComisionado.fkLugarEspecifico,
+                            valor: valor.registroLaboral.refUnidadNotificadoraComisionado.nombreLugarEspecifico
+                        };
                         var id3 = vm.formWizard.lugarEspesificoDistritoComisionado.id;
                         if (id3) {
                             var entryViewsComunidad3 = ws.comunidad(id3).query({}, function () {
@@ -1437,11 +1446,26 @@
                         id: valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicio,
                         valor: valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicioNombre
                     };
-                    vm.formWizard.clasificaServicio.id ? $scope.takeClasificaSer() : '';
-                    vm.formWizard.AreaclasificaServicio = {
+                     
+
+                    if(vm.formWizard.clasificaServicio.id){
+                        var idArea = vm.formWizard.clasificaServicio.id;
+                        var entryViewsClasificacionSerArea = ws.clasificacionSerArea(idArea).query({}, function () {
+                            $scope.clasificacionSerArea = [];
+                            entryViewsClasificacionSerArea.forEach(function (value, key) {
+                                $scope.clasificacionSerArea.push({id: value.id, valor: value.valor});
+                            });
+                            vm.formWizard.AreaclasificaServicio = {
                         id: valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicio,
                         valor: valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicioNombre
                     };
+                        }, function (error) {
+                            workSpace.error = error.data;
+                            $scope.Error();
+                        });
+                    }
+
+                    
 
 
 

@@ -32,14 +32,14 @@
                                 <!--                                <button ng-click="manual()" class="
                                                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                                                         type="button"><span class="ng-scope">Ingreso Manual</span><div class="md-ripple-container"></div></button>-->
-                                <button ng-click="lector()" class="
+                                <button ng-click="lector2()" class="
                                         md-yellow-800-bg md-accent md-raised md-hue-1 md-button md-default-theme md-ink-ripple"
                                         type="button"><span class="ng-scope">Leer DPI</span><div class="md-ripple-container"></div></button>
                             </article>
                             <div layout="column" layout-gt-xs="row" flex>
                                 <md-input-container flex="100" flex-gt-xs="50">
                                     <input type="text" name="cui" id="cui" ng-model="vm.formWizard.cui"
-                                           placeholder="CUI"  ng-disabled="manualEnable"
+                                           placeholder="CUI" 
                                            required  ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
                                     <div ng-messages="wizardStep1.cui.$error"
                                          ng-show="wizardStep1.cui"
