@@ -1214,6 +1214,9 @@
                            ng-disabled="msWizard.formsIncomplete()">
                     Guardar
                 </md-button>
+                 <md-button class="md-raised md-warn" ng-click="msWizard.resetForm(); cancelar();" >
+                    Cancelar
+                </md-button>
             </div>
 
         </ms-form-wizard>

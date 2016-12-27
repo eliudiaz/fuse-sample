@@ -6,7 +6,7 @@
             .controller('addUserController', addUserController);
 
     /** @ngInject */
-    function addUserController($scope, $timeout, $mdDialog, $state, workSpace, localStorageService, ws, ioRoles, f) {
+    function addUserController($scope, $timeout, $mdDialog, $state, workSpace, localStorageService, ws, ioRoles, f, Notification) {
         var vm = this;
         // Data
         vm.basicForm = {};
@@ -22,6 +22,11 @@
             valor = localStorageService.get('workSpace').user.usuario;
         } catch (e) {
 
+        }
+
+        $scope.cancelar = function(){
+            $state.go("app.users");
+            Notification.warning('Haz Cancelado la Operacion');
         }
 
         if (valor) {

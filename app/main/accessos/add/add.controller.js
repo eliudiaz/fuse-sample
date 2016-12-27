@@ -7,7 +7,7 @@
         .controller('addController', addController);
 
     /** @ngInject */
-  function addController($scope,$timeout,$mdDialog,$state,workSpace,localStorageService,ws){
+  function addController($scope,$timeout,$mdDialog,$state,workSpace,localStorageService,ws,Notification){
         var vm = this;
 
         // Data
@@ -21,7 +21,10 @@
 
         }
 
-
+         $scope.cancelar = function(){
+            $state.go("app.accessos");
+            Notification.warning('Haz Cancelado la Operacion');
+        }
 
         if(valor){
             vm.basicForm.valor = localStorageService.get('workSpace').access.valor;

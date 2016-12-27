@@ -26,6 +26,11 @@
             Notification.primary({message: "Just message", templateUrl: "custom_template.html", scope: $scope});
         };
 
+         $scope.cancelar = function(){
+            $state.go("app.roles");
+            Notification.warning('Haz Cancelado la Operacion');
+        }
+
         $scope.showAlert = function(ev) {
             $mdDialog.show(
               $mdDialog.alert()

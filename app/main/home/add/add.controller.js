@@ -952,6 +952,11 @@
             });
         }
 
+        $scope.cancelar = function(){
+            $state.go("app.home");
+            Notification.warning('Haz Cancelado la Operacion');
+        }
+
 
         $scope.pueblo = [
             {id: "MESTIZO_O_LADINO", name: "MESTIZO_O_LADINO"},
