@@ -39,7 +39,7 @@
                             <div layout="column" layout-gt-xs="row" flex>
                                 <md-input-container flex="100" flex-gt-xs="50">
                                     <input type="text" name="cui" id="cui" ng-disabled="manualEnable" ng-model="vm.formWizard.cui"
-                                           placeholder="CUI" 
+                                           placeholder="CUI"
                                            required  ng-pattern="/^[0-9]*$/"  md-maxlength="13" md-minlength="13">
                                     <div ng-messages="wizardStep1.cui.$error"
                                          ng-show="wizardStep1.cui"
@@ -90,7 +90,7 @@
                                     <input type="text" name="segundoNombre" id="segundoNombre" ng-model="vm.formWizard.segundoNombre"
                                            placeholder="Segundo Nombre"
                                            ng-disabled="manualEnable">
-                                   
+
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
                                     <input type="text" name="tercerNombre" id="tercerNombre" ng-model="vm.formWizard.tercerNombre"
@@ -124,8 +124,8 @@
                                 <md-input-container flex flex-gt-xs="50">
                                     <input type="text" name="segundoApellido" id="segundoApellido" ng-model="vm.formWizard.segundoApellido"
                                            placeholder="Segundo Apellido"
-                                            ng-disabled="manualEnable">
-                                    
+                                           ng-disabled="manualEnable">
+
                                 </md-input-container>
                                 <md-input-container flex flex-gt-xs="50">
                                     <input type="text" name="tercerApellido" id="tercerApellido" ng-model="vm.formWizard.tercerApellido"
@@ -190,7 +190,7 @@
                                     <input ng-disabled="manualEnable" type="text" name="nserie" id="nserie" ng-model="vm.formWizard.nserie"
                                            placeholder="No. Serie"
                                            >
-                                   
+
                                 </md-input-container>
 
                                 <md-input-container flex flex-gt-xs="50">
@@ -588,12 +588,12 @@
                                         required
                                         >
                                         <div ng-show="!vm.formWizard.gradoAprobado.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
-                                            <span>
-                                                Lugar Espesifico es Requerido.</span>
+                                            <div >
+                                                <span>
+                                                    Lugar Espesifico es Requerido.</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                                                       </md-input-container>
+                                </md-input-container>
                                 <md-input-container flex="50">
                                     <label>Grado Aprobado</label>
                                     <oi-select
@@ -605,11 +605,11 @@
                                         required
                                         >
                                         <div ng-show="!vm.formWizard.gradoEstudia.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
-                                        <div >
-                                            <span>
-                                                Lugar Espesifico es Requerido.</span>
+                                            <div >
+                                                <span>
+                                                    Lugar Espesifico es Requerido.</span>
+                                            </div>
                                         </div>
-                                    </div>
                                 </md-input-container>
                                 <md-input-container ng-show="carreraShow" flex="50">
                                     <label>Carrera</label>
@@ -940,12 +940,12 @@
                                     <div ng-show="!vm.formWizard.esComisinado" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
-                                                comisionado es Requerido.</span>
+                                                Comisionado es requerido.</span>
                                         </div>
                                     </div>
                                 </md-input-container>
                                 <md-input-container ng-if="comisionadoSI" flex flex-gt-xs="50">
-                                    <label>Unidad Ejecutora Actual</label>
+                                    <label>Unidad ejecutora a la que pertenece su puesto</label>
                                     <oi-select
                                         oi-options="item.nombre for (key, item) in unidadEjecutora"
                                         ng-model="vm.formWizard.unidadEjecutoraActualComisionado"
@@ -954,10 +954,10 @@
                                         ng-change="takeUnidadEje2()"
                                         required
                                         ></oi-select>
-                                        <div ng-show="!vm.formWizard.unidadEjecutoraActualComisionado.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.unidadEjecutoraActualComisionado.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
-                                                Unidad Ejecutora Actual es Requerido.</span>
+                                                Unidad Ejecutora es Requerido.</span>
                                         </div>
                                     </div>
                                 </md-input-container>
@@ -971,7 +971,7 @@
                                         placeholder=""
                                         ng-change="takeDistrito2()"
                                         ></oi-select>
-                                        
+
                                 </md-input-container>
                                 <md-input-container ng-if="comisionadoSI" flex="50" >
                                     <div>{{labelNivel12}}</div>
@@ -981,9 +981,9 @@
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         ng-change="takeLugarE3()"
                                         placeholder=""
-                                        
+
                                         ></oi-select>
-                                       
+
                                 </md-input-container>
                                 <md-input-container flex="50" ng-if="comunidad3[0].id" >
                                     <div> {{labelNivel1313}} </div>
@@ -1038,7 +1038,7 @@
                                         placeholder=""
                                         required
                                         ></oi-select>
-                                        <div ng-show="!vm.formWizard.puestoFuncionalotroPuesto.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.puestoFuncionalotroPuesto.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Puesto de acuerdo a funciones es Requerido.</span>
@@ -1055,7 +1055,7 @@
                                         placeholder=""
                                         required
                                         ></oi-select>
-                                        <div ng-show="!vm.formWizard.reglonPresupuestariootroPuesto.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.reglonPresupuestariootroPuesto.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Reglón Presupuestario es Requerido.</span>
@@ -1071,7 +1071,7 @@
                                         placeholder=""
                                         required
                                         ></oi-select>
-                                        <div ng-show="!vm.formWizard.puestoNominalotroPuesto.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.puestoNominalotroPuesto.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Puesto Nominal es Requerido.</span>
@@ -1090,7 +1090,7 @@
                                         placeholder=""
                                         required
                                         ></oi-select>
-                                        <div ng-show="!vm.formWizard.unidadEjecutoraActualotroPuesto.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                                    <div ng-show="!vm.formWizard.unidadEjecutoraActualotroPuesto.id" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
                                         <div >
                                             <span>
                                                 Unidad Ejecutora Actual es Requerido.</span>
@@ -1106,9 +1106,9 @@
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         ng-change="takeDistrito3()"
                                         placeholder=""
-                                        
+
                                         ></oi-select>
-                                        
+
                                 </md-input-container>
                                 <md-input-container flex="50" >
                                     <div> {{labelNivel23}} </div>
@@ -1118,9 +1118,9 @@
                                         oi-select-options="{newItem: 'autocomplete'}"
                                         ng-change="takeLugarE2()"
                                         placeholder=""
-                                        
+
                                         ></oi-select>
-                                        
+
                                 </md-input-container>
                                 <md-input-container flex="50" ng-if="comunidad2[0].id" >
                                     <div> {{labelNivel33}} </div>
@@ -1185,7 +1185,7 @@
                            ng-disabled="msWizard.formsIncomplete()">
                     Guardar
                 </md-button>
-                 <md-button class="md-raised md-warn" ng-click="msWizard.resetForm(); cancelar();" >
+                <md-button class="md-raised md-warn" ng-click="msWizard.resetForm(); cancelar();" >
                     Cancelar
                 </md-button>
             </div>
