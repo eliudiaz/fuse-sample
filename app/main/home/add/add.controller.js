@@ -230,7 +230,28 @@
                 $timeout($scope.checkID, 2000);
             });
         };
+
+        $scope.buscarCUI = function (tCui) {
+            sesion.startT();
+            try {
+                var f = {
+                    cui: tCui
+                };
+
+                $scope.busqPersona = ws.searchPersona();
+                var r = $scope.busqPersona.post(f, function () {
+                    alert("Error: La persona ya se encuentra registrada en el Sistema!");
+                    console.info(r);
+                }, function (error) {
+                    console.error(error);
+                });
+            } catch (e) {
+            }
+            sesion.endT();
+        };
+
         $scope.cargarDatosLector = function () {
+            $scope.buscarCUI($scope.lecturaJson.txtCUI);
             $scope.img = $scope.lecturaJson.lblPicture;
             $scope.manualEnable = true;
 
@@ -952,7 +973,7 @@
             });
         }
 
-        $scope.cancelar = function(){
+        $scope.cancelar = function () {
             $state.go("app.home");
             Notification.warning('Haz Cancelado la Operacion');
         }
@@ -1251,9 +1272,9 @@
                         $scope.distrito2.push({id: value.id, valor: value.valor});
                     });
                     vm.formWizard.distritoComisionado = {
-                            id: valor.registroLaboral.refUnidadNotificadoraComisionado.fkDistrito,
-                            valor: valor.registroLaboral.refUnidadNotificadoraComisionado.nombreDistrito
-                        };
+                        id: valor.registroLaboral.refUnidadNotificadoraComisionado.fkDistrito,
+                        valor: valor.registroLaboral.refUnidadNotificadoraComisionado.nombreDistrito
+                    };
 
                     var id2 = vm.formWizard.distritoComisionado.id;
                     var entryViewsLugarEspesifico2 = ws.lugarEspesifico(id2).query({}, function () {
@@ -1451,9 +1472,9 @@
                         id: valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicio,
                         valor: valor.registroLaboral.puestos[key].refClasificacionServicio.fkClasificacionServicioNombre
                     };
-                     
 
-                    if(vm.formWizard.clasificaServicio.id){
+
+                    if (vm.formWizard.clasificaServicio.id) {
                         var idArea = vm.formWizard.clasificaServicio.id;
                         var entryViewsClasificacionSerArea = ws.clasificacionSerArea(idArea).query({}, function () {
                             $scope.clasificacionSerArea = [];
@@ -1461,16 +1482,16 @@
                                 $scope.clasificacionSerArea.push({id: value.id, valor: value.valor});
                             });
                             vm.formWizard.AreaclasificaServicio = {
-                        id: valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicio,
-                        valor: valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicioNombre
-                    };
+                                id: valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicio,
+                                valor: valor.registroLaboral.puestos[key].refClasificacionServicio.fkAreaServicioNombre
+                            };
                         }, function (error) {
                             workSpace.error = error.data;
                             $scope.Error();
                         });
                     }
 
-                    
+
 
 
 
@@ -1966,11 +1987,11 @@
                 };
             }
 
-             //console.info(JSON.stringify(sendJSON));
+            //console.info(JSON.stringify(sendJSON));
             sesion.startT();
             if (update) {
-                $scope.entryUp = ws.UpdatePersonas(vm.formWizard.cui);
-                var EntryUp = $scope.entryUp.update(sendJSON, function () {
+                $scope.busqPersona = ws.UpdatePersonas(vm.formWizard.cui);
+                var EntryUp = $scope.busqPersona.update(sendJSON, function () {
                     $scope.showAlert();
                     $state.go("app.home");
                     loading_screen.finish();
