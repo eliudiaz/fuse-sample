@@ -240,12 +240,15 @@
 
                 $scope.busqPersona = ws.searchPersona();
                 var r = $scope.busqPersona.post(f, function () {
-                    alert("Error: La persona ya se encuentra registrada en el Sistema!");
                     console.info(r);
+                    if (l.length && l.length > 0) {
+                        alert("Error: La persona ya se encuentra registrada en el Sistema!");
+                    }
                 }, function (error) {
                     console.error(error);
                 });
             } catch (e) {
+                console.error(e);
             }
             sesion.endT();
         };
@@ -839,7 +842,7 @@
         $scope.takeDistrito = function (id) {
             var id = vm.formWizard.distrito.id;
             var entryViewsLugarEspesifico = ws.lugarEspesifico(id).query({}, function () {
-                $scope.lugarEspesifico = entryViewsLugarEspesifico;
+                $scope.lugarEspesifico = [];
                 entryViewsLugarEspesifico.forEach(function (value, key) {
                     $scope.lugarEspesifico.push({id: value.id, valor: value.valor});
                 });
