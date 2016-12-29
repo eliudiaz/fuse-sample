@@ -239,8 +239,8 @@
                 };
 
                 $scope.busqPersona = ws.searchPersona();
-                var r = $scope.busqPersona.post(f, function () {
-                    console.info(r);
+                var l = $scope.busqPersona.post(f, function () {
+                    console.info(l);
                     if (l.length && l.length > 0) {
                         alert("Error: La persona ya se encuentra registrada en el Sistema!");
                     }
