@@ -36,6 +36,13 @@
                 creadoPor:'',
                 fechaCreacion:''
             },
+            catalogoGeneral:{
+                id:'',
+                valor:'',
+                tipo:'',
+                estado:'',
+                codigoPadre:''
+            },
             person:{}
         };
 

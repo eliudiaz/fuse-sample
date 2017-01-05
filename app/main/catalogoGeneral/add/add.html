@@ -1,0 +1,87 @@
+<style type="text/css" media="screen">
+	.md-primary-bg{
+		    background-color: #075993 !important;
+	}
+</style>
+<header class="headerNew">
+</header>
+
+<div class="contentBase">
+	<article>
+		<h1 style=" padding: 0;    margin: 0;"> Nuevo Catalogo General: </h1> 
+	</article>
+	
+	<div style=" width: 100%; margin: 0 auto; border: 1px solid; padding: 15px; margin-bottom: 25px;">
+		<form name="basicForm" class="md-inline-form" novalidate>
+	        <div class="form-title"></div>
+            <div layout="column" layout-gt-sm="row">
+                <md-input-container flex="50">
+                    <input type="text" name="valor" ng-model="vm.basicForm.valor"
+                           placeholder="Valor" required>
+                    <div ng-messages="basicForm.valor.$error" ng-show="basicForm.valor"
+                         role="alert">
+                        <div ng-message="required">
+                            <span>valor es requerido</span>
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="30" flex-gt-xs="50">
+                    <label>Tipo</label>
+                    <oi-select
+                    oi-options="item.name for (key, item) in getAllType"
+                    ng-model="vm.basicForm.tipo"
+                    oi-select-options="{ newItem: 'autocomplete' }"
+                    placeholder="Select" 
+                    required>
+                    </oi-select>
+                    <div ng-show="!vm.basicForm.tipo" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                        <div >
+                            <span>Tipo es Requerido.</span>
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="column" layout-gt-sm="row">
+                 <md-input-container flex="30" flex-gt-xs="50">
+                    <label>Estado</label>
+                    <oi-select
+                    oi-options="item.name for (key, item) in getAllEstado"
+                    ng-model="vm.basicForm.estado"
+                    oi-select-options="{ newItem: 'autocomplete' }"
+                    placeholder="Select" 
+                    required>
+                    </oi-select>
+                    <div ng-show="!vm.basicForm.estado" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                        <div >
+                            <span>Estado es Requerido.</span>
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="30" flex-gt-xs="50">
+                    <label>Codigo Padre</label>
+                    <oi-select
+                    oi-options="item.valor for (key, item) in nivelEducativo"
+                    ng-model="vm.basicForm.padre"
+                    oi-select-options="{ newItem: 'autocomplete' }"
+                    placeholder="Select" 
+                    required>
+                    </oi-select>
+                    <div ng-show="!vm.basicForm.padre" style=" visibility: visible !important; border-top: 1px solid #F44336; font-size: 12px; color: #F44336">
+                        <div >
+                            <span>Codigo Padre es Requerido.</span>
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+            
+                    <md-button ng-click="save()" type="button" class="md-raised md-accent" aria-label="Submit"
+                               ng-disabled="basicForm.$invalid || basicForm.$pristine">
+                        Guardar
+                    </md-button>
+                    <md-button class="md-raised md-warn" ng-click="msWizard.resetForm(); cancelar();" >
+                    Cancelar
+                </md-button>
+                </form>
+	</div>
+
+</div>
