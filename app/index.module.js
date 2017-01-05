@@ -6,30 +6,32 @@
      * Main module of the Fuse
      */
     angular
-        .module('fuse', [
+            .module('fuse', [
 
-            // Core
-            'app.core',
+                // Core
+                'app.core',
 
-            // Navigation
-            'app.navigation',
+                // Navigation
+                'app.navigation',
 
-            // Toolbar
-            'app.toolbar',
+                // Toolbar
+                'app.toolbar',
 
-            // Quick panel
-            'app.quick-panel',
+                // Quick panel
+                'app.quick-panel',
 
-            // Sample
-            'app.login',
-            'app.home',
-            'app.home.add',
-            'app.home.update',
-            'app.roles',
-            'app.roles.add',
-            'app.users',
-            'app.users.add',
-            'app.accessos',
-            'app.accessos.add'
-        ]);
+                // Sample
+                'app.login',
+                'app.home',
+                'app.home.add',
+                'app.home.update',
+                'app.roles',
+                'app.roles.add',
+                'app.users',
+                'app.users.add',
+                'app.accessos',
+                'app.accessos.add',
+                'app.catalogoGeneral',
+                'app.catalogoGeneral.add'
+            ]);
 })();
