@@ -17,12 +17,12 @@
                 localStorage.getItem("servicesPath");
 
         var data = {
-            
+
             allCatalogoG: function () {
                 var r = $resource(path + 'catalogos/get/all?padre=-1');
                 return r;
             },
-             UpdateCatalogoG: function (id) {
+            UpdateCatalogoG: function (id) {
                 var r = $resource(path + 'catalogos/update/' + id + '?sesion=' + sesion.id(), null, {
                     'update': {method: 'PUT'}
                 });
@@ -110,7 +110,8 @@
                 $headers.responseType = "arraybuffer";
                 $http($headers).success(function (data, status, headers, config) {
                     sesion.endT();
-                    var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+                    var xlsType = "application/vnd.ms-excel"; //"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    var blob = new Blob([data], {type: xlsType});
                     var objectUrl = URL.createObjectURL(blob);
                     document.getElementById('my_iframe').src = objectUrl;
                 }).error(function (data, status, headers, config) {
