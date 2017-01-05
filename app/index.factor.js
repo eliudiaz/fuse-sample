@@ -13,10 +13,31 @@
 //                "http://45.79.200.203:8080/MS_RRHH_Servicios/" :
 //                localStorage.getItem("servicesPath");
         var path = localStorage.getItem("servicesPath") == null ?
-                "http://localhost:41825/MS_RRHH_Servicios/" :
+                "http://45.79.200.203:8080/MS_RRHH_Servicios/" :
                 localStorage.getItem("servicesPath");
 
         var data = {
+            
+            allCatalogoG: function () {
+                var r = $resource(path + 'catalogos/get/all?padre=-1');
+                return r;
+            },
+             UpdateCatalogoG: function (id) {
+                var r = $resource(path + 'catalogos/update/' + id + '?sesion=' + sesion.id(), null, {
+                    'update': {method: 'PUT'}
+                });
+                return r;
+            },
+            deleteCatalogoG: function (id) {
+                var r = $resource(path + 'catalogos/delete/' + id + '?sesion=' + sesion.id(), null, {
+                    'delete': {method: 'DELETE', isArray: true}
+                });
+                return r;
+            },
+            saveCatalogoG: function () {
+                var r = $resource(path + 'catalogos/save?sesion=' + sesion.id());
+                return r;
+            },
             saveHome: function () {
                 var r = $resource(path + 'personas/crea?sesion=' + sesion.id());
                 return r;
@@ -80,16 +101,16 @@
                 return r;
             },
             searchPersona: function () {
-                return $resource(path + 'home/busquedaNormal', null, {
+                var r = $resource(path + 'home/busquedaNormal', null, {
                     'post': {method: 'POST', isArray: true}
                 });
+                return r;
             },
             fileDownload: function ($headers) {
                 $headers.responseType = "arraybuffer";
                 $http($headers).success(function (data, status, headers, config) {
                     sesion.endT();
-                    var xlsType = "application/vnd.ms-excel"; //"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    var blob = new Blob([data], {type: xlsType});
+                    var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
                     var objectUrl = URL.createObjectURL(blob);
                     document.getElementById('my_iframe').src = objectUrl;
                 }).error(function (data, status, headers, config) {
