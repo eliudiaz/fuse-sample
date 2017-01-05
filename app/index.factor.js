@@ -13,7 +13,7 @@
 //                "http://45.79.200.203:8080/MS_RRHH_Servicios/" :
 //                localStorage.getItem("servicesPath");
         var path = localStorage.getItem("servicesPath") == null ?
-                "http://45.79.200.203:8080/MS_RRHH_Servicios/" :
+                "http://localhost:41825/MS_RRHH_Servicios/" :
                 localStorage.getItem("servicesPath");
 
         var data = {
