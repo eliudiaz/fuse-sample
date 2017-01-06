@@ -769,6 +769,7 @@
                 entryViewsDistrito.forEach(function (value, key) {
                     $scope.distrito.push({id: value.id, valor: value.valor});
                 });
+                $scope.distrito = $scope.distrito.filter(d => d.valor !== "NO APLICA");
                 vm.formWizard.distrito = {};
                 vm.formWizard.lugarEspesificoDistrito = {};
                 vm.formWizard.comunidadDistrito = {};
