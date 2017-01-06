@@ -32,6 +32,7 @@
                 'app.accessos',
                 'app.accessos.add',
                 'app.catalogoGeneral',
-                'app.catalogoGeneral.add'
+                'app.catalogoGeneral.add',
+                'app.ejemplos'
             ]);
 })();

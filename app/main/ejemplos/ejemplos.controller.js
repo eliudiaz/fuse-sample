@@ -7,12 +7,16 @@
             .controller('ejemplosController', ejemplosController);
 
     /** @ngInject */
-    function ejemplosController($scope, $timeout, $state, workSpace, localStorageService, wsEjemplos, sg, Notification, $mdDialog) {
-        
-        $scope.hola=function(){
-            $scope.data=$scope.wsEjemplos.query({},function(){
-                alert($scope.data);
-            });
+    function ejemplosController($scope, $http, $timeout, $state, workSpace,
+            localStorageService, wse, sg, Notification, $mdDialog) {
+        var path = localStorage.getItem("servicesPath") == null ?
+                "http://localhost:41825/MS_RRHH_Servicios/" :
+                localStorage.getItem("servicesPath");
+        $scope.hola = function () {
+            $http.get(path + 'ejemplos/hola')
+                    .then(function (response) {
+                        alert(response.data);
+                    });
         }
 
     }
